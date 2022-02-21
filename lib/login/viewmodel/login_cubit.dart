@@ -32,6 +32,7 @@ class LoginCubit extends Cubit<LoginState> with CacheManager {
         emit(LoginComplete(data));
         saveToken(data.token ?? "");
         saveExpiration(data.expiration!);
+        print("123");
         saveUser(data.user!);
       }
     } else {
