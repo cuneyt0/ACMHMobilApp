@@ -10,10 +10,8 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 class LoginService extends ILoginService {
   LoginService(Dio dio) : super(dio);
 
-
   @override
   Future<LoginResponseModel?> postUserLogin(LoginRequestModel model) async {
-
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =
@@ -27,7 +25,6 @@ class LoginService extends ILoginService {
       loginPath,
       data: model,
     );
-    print(response);
 
     if (response.statusCode == HttpStatus.ok) {
       return LoginResponseModel.fromJson(response.data);

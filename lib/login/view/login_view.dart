@@ -1,77 +1,75 @@
-import 'dart:ffi';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:login_work/login/login_sources.dart';
 import 'package:login_work/login/service/login_service.dart';
 import 'package:login_work/login/view/login_detail_view.dart';
 import 'package:login_work/login/viewmodel/login_cubit.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatelessWidget with LoginResources {
   final GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  final String baseUrl = "https://192.168.1.103:5001/api/auth";
-
+  final LoginService loginService = LoginService(
+    Dio(
+      BaseOptions(
+        baseUrl: "https://192.168.1.103:5001/api/auth",
+      ),
+    ),
+  );
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => LoginCubit(
-              formKey,
-              usernameController,
-              passwordController,
-              service: LoginService(
-                Dio(
-                  BaseOptions(
-                    baseUrl: baseUrl,
-                  ),
-                ),
-              ),
-            ),
-        child: BlocConsumer<LoginCubit, LoginState>(
-          listener: (context, state) {
-            if (state is LoginComplete) {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => LoginDetialView(
-                    model: state.model,
-                  ),
-                ),
-              );
-            }
-          },
-          builder: (context, state) {
-            return buildScaffold(context, state);
-          },
-        ));
+    return SafeArea(
+      child: BlocProvider(
+          create: (context) => LoginCubit(
+              formKey: formKey,
+              usernameController: usernameController,
+              passwordController: passwordController,
+              service: loginService),
+          child: BlocConsumer<LoginCubit, LoginState>(
+            listener: (context, state) {
+              if (state is LoginComplete) {
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                        builder: (context) => LoginDetailView(
+                              model: state.model,
+                              cacheManager: state.cacheManager,
+                              isClear: state.isClear,
+                            )),
+                    (Route<dynamic> route) => false);
+              }
+            },
+            builder: (context, state) {
+              return buildScaffold(context, state);
+            },
+          )),
+    );
   }
 
   Scaffold buildScaffold(BuildContext context, LoginState state) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.black12, //Color(0xFF18FFFF),
+        backgroundColor: Colors.white, //Color(0xFF18FFFF),
         body: Column(
           children: [
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Text(
-                      " Logo Gelecek",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ),
-                ],
-              ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
+            ),
+            const CircleAvatar(
+              backgroundImage: AssetImage("assets/logo/neu_logo.jpg"),
+              maxRadius: 90,
+              minRadius: 50,
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
             ),
             Expanded(
-              flex: 3,
+              flex: 2,
               child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
+                decoration: const BoxDecoration(
+                  color: Color(0xFF01579B),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(75.0),
                   ),
@@ -81,33 +79,43 @@ class LoginView extends StatelessWidget {
                   autovalidateMode: autovalidateMode(state),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisSize: MainAxisSize.min,
+                    mainAxisSize: MainAxisSize.max,
                     children: [
-                      Center(
-                        child: Text(
-                          "Giriş Yap",
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold),
+                      Flexible(
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 30, right: 20),
+                            child: Text(
+                              title,
+                              style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 30.0,
-                          right: 30.0,
+                      Flexible(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 30.0,
+                            right: 30.0,
+                          ),
+                          child: buildTextFormFieldUsername(),
                         ),
-                        child: buildTextFormFieldUsername(),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 30.0,
-                          right: 30.0,
+                      Flexible(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 30.0,
+                            right: 30.0,
+                          ),
+                          child: buildTextFormFieldPassword(state),
                         ),
-                        child: buildTextFormFieldPassword(),
                       ),
-                      buildElevatedButton(context),
+                      Flexible(child: buildElevatedButton(context)),
                     ],
                   ),
                 ),
@@ -122,8 +130,8 @@ class LoginView extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         if (state is LoginComplete) {
-          return Card(
-            child: Icon(Icons.check),
+          return const Card(
+            child: const Icon(Icons.check),
           );
         }
         return Padding(
@@ -133,12 +141,17 @@ class LoginView extends StatelessWidget {
                 ? null
                 : () {
                     context.read<LoginCubit>().postUserModel();
-                    print("Detay Sayfasına gidicek");
                   },
-            child: Text('Giriş Yap'),
+            child: Text(
+              buttonText,
+              style: const TextStyle(
+                  color: Color(0xFF01579B),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+            ),
             style: ElevatedButton.styleFrom(
-                primary: Colors.black,
-                textStyle: const TextStyle(fontSize: 25)),
+              primary: Colors.white,
+            ),
           ),
         );
       },
@@ -150,24 +163,26 @@ class LoginView extends StatelessWidget {
       ? (state.isValidate ? AutovalidateMode.always : AutovalidateMode.disabled)
       : AutovalidateMode.disabled;
 
-  TextFormField buildTextFormFieldPassword() {
+  TextFormField buildTextFormFieldPassword(LoginState state) {
     return TextFormField(
       controller: passwordController,
       keyboardType: TextInputType.number,
-      style: TextStyle(color: Colors.black),
+      style: const TextStyle(color: Colors.white),
       validator: (value) => (value ?? '').length > 2 ? null : '2 ten kucuk',
       decoration: InputDecoration(
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.white),
         ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
         ),
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey),
+        border: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
         ),
-        hintText: "Password",
-        hintStyle: TextStyle(color: Colors.grey),
+        hintText: passwordlhinttext,
+        labelText: passwordlabeltext,
+        labelStyle: const TextStyle(color: Colors.white),
+        hintStyle: const TextStyle(color: Colors.white),
       ),
     );
   }
@@ -175,21 +190,25 @@ class LoginView extends StatelessWidget {
   TextFormField buildTextFormFieldUsername() {
     return TextFormField(
       keyboardType: TextInputType.number,
-      style: TextStyle(color: Colors.black),
+      style: const TextStyle(color: Colors.white),
       controller: usernameController,
-      validator: (value) => (value ?? '').length > 5 ? null : '5 ten kucuk',
+      validator: (value) => (value ?? '').length > 10 ? null : '11 ten kucuk',
       decoration: InputDecoration(
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
+          ),
         ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
         ),
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey),
+        border: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
         ),
-        hintText: "Username",
-        hintStyle: TextStyle(color: Colors.grey),
+        hintText: usernamelhinttext,
+        labelText: usernamelabeltext,
+        labelStyle: const TextStyle(color: Colors.white),
+        hintStyle: const TextStyle(color: Colors.white),
       ),
     );
   }

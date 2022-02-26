@@ -204,3 +204,235 @@ class LoginComplete extends LoginState {
 
 
  */
+
+
+
+/*
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:login_work/login/login_sources.dart';
+import 'package:login_work/login/service/login_service.dart';
+import 'package:login_work/login/view/login_detail_view.dart';
+import 'package:login_work/login/viewmodel/login_cubit.dart';
+
+class LoginView extends StatelessWidget with LoginResources {
+  final GlobalKey<FormState> formKey = GlobalKey();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  final String baseUrl = "https://192.168.1.103:5001/api/auth";
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: BlocProvider(
+          create: (context) => LoginCubit(
+                formKey: formKey,
+                usernameController: usernameController,
+                passwordController: passwordController,
+                service: LoginService(
+                  Dio(
+                    BaseOptions(
+                      baseUrl: baseUrl,
+                    ),
+                  ),
+                ),
+              ),
+          child: BlocConsumer<LoginCubit, LoginState>(
+            listener: (context, state) {
+              if (state is LoginComplete) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context) => LoginDetialView(
+                            model: state.model,
+                            cacheManager: state.cacheManager,
+                            isClear: state.isClear,
+                          )),
+                );
+              }
+            },
+            builder: (context, state) {
+              return buildScaffold(context, state);
+            },
+          )),
+    );
+  }
+
+  Scaffold buildScaffold(BuildContext context, LoginState state) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.white, //Color(0xFF18FFFF),
+      body: SingleChildScrollView(
+        reverse: true,
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
+            ),
+            CircleAvatar(
+              backgroundImage: AssetImage("assets/logo/neu_logo.jpg"),
+              maxRadius: 90,
+              minRadius: 50,
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
+            ),
+            Expanded(
+              flex: 2,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color(0xFF01579B),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(75.0),
+                  ),
+                ),
+                child: Form(
+                  key: formKey,
+                  autovalidateMode: autovalidateMode(state),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Flexible(
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 30, right: 20),
+                            child: Text(
+                              title,
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 30.0,
+                            right: 30.0,
+                          ),
+                          child: buildTextFormFieldUsername(),
+                        ),
+                      ),
+                      Flexible(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 30.0,
+                            right: 30.0,
+                          ),
+                          child: buildTextFormFieldPassword(state),
+                        ),
+                      ),
+                      Flexible(child: buildElevatedButton(context)),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildElevatedButton(BuildContext context) {
+    return BlocConsumer<LoginCubit, LoginState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        if (state is LoginComplete) {
+          return Card(
+            child: Icon(Icons.check),
+          );
+        }
+        return Padding(
+          padding: const EdgeInsets.only(left: 100.0, right: 100.0),
+          child: ElevatedButton(
+            onPressed: context.watch<LoginCubit>().isLoading
+                ? null
+                : () {
+                    context.read<LoginCubit>().postUserModel();
+                  },
+            child: Text(
+              buttonText,
+              style: TextStyle(
+                  color: Color(0xFF01579B),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+            ),
+            style: ElevatedButton.styleFrom(
+              primary: Colors.white,
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  AutovalidateMode autovalidateMode(LoginState state) => state
+          is LoginValidateState
+      ? (state.isValidate ? AutovalidateMode.always : AutovalidateMode.disabled)
+      : AutovalidateMode.disabled;
+
+  TextFormField buildTextFormFieldPassword(LoginState state) {
+    return TextFormField(
+      controller: passwordController,
+      keyboardType: TextInputType.number,
+      style: TextStyle(color: Colors.white),
+      validator: (value) => (value ?? '').length > 2 ? null : '2 ten kucuk',
+      decoration: InputDecoration(
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
+        ),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
+        ),
+        hintText: passwordlhinttext,
+        labelText: passwordlabeltext,
+        labelStyle: TextStyle(color: Colors.white),
+        hintStyle: TextStyle(color: Colors.white),
+      ),
+    );
+  }
+
+  TextFormField buildTextFormFieldUsername() {
+    return TextFormField(
+      keyboardType: TextInputType.number,
+      style: TextStyle(color: Colors.white),
+      controller: usernameController,
+      validator: (value) => (value ?? '').length > 10 ? null : '11 ten kucuk',
+      decoration: InputDecoration(
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
+        ),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
+        ),
+        hintText: usernamelhinttext,
+        labelText: usernamelabeltext,
+        labelStyle: TextStyle(color: Colors.white),
+        hintStyle: TextStyle(color: Colors.white),
+      ),
+    );
+  }
+}
+
+
+
+ */

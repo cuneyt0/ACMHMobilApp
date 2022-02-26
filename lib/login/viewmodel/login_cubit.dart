@@ -12,10 +12,14 @@ class LoginCubit extends Cubit<LoginState> with CacheManager {
 
   bool isLoginFail = false;
   bool isLoading = false;
+  bool isClear = false;
   final ILoginService service;
 
-  LoginCubit(this.formKey, this.usernameController, this.passwordController,
-      {required this.service})
+  LoginCubit(
+      {required this.formKey,
+      required this.usernameController,
+      required this.passwordController,
+      required this.service})
       : super(LoginInitial());
 
   Future<void> postUserModel() async {
@@ -29,13 +33,13 @@ class LoginCubit extends Cubit<LoginState> with CacheManager {
       changeLoadingView();
 
       if (data is LoginResponseModel) {
-        emit(LoginComplete(data));
+        emit(LoginComplete(data, CacheManager(), isClear));
         saveToken(data.token ?? "");
         saveExpiration(data.expiration!);
-        print("123");
         saveUser(data.user!);
       }
     } else {
+      isClear = true;
       isLoginFail = true;
       emit(LoginValidateState(isLoginFail));
     }
@@ -65,6 +69,14 @@ class LoginLoadingState extends LoginState {
 
 class LoginComplete extends LoginState {
   final LoginResponseModel model;
+  final CacheManager cacheManager;
+  final bool isClear;
 
-  LoginComplete(this.model);
+  LoginComplete(this.model, this.cacheManager, this.isClear);
+}
+
+class RemoveCacheData extends LoginState {
+  final bool isClear;
+
+  RemoveCacheData(this.isClear);
 }
