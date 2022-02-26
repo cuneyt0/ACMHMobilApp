@@ -7,8 +7,11 @@ import 'package:login_work/login/service/login_service.dart';
 import 'package:login_work/login/view/login_detail_view.dart';
 import 'package:login_work/login/viewmodel/login_cubit.dart';
 
+import 'package:login_work/core/extension/context_extension.dart';
+
 class LoginView extends StatelessWidget with LoginResources {
   final GlobalKey<FormState> formKey = GlobalKey();
+
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -24,6 +27,7 @@ class LoginView extends StatelessWidget with LoginResources {
     return SafeArea(
       child: BlocProvider(
           create: (context) => LoginCubit(
+              context: context,
               formKey: formKey,
               usernameController: usernameController,
               passwordController: passwordController,
@@ -50,20 +54,19 @@ class LoginView extends StatelessWidget with LoginResources {
 
   Scaffold buildScaffold(BuildContext context, LoginState state) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
+
+        ///  resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white, //Color(0xFF18FFFF),
         body: Column(
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.05,
-            ),
-            const CircleAvatar(
-              backgroundImage: AssetImage("assets/logo/neu_logo.jpg"),
-              maxRadius: 90,
-              minRadius: 50,
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.05,
+            const Expanded(
+              child: Center(
+                child: CircleAvatar(
+                  backgroundImage: AssetImage("assets/logo/neu_logo.jpg"),
+                  maxRadius: 80,
+                  minRadius: 50,
+                ),
+              ),
             ),
             Expanded(
               flex: 2,
@@ -81,7 +84,8 @@ class LoginView extends StatelessWidget with LoginResources {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Flexible(
+                      Expanded(
+                        flex: 1,
                         child: Center(
                           child: Padding(
                             padding: const EdgeInsets.only(left: 30, right: 20),
@@ -95,27 +99,24 @@ class LoginView extends StatelessWidget with LoginResources {
                           ),
                         ),
                       ),
-                      Flexible(
-                        flex: 2,
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 30.0,
-                            right: 30.0,
-                          ),
-                          child: buildTextFormFieldUsername(),
+                      Expanded(
+                        flex: 3,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 30.0, right: 30.0, bottom: 30),
+                              child: buildTextFormFieldUsername(),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 30.0, right: 30.0, bottom: 40),
+                              child: buildTextFormFieldPassword(state),
+                            ),
+                            buildElevatedButton(context),
+                          ],
                         ),
                       ),
-                      Flexible(
-                        flex: 2,
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 30.0,
-                            right: 30.0,
-                          ),
-                          child: buildTextFormFieldPassword(state),
-                        ),
-                      ),
-                      Flexible(child: buildElevatedButton(context)),
                     ],
                   ),
                 ),
@@ -129,31 +130,33 @@ class LoginView extends StatelessWidget with LoginResources {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {},
       builder: (context, state) {
-        if (state is LoginComplete) {
-          return const Card(
-            child: const Icon(Icons.check),
-          );
+        if (state is LoginLoadingState) {
+          return const CircularProgressIndicator();
         }
-        return Padding(
-          padding: const EdgeInsets.only(left: 100.0, right: 100.0),
-          child: ElevatedButton(
-            onPressed: context.watch<LoginCubit>().isLoading
-                ? null
-                : () {
-                    context.read<LoginCubit>().postUserModel();
-                  },
+        return ElevatedButton(
+            onPressed: () => context.read<LoginCubit>().postUserModel(),
             child: Text(
               buttonText,
               style: const TextStyle(
                   color: Color(0xFF01579B),
-                  fontSize: 20,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold),
             ),
-            style: ElevatedButton.styleFrom(
-              primary: Colors.white,
-            ),
-          ),
-        );
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+              maximumSize: MaterialStateProperty.all<Size>(
+                Size(context.width * 0.9, context.highValue),
+              ),
+              minimumSize: MaterialStateProperty.all<Size>(
+                Size(context.width * 0.45, context.mediumValue),
+              ),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  side: const BorderSide(color: Colors.white),
+                ),
+              ),
+            ));
       },
     );
   }
@@ -168,7 +171,7 @@ class LoginView extends StatelessWidget with LoginResources {
       controller: passwordController,
       keyboardType: TextInputType.number,
       style: const TextStyle(color: Colors.white),
-      validator: (value) => (value ?? '').length > 2 ? null : '2 ten kucuk',
+      validator: (value) => (value ?? '').length > 2 ? null : '2 ten küçük',
       decoration: InputDecoration(
         focusedBorder: const OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.white),

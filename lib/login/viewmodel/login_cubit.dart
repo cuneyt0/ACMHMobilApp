@@ -9,6 +9,7 @@ class LoginCubit extends Cubit<LoginState> with CacheManager {
   TextEditingController usernameController;
   TextEditingController passwordController;
   final GlobalKey<FormState> formKey;
+  final BuildContext context;
 
   bool isLoginFail = false;
   bool isLoading = false;
@@ -17,6 +18,7 @@ class LoginCubit extends Cubit<LoginState> with CacheManager {
 
   LoginCubit(
       {required this.formKey,
+      required this.context,
       required this.usernameController,
       required this.passwordController,
       required this.service})
@@ -25,24 +27,38 @@ class LoginCubit extends Cubit<LoginState> with CacheManager {
   Future<void> postUserModel() async {
     if (formKey.currentState != null && formKey.currentState!.validate()) {
       changeLoadingView();
-
       final data = await service.postUserLogin(LoginRequestModel(
           username: usernameController.text,
           password: passwordController.text));
-
       changeLoadingView();
 
       if (data is LoginResponseModel) {
         emit(LoginComplete(data, CacheManager(), isClear));
-        saveToken(data.token ?? "");
-        saveExpiration(data.expiration!);
-        saveUser(data.user!);
-      }
+        saveUserState(data);
+      } else if (data is String) {
+        emit(LoginFailState(data));
+
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(data)));
+        isClear = true;
+        isLoginFail = true;
+      } else {}
     } else {
+      changeLoadingView();
+
+      await Future.delayed(Duration(milliseconds: 250));
+
       isClear = true;
       isLoginFail = true;
       emit(LoginValidateState(isLoginFail));
     }
+  }
+
+  void saveUserState(LoginResponseModel data) {
+    /*saveToken(data.token ?? "");
+    saveExpiration(data.expiration ?? 0);
+    saveUser(data.user!);*/
+    saveLoginResponse(data);
   }
 
   void changeLoadingView() {
@@ -59,6 +75,11 @@ class LoginValidateState extends LoginState {
   final bool isValidate;
 
   LoginValidateState(this.isValidate);
+}
+
+class LoginFailState extends LoginState {
+  final String errorText;
+  LoginFailState(this.errorText);
 }
 
 class LoginLoadingState extends LoginState {

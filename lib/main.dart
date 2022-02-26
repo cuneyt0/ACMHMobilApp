@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_work/login/view/login_view.dart';
 import 'package:flutter/services.dart';
+import 'package:login_work/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,6 +19,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Material App",
-        home: LoginView());
+        home: SplashScreen());
   }
 }

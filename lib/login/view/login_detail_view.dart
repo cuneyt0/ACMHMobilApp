@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:login_work/core/cache_manager.dart';
 import 'package:login_work/login/model/login_response.dart';
 
+import 'login_view.dart';
+
 class LoginDetailView extends StatelessWidget {
   final LoginResponseModel? model;
   final CacheManager? cacheManager;
@@ -43,7 +45,9 @@ class LoginDetailView extends StatelessWidget {
                 if (model!.user == null) {
                   print("model null");
                   cacheManager?.removeAllData();
-                  SystemNavigator.pop();
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => LoginView()),
+                      (Route<dynamic> route) => false);
                 } else {
                   exit(0);
                 }
