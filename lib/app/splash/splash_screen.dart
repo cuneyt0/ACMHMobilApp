@@ -13,14 +13,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 2), () {
-      cacheManager.getLoginResponse().then((loginRes) {
+      cacheManager.getLoginResponse().then((loginRes) async {
         if (loginRes == null) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LoginView(),
-            ),
-          );
+          await Navigation.pushReplacementNamed(root: Routes.loginView);
         } else {
           Navigator.pushReplacement(
             context,

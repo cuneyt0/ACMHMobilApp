@@ -25,5 +25,7 @@ export 'package:login_work/app/login/view/widgets/autovalidate_mode.dart';
 export 'package:login_work/app/login/view/widgets/text_form_field_password.dart';
 export 'package:login_work/app/login/view/widgets/text_form_field_username.dart';
 export 'package:login_work/app/login/view/widgets/build_scaffold.dart';
+export 'package:login_work/core/routes/routes.dart';
+export 'package:login_work/core/navigation/navigation_helper.dart';
 //URL CONSTANTS
 export 'package:login_work/app/constants/url_constants.dart';

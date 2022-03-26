@@ -13,9 +13,11 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return const MaterialApp(
+    return MaterialApp(
         debugShowCheckedModeBanner: false,
+        navigatorKey: Navigation.navigationKey,
         title: "Material App",
-        home: SplashScreen());
+        onGenerateRoute: Routes.onGenerateRoutes,
+        home: const SplashScreen());
   }
 }

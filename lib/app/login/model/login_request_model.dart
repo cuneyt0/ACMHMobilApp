@@ -10,9 +10,9 @@ class LoginRequestModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['Username'] = this.username;
-    data['Password'] = this.password;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['Username'] = username;
+    data['Password'] = password;
     return data;
   }
 }

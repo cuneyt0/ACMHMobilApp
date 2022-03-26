@@ -46,7 +46,7 @@ Widget _buildMenuHeader(LoginResponseModel? model) {
           Text(model?.user?.lastName ?? " "),
         ],
       ),
-      Divider(color: Colors.white),
+      const Divider(color: Colors.white),
       Center(
         child: model?.user?.departmentId == 2
             ? const Text(departmentComputerText)
