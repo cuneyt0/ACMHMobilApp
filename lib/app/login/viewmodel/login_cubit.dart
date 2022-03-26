@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:bloc/bloc.dart';
-import 'package:login_work/app/login/model/login_request_model.dart';
-import 'package:login_work/app/login/model/login_response.dart';
-import 'package:login_work/app/login/service/ILoginService.dart';
-import 'package:login_work/core/cache_manager.dart';
+import 'package:login_work/export_import.dart';
 
 class LoginCubit extends Cubit<LoginState> with CacheManager {
   TextEditingController usernameController;
@@ -47,7 +42,7 @@ class LoginCubit extends Cubit<LoginState> with CacheManager {
     } else {
       changeLoadingView();
 
-      await Future.delayed(Duration(milliseconds: 250));
+      await Future.delayed(const Duration(milliseconds: 250));
 
       isClear = true;
       isLoginFail = true;

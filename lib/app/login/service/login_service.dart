@@ -1,5 +1,4 @@
 import 'package:login_work/export_import.dart';
-import '../model/login_response.dart';
 
 class LoginService extends ILoginService {
   LoginService(Dio dio) : super(dio);

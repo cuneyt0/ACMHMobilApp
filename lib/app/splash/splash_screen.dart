@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => LoginDetailView(
+              builder: (context) => HomePage(
                 model: LoginResponseModel.fromJson(jsonDecode(loginRes)),
                 cacheManager: cacheManager,
               ),
@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
       color: Colors.white,
       child: const Center(
         child: CircleAvatar(
-          backgroundImage: AssetImage("assets/logo/neu_logo.jpg"),
+          backgroundImage: AssetImage(assetNeuLogo),
           maxRadius: 120,
           minRadius: 50,
         ),

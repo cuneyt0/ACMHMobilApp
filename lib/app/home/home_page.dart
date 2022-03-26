@@ -1,9 +1,4 @@
-import 'dart:io';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:login_work/app/login/model/login_response.dart';
-import 'package:login_work/app/login/view/login_view.dart';
-import 'package:login_work/core/cache_manager.dart';
+import '../../export_import.dart';
 
 class HomePage extends StatelessWidget {
   final LoginResponseModel? model;
@@ -23,15 +18,15 @@ class HomePage extends StatelessWidget {
             child: Text(model?.token ?? ''),
           ),
           SizedBox(
-            height: 10,
+            height: context.lowValue,
           ),
           Center(
             child: Text(model?.user!.firstName ?? ""),
           ),
           Center(
             child: model?.user!.departmentId == 2
-                ? Text("Bilgisayar Muhendisligi")
-                : Text("Makine Mühendisligi"),
+                ? const Text(departmentComputerText)
+                : const Text(departmentMachineText),
           ),
           ElevatedButton(
               onPressed: () {
@@ -40,7 +35,6 @@ class HomePage extends StatelessWidget {
                 model?.token = null;
                 model?.expiration = 0;
                 if (model!.user == null) {
-                  print("model null");
                   cacheManager?.removeAllData();
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) => LoginView()),
@@ -49,7 +43,7 @@ class HomePage extends StatelessWidget {
                   exit(0);
                 }
               },
-              child: Text("Cıkıs yap"))
+              child: const Text(btSignOut))
         ],
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:login_work/export_import.dart';
 
-class LoginView extends StatelessWidget with LoginResources {
+class LoginView extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey();
 
   TextEditingController usernameController = TextEditingController();
@@ -56,15 +56,13 @@ class LoginView extends StatelessWidget with LoginResources {
 
   Scaffold buildScaffold(BuildContext context, LoginState state) {
     return Scaffold(
-
-        ///  resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white, //Color(0xFF18FFFF),
+        backgroundColor: Colors.white,
         body: Column(
           children: [
             const Expanded(
               child: Center(
                 child: CircleAvatar(
-                  backgroundImage: AssetImage("assets/logo/neu_logo.jpg"),
+                  backgroundImage: AssetImage(assetNeuLogo),
                   maxRadius: 80,
                   minRadius: 50,
                 ),
@@ -86,14 +84,14 @@ class LoginView extends StatelessWidget with LoginResources {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Expanded(
+                      const Expanded(
                         flex: 1,
                         child: Center(
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 30, right: 20),
+                            padding: EdgeInsets.only(left: 30, right: 20),
                             child: Text(
                               title,
-                              style: const TextStyle(
+                              style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
@@ -137,9 +135,9 @@ class LoginView extends StatelessWidget with LoginResources {
         }
         return ElevatedButton(
             onPressed: () => context.read<LoginCubit>().postUserModel(),
-            child: Text(
+            child: const Text(
               buttonText,
-              style: const TextStyle(
+              style: TextStyle(
                   color: Color(0xFF01579B),
                   fontSize: 24,
                   fontWeight: FontWeight.bold),
@@ -174,20 +172,20 @@ class LoginView extends StatelessWidget with LoginResources {
       keyboardType: TextInputType.number,
       style: const TextStyle(color: Colors.white),
       validator: (value) => (value ?? '').length > 2 ? null : '2 ten küçük',
-      decoration: InputDecoration(
-        focusedBorder: const OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.white),
-        ),
-        enabledBorder: const OutlineInputBorder(
+      decoration: const InputDecoration(
+        focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
-        border: const OutlineInputBorder(
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
+        ),
+        border: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
         hintText: passwordlhinttext,
         labelText: passwordlabeltext,
-        labelStyle: const TextStyle(color: Colors.white),
-        hintStyle: const TextStyle(color: Colors.white),
+        labelStyle: TextStyle(color: Colors.white),
+        hintStyle: TextStyle(color: Colors.white),
       ),
     );
   }
@@ -198,22 +196,22 @@ class LoginView extends StatelessWidget with LoginResources {
       style: const TextStyle(color: Colors.white),
       controller: usernameController,
       validator: (value) => (value ?? '').length > 10 ? null : '11 ten kucuk',
-      decoration: InputDecoration(
-        focusedBorder: const OutlineInputBorder(
+      decoration: const InputDecoration(
+        focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: Colors.white,
           ),
         ),
-        enabledBorder: const OutlineInputBorder(
+        enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
-        border: const OutlineInputBorder(
+        border: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
         hintText: usernamelhinttext,
         labelText: usernamelabeltext,
-        labelStyle: const TextStyle(color: Colors.white),
-        hintStyle: const TextStyle(color: Colors.white),
+        labelStyle: TextStyle(color: Colors.white),
+        hintStyle: TextStyle(color: Colors.white),
       ),
     );
   }

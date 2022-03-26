@@ -1,7 +1,4 @@
-import 'dart:convert';
-
-import 'package:login_work/login/model/login_response.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:login_work/export_import.dart';
 
 class CacheManager {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();

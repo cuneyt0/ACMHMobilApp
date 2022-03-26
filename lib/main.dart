@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:login_work/login/view/login_view.dart';
-import 'package:flutter/services.dart';
-import 'package:login_work/splash_screen.dart';
+import 'package:login_work/export_import.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +13,7 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return MaterialApp(
+    return const MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Material App",
         home: SplashScreen());
