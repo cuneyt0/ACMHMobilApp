@@ -1,12 +1,4 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login_work/app/login/login_sources.dart';
-import 'package:login_work/app/login/service/login_service.dart';
-import 'package:login_work/app/login/view/login_detail_view.dart';
-import 'package:login_work/app/login/viewmodel/login_cubit.dart';
-import 'package:login_work/core/extension/context_extension.dart';
+import 'package:login_work/export_import.dart';
 
 class LoginView extends StatelessWidget with LoginResources {
   final GlobalKey<FormState> formKey = GlobalKey();
@@ -36,7 +28,7 @@ class LoginView extends StatelessWidget with LoginResources {
               if (state is LoginComplete) {
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
-                        builder: (context) => LoginDetailView(
+                        builder: (context) => HomePage(
                               model: state.model,
                               cacheManager: state.cacheManager,
                               isClear: state.isClear,
