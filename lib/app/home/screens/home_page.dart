@@ -1,4 +1,6 @@
-import '../../export_import.dart';
+import 'package:login_work/app/home/widgets/drawer_menu.dart';
+
+import '../../../export_import.dart';
 
 class HomePage extends StatelessWidget {
   final LoginResponseModel? model;
@@ -12,6 +14,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
+      drawer: DrawerMenu(context, model, cacheManager, isClear),
       body: Column(
         children: [
           Center(

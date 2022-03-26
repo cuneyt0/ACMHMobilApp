@@ -8,15 +8,15 @@ class LoginResponseModel {
   LoginResponseModel.fromJson(Map<String, dynamic> json) {
     token = json['token'];
     expiration = json['expiration'];
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['token'] = this.token;
-    data['expiration'] = this.expiration;
-    if (this.user != null) {
-      data['user'] = this.user!.toJson();
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['token'] = token;
+    data['expiration'] = expiration;
+    if (user != null) {
+      data['user'] = user!.toJson();
     }
     return data;
   }
@@ -45,12 +45,12 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['departmentId'] = this.departmentId;
-    data['firstName'] = this.firstName;
-    data['lastName'] = this.lastName;
-    data['schoolNumber'] = this.schoolNumber;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['departmentId'] = departmentId;
+    data['firstName'] = firstName;
+    data['lastName'] = lastName;
+    data['schoolNumber'] = schoolNumber;
     return data;
   }
 }
