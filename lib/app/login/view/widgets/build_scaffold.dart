@@ -1,11 +1,12 @@
 import '../../../../export_import.dart';
 
 Scaffold buildScaffold(
-    BuildContext context,
-    LoginState state,
-    GlobalKey<FormState> formKey,
-    TextEditingController usernameController,
-    TextEditingController passwordController) {
+  BuildContext context,
+  LoginState state,
+  GlobalKey<FormState> formKey,
+  TextEditingController usernameController,
+  TextEditingController passwordController,
+) {
   return Scaffold(
       backgroundColor: Colors.white,
       body: Column(

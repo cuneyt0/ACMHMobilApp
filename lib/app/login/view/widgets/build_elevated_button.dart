@@ -8,7 +8,9 @@ Widget buildElevatedButton(BuildContext context) {
         return const CircularProgressIndicator();
       }
       return ElevatedButton(
-          onPressed: () => context.read<LoginCubit>().postUserModel(),
+          onPressed: () {
+            context.read<LoginCubit>().postUserModel();
+          },
           child: const Text(
             buttonText,
             style: TextStyle(

@@ -15,39 +15,10 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       drawer: DrawerMenu(context, model, cacheManager, isClear),
-      body: Column(
-        children: [
-          Center(
-            child: Text(model?.token ?? ''),
-          ),
-          SizedBox(
-            height: context.lowValue,
-          ),
-          Center(
-            child: Text(model?.user!.firstName ?? ""),
-          ),
-          Center(
-            child: model?.user!.departmentId == 2
-                ? const Text(departmentComputerText)
-                : const Text(departmentMachineText),
-          ),
-          ElevatedButton(
-              onPressed: () {
-                model?.user = null;
-                isClear != isClear;
-                model?.token = null;
-                model?.expiration = 0;
-                if (model!.user == null) {
-                  cacheManager?.removeAllData();
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => LoginView()),
-                      (Route<dynamic> route) => false);
-                } else {
-                  exit(0);
-                }
-              },
-              child: const Text(btSignOut))
-        ],
+      body: ListView.builder(
+        itemCount: model?.userClaims?.length,
+        itemBuilder: (context, index) =>
+            ListTile(title: Text(model?.userClaims?[index].name ?? "asd")),
       ),
     );
   }
