@@ -6,7 +6,7 @@ TextFormField buildTextFormFieldUsername(
     keyboardType: TextInputType.number,
     style: const TextStyle(color: Colors.white),
     controller: usernameController,
-    validator: (value) => (value ?? '').length > 10 ? null : '11 ten kucuk',
+    validator: (value) => (value ?? '').length > 2 ? null : '11 ten kucuk',
     decoration: const InputDecoration(
       focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(

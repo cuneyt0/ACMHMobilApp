@@ -1,5 +1,3 @@
-import 'package:login_work/app/home/widgets/drawer_menu.dart';
-
 import '../../../export_import.dart';
 
 class HomePage extends StatelessWidget {
@@ -14,11 +12,16 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      drawer: DrawerMenu(context, model, cacheManager, isClear),
+      drawer: DrawerMenu(
+          context: context,
+          cacheManager: cacheManager,
+          isClear: isClear,
+          model: model),
       body: ListView.builder(
         itemCount: model?.userClaims?.length,
-        itemBuilder: (context, index) =>
-            ListTile(title: Text(model?.userClaims?[index].name ?? "asd")),
+        itemBuilder: (context, index) => ListTile(
+          title: Text(model?.userClaims?[index].name ?? "asd"),
+        ),
       ),
     );
   }

@@ -17,30 +17,17 @@ List<dynamic> NormalMenu = [
   "ETKİNLİK VE TAKVİMİ",
   "SINAV BİLGİ SİSTEMİ",
 ];
-Widget DrawerMenu(BuildContext context, LoginResponseModel? model,
-    CacheManager? cacheManager, bool? isClear) {
-  return Drawer(
-      child: Container(
-    child: Column(
-      children: [
-        Expanded(child: _buildMenuHeader(model)),
-        Expanded(
-            flex: 4,
-            child: model!.userClaims!.contains("admin")
-                ? _buildAdminMenuBody()
-                : _buildNormalMenuBody()),
-        _buildMenuExit(context, model, cacheManager, isClear),
-      ],
-    ),
-  ));
-}
 
+//exam information system
 Widget _buildNormalMenuBody() => ListView.builder(
       itemCount: NormalMenu.length,
       itemBuilder: (context, index) => ListTile(
         title: Text(NormalMenu[index]),
         onTap: () {
-          print("${NormalMenu[index]} Tıklanıldı");
+          if (NormalMenu[index] == 'SINAV BİLGİ SİSTEMİ') {
+            Navigation.pushReplacementNamed(
+                root: Routes.examInformationSystemScreen);
+          }
         },
       ),
     );
@@ -85,13 +72,13 @@ Widget _buildMenuExit(BuildContext context, LoginResponseModel? model,
   return Padding(
     padding: const EdgeInsets.all(20.0),
     child: ElevatedButton(
-        onPressed: () {
+        onPressed: () async {
           model?.user = null;
           isClear != isClear;
           model?.token = null;
           model?.expiration = 0;
           if (model!.user == null) {
-            cacheManager?.removeAllData();
+            await cacheManager?.removeAllData();
             Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => LoginView()),
                 (Route<dynamic> route) => false);
@@ -101,4 +88,33 @@ Widget _buildMenuExit(BuildContext context, LoginResponseModel? model,
         },
         child: const Text(btSignOut)),
   );
+}
+
+class DrawerMenu extends StatelessWidget {
+  DrawerMenu({this.context, this.cacheManager, this.isClear, this.model});
+  BuildContext? context;
+  LoginResponseModel? model;
+  CacheManager? cacheManager;
+  bool? isClear;
+  @override
+  Widget build(BuildContext context) {
+    var adminYetkisi =
+        model!.userClaims!.where((element) => element.name == 'admin').toList();
+    return Container(
+      child: Drawer(
+          child: Container(
+        child: Column(
+          children: [
+            Expanded(child: _buildMenuHeader(model)),
+            Expanded(
+                flex: 4,
+                child: adminYetkisi.isNotEmpty
+                    ? _buildAdminMenuBody()
+                    : _buildNormalMenuBody()),
+            _buildMenuExit(context, model, cacheManager, isClear),
+          ],
+        ),
+      )),
+    );
+  }
 }
