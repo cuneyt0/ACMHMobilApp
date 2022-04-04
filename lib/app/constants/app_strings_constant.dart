@@ -9,3 +9,13 @@ const String btSignOut = "Cıkıs yap";
 const String departmentComputerText = "Bilgisayar Muhendisligi";
 const String departmentMachineText = "Makine Muhendisligi";
 const String assetNeuLogo = "assets/logo/neu_logo.jpg";
+const String aTitle = "Başlık Ekle";
+const String aContent = "Içerik";
+// Drawer Menu Item
+const String mHome = 'ANASAYFA';
+const String mFood = 'YEMEK SAYFASI';
+const String mAnnouncement = 'DUYURU';
+const String mExam = 'SINAV BİLGİ SİSTEMİ';
+const String mActivity = 'ETKİNLİK VE TAKVİMİ';
+const String mAdminPanel = 'ADMİN PANELİ';
+const String mAddedAnnouncement = 'DUYURU EKLE';

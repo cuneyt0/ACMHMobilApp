@@ -10,6 +10,7 @@ class LoginCubit extends Cubit<LoginState> with CacheManager {
   bool isLoading = false;
   bool isClear = false;
   final ILoginService service;
+  bool showObsecure = true;
 
   LoginCubit(
       {required this.formKey,
@@ -50,6 +51,10 @@ class LoginCubit extends Cubit<LoginState> with CacheManager {
     }
   }
 
+  Future<void> showObsecureToggle() async {
+    deneme();
+  }
+
   void saveUserState(LoginResponseModel data) {
     saveLoginResponse(data);
   }
@@ -57,6 +62,11 @@ class LoginCubit extends Cubit<LoginState> with CacheManager {
   void changeLoadingView() {
     isLoading = !isLoading;
     emit(LoginLoadingState(isLoading));
+  }
+
+  void deneme() {
+    showObsecure = !showObsecure;
+    emit(showObsecureToggleState(showObsecure));
   }
 }
 
@@ -79,6 +89,12 @@ class LoginLoadingState extends LoginState {
   final bool isLoading;
 
   LoginLoadingState(this.isLoading);
+}
+
+class showObsecureToggleState extends LoginState {
+  final bool showObsecure;
+
+  showObsecureToggleState(this.showObsecure);
 }
 
 class LoginComplete extends LoginState {

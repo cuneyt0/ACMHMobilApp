@@ -1,13 +1,26 @@
 import '../../../../export_import.dart';
 
-TextFormField buildTextFormFieldPassword(
-    LoginState state, TextEditingController passwordController) {
+TextFormField buildTextFormFieldPassword(BuildContext context, LoginState state,
+    TextEditingController passwordController) {
   return TextFormField(
     controller: passwordController,
+    obscureText: state is showObsecureToggleState
+        ? (state.showObsecure ? true : false)
+        : false,
     keyboardType: TextInputType.number,
     style: const TextStyle(color: Colors.white),
     validator: (value) => (value ?? '').length > 2 ? null : '2 ten küçük',
-    decoration: const InputDecoration(
+    decoration: InputDecoration(
+      suffixIcon: IconButton(
+          onPressed: () {
+            context.read<LoginCubit>().showObsecureToggle();
+            print("tıklanıldı");
+          },
+          icon: state is showObsecureToggleState
+              ? (state.showObsecure
+                  ? Icon(Icons.visibility_off)
+                  : Icon(Icons.visibility))
+              : Icon(Icons.visibility)),
       focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(color: Colors.white),
       ),

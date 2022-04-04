@@ -65,7 +65,7 @@ Scaffold buildScaffold(
                             padding: const EdgeInsets.only(
                                 left: 30.0, right: 30.0, bottom: 40),
                             child: buildTextFormFieldPassword(
-                                state, passwordController),
+                                context, state, passwordController),
                           ),
                           buildElevatedButton(context),
                         ],

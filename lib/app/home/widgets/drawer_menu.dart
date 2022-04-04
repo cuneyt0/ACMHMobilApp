@@ -1,42 +1,70 @@
 import 'package:login_work/export_import.dart';
 
-List<dynamic> AdminMenu = [
-  "ANASAYFA",
-  "YEMEK SAYFASI",
-  "SINAV BİLGİ SİSTEMİ",
-  "DUYURU ",
-  "ETKİNLİK VE TAKVİMİ",
-  "SINAV BİLGİ SİSTEMİ",
-  "ADMİN PANELİ",
-];
-List<dynamic> NormalMenu = [
-  "ANASAYFA",
-  "YEMEK SAYFASI",
-  "SINAV BİLGİ SİSTEMİ",
-  "DUYURU ",
-  "ETKİNLİK VE TAKVİMİ",
-  "SINAV BİLGİ SİSTEMİ",
-];
+class DrawerMenu extends StatelessWidget {
+  DrawerMenu({this.context, this.cacheManager, this.isClear, this.model});
+  BuildContext? context;
+  LoginResponseModel? model;
+  CacheManager? cacheManager;
+  bool? isClear;
+  int? index;
+  @override
+  Widget build(BuildContext context) {
+    var adminYetkisi = model?.userClaims?[0].name == 'admin';
+    return Container(
+      child: Drawer(
+          child: Container(
+        child: Column(
+          children: [
+            Expanded(child: _buildMenuHeader(model)),
+            Expanded(
+                flex: 4,
+                child: adminYetkisi
+                    ? _buildAdminMenuBody(model, cacheManager)
+                    : _buildNormalMenuBody(model, cacheManager)),
+            _buildMenuExit(context, model, cacheManager, isClear),
+          ],
+        ),
+      )),
+    );
+  }
+}
 
 //exam information system
-Widget _buildNormalMenuBody() => ListView.builder(
+Widget _buildNormalMenuBody(
+        LoginResponseModel? model, CacheManager? cacheManager) =>
+    ListView.builder(
       itemCount: NormalMenu.length,
       itemBuilder: (context, index) => ListTile(
         title: Text(NormalMenu[index]),
-        onTap: () {
-          if (NormalMenu[index] == 'SINAV BİLGİ SİSTEMİ') {
-            Navigation.pushReplacementNamed(
-                root: Routes.examInformationSystemScreen);
+        onTap: () async {
+          if (NormalMenu[index] == mExam) {
+            await Navigator.of(context).push(MaterialPageRoute(
+                builder: ((context) => ExamInformationSystemScreen(
+                      model: model,
+                    ))));
           }
         },
       ),
     );
-Widget _buildAdminMenuBody() => ListView.builder(
+Widget _buildAdminMenuBody(
+        LoginResponseModel? model, CacheManager? cacheManager) =>
+    ListView.builder(
       itemCount: AdminMenu.length,
       itemBuilder: (context, index) => ListTile(
         title: Text(AdminMenu[index]),
         onTap: () {
-          print("${AdminMenu[index]} Tıklanıldı");
+          if (AdminMenu[index] == mExam) {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: ((context) => ExamInformationSystemScreen(
+                      model: model,
+                    ))));
+          }
+          if (AdminMenu[index] == mAdminPanel) {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: ((context) => AdminPanelScreen(
+                      model: model,
+                    ))));
+          }
         },
       ),
     );
@@ -52,7 +80,7 @@ Widget _buildMenuHeader(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("${model?.user?.firstName ?? " "} "),
+            Text("${model?.user?.firstName!}"),
             Text(model?.user?.lastName ?? " "),
           ],
         ),
@@ -77,7 +105,7 @@ Widget _buildMenuExit(BuildContext context, LoginResponseModel? model,
           isClear != isClear;
           model?.token = null;
           model?.expiration = 0;
-          if (model!.user == null) {
+          if (model?.user == null) {
             await cacheManager?.removeAllData();
             Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => LoginView()),
@@ -88,33 +116,4 @@ Widget _buildMenuExit(BuildContext context, LoginResponseModel? model,
         },
         child: const Text(btSignOut)),
   );
-}
-
-class DrawerMenu extends StatelessWidget {
-  DrawerMenu({this.context, this.cacheManager, this.isClear, this.model});
-  BuildContext? context;
-  LoginResponseModel? model;
-  CacheManager? cacheManager;
-  bool? isClear;
-  @override
-  Widget build(BuildContext context) {
-    var adminYetkisi =
-        model!.userClaims!.where((element) => element.name == 'admin').toList();
-    return Container(
-      child: Drawer(
-          child: Container(
-        child: Column(
-          children: [
-            Expanded(child: _buildMenuHeader(model)),
-            Expanded(
-                flex: 4,
-                child: adminYetkisi.isNotEmpty
-                    ? _buildAdminMenuBody()
-                    : _buildNormalMenuBody()),
-            _buildMenuExit(context, model, cacheManager, isClear),
-          ],
-        ),
-      )),
-    );
-  }
 }
