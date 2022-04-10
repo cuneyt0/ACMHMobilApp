@@ -1,3 +1,4 @@
-const String baseUrl = 'https://192.168.1.104:5001/api/auth';
+const String baseUrl = 'https://192.168.1.106:5001/api/auth';
 const String departmentgetAll =
-    'https://192.168.1.104:5001/api/department/getall';
+    'https://192.168.1.106:5001/api/department/getall';
+const String noticeAdd = 'https://192.168.1.106:5001/api/Notice';

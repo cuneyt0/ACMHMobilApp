@@ -52,7 +52,7 @@ class LoginCubit extends Cubit<LoginState> with CacheManager {
   }
 
   Future<void> showObsecureToggle() async {
-    deneme();
+    showObsecureView();
   }
 
   void saveUserState(LoginResponseModel data) {
@@ -64,7 +64,7 @@ class LoginCubit extends Cubit<LoginState> with CacheManager {
     emit(LoginLoadingState(isLoading));
   }
 
-  void deneme() {
+  void showObsecureView() {
     showObsecure = !showObsecure;
     emit(showObsecureToggleState(showObsecure));
   }

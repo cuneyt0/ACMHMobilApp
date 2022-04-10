@@ -29,7 +29,7 @@ export 'package:login_work/core/routes/routes.dart';
 export 'package:login_work/core/navigation/navigation_helper.dart';
 export 'package:login_work/app/home/widgets/drawer_menu.dart';
 export 'package:login_work/app/Lists/lists.dart';
-export 'package:login_work/app/home/screens/admin_panel_screen/admin_panel_screen.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/screen/admin_panel_screen.dart';
 export 'package:login_work/app/home/screens/exam_information_system_screen/exam_information_system_screen.dart';
 //URL CONSTANTS
 export 'package:login_work/app/constants/url_constants.dart';

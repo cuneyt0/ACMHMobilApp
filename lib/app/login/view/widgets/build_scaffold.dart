@@ -8,6 +8,7 @@ Scaffold buildScaffold(
   TextEditingController passwordController,
 ) {
   return Scaffold(
+      //resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: Column(
         children: [

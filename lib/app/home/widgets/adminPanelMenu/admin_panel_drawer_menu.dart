@@ -1,4 +1,4 @@
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/announcement_screen.dart';
+import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/announcement_screen.dart';
 import 'package:login_work/export_import.dart';
 
 class AdminPanelDrawerMenu extends StatelessWidget {

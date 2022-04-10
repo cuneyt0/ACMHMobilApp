@@ -9,6 +9,8 @@ class CacheManager {
         jsonEncode(responseModel.toJson()));
     return true;
   }
+//encode json -> string
+//decode string -> json
 
   Future<dynamic> getLoginResponse() async {
     final SharedPreferences prefs = await _prefs;
