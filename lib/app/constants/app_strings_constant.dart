@@ -19,3 +19,4 @@ const String mExam = 'SINAV BİLGİ SİSTEMİ';
 const String mActivity = 'ETKİNLİK VE TAKVİMİ';
 const String mAdminPanel = 'ADMİN PANELİ';
 const String mAddedAnnouncement = 'DUYURU EKLE';
+const String mShowAnnouncement = "DUYURULARI GÖSTER";

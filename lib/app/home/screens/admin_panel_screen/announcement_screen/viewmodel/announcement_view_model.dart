@@ -1,14 +1,8 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:login_work/app/home/model/department_response_model.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_request_model.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_response_model.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/service/IAnnouncementService.dart';
+import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/service/announcementService.dart';
 import 'package:login_work/export_import.dart';
 import 'package:mobx/mobx.dart';
 
-import '../service/announcementService.dart';
 part 'announcement_view_model.g.dart';
 
 class AnnouncementViewModel = _AnnouncementViewModelBase

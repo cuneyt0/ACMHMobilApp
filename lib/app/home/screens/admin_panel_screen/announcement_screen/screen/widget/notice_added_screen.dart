@@ -1,6 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/viewmodel/announcement_view_model.dart';
 import 'package:login_work/export_import.dart';
 
 class NoticeAddedScreen extends StatelessWidget {

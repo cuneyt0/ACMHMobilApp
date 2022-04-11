@@ -1,9 +1,11 @@
 import 'package:login_work/export_import.dart';
+import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/all_announcement_screen.dart';
 
 class Routes {
   Routes._();
   static const splash = '/splash_screen';
   static const loginView = '/login_view';
+  static const getAllNotice = '/all_announcement_screen';
 
   static Route<dynamic> onGenerateRoutes(RouteSettings settings) {
     switch (settings.name) {
@@ -11,6 +13,8 @@ class Routes {
         return _materialPageRoute(const SplashScreen());
       case loginView:
         return _materialPageRoute(LoginView());
+      case getAllNotice:
+        return _materialPageRoute(const AllAnnouncementScreen());
 
       default:
         return _materialPageRoute(const Text('PremiumPager'));

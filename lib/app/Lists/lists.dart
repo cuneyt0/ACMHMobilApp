@@ -18,5 +18,6 @@ const List<String> NormalMenu = [
 const List<dynamic> AdminPanelMenu = [
   mHome,
   mAddedAnnouncement,
+  mShowAnnouncement,
   'DERS BİLGİLERİ EKLE'
 ];

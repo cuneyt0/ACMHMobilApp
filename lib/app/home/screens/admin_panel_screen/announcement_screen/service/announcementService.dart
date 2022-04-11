@@ -1,7 +1,3 @@
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_response_model.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_request_model.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/service/IAnnouncementService.dart';
-
 import '../../../../../../export_import.dart';
 
 class AnnouncementService extends IAnnouncementService {

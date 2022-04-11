@@ -69,6 +69,9 @@ Widget _buildAdminMenuBody(
               ),
             );
           }
+          if (AdminPanelMenu[index] == mShowAnnouncement) {
+            Navigation.pushReplacementNamed(root: Routes.getAllNotice);
+          }
         },
       ),
     );

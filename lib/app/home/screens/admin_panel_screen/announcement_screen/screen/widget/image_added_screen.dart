@@ -1,5 +1,3 @@
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/photo_added_screen.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/viewmodel/announcement_view_model.dart';
 import 'package:login_work/export_import.dart';
 
 class ImageAddedScreen extends StatelessWidget {

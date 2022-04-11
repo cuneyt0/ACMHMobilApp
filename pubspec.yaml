@@ -49,6 +49,9 @@ dependencies:
   flutter_image_compress: ^1.1.0
   convex_bottom_bar: ^3.0.0
   another_flushbar: ^1.10.28
+  open_file: ^3.2.1
+  path_provider: ^2.0.9
+  easy_localization: ^3.0.0-nullsafety.0
  
   
 

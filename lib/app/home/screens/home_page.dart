@@ -1,3 +1,5 @@
+import 'package:login_work/app/home/viewmodel/home_view_model.dart';
+
 import '../../../export_import.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,6 +15,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // HomeViewModel _viewModel = HomeViewModel();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // _viewModel.getAllNotice();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

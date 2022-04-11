@@ -1,6 +1,3 @@
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:login_work/app/home/model/department_response_model.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/viewmodel/announcement_view_model.dart';
 import 'package:login_work/export_import.dart';
 
 Row noticeDepartmentRow(

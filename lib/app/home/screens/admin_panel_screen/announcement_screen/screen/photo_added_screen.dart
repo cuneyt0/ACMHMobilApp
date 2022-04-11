@@ -1,10 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:image_picker/image_picker.dart';
-
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/viewmodel/announcement_view_model.dart';
-
 import '../../../../../../export_import.dart';
 
 class PhotoAddedScreen extends StatelessWidget {
