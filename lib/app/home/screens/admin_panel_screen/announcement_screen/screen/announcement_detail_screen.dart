@@ -40,39 +40,54 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
       body: Observer(
         builder: ((context) => Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                      height: MediaQuery.of(context).size.height * 0.4,
-                      child: _viewModel.photo != null
-                          ? Image.memory(_viewModel.photo)
-                          : Center(
-                              child: Image.asset("assets/logo/neu_logo.jpg"))),
-                ),
-                Center(child: Text(widget.responseData?.title ?? 'title null')),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(
-                      child:
-                          Text(widget.responseData?.content ?? 'content null')),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0, left: 0.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text("Oluştulma Tarihi:"),
-                      Text(createdAt.toString())
-                    ],
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Container(
+                        height: MediaQuery.of(context).size.height * 0.4,
+                        width: MediaQuery.of(context).size.width * 1,
+                        child: _viewModel.photo != null
+                            ? Image.memory(_viewModel.photo)
+                            : Center(child: Image.asset(defaultImage))),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0, right: 13.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                Expanded(
+                  child: Column(
                     children: [
-                      Text("Güncelleme Tarihi:"),
-                      Text(updatedAt.toString())
+                      Center(child: Text('${widget.responseData?.title}')),
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Center(
+                            child: Text('${widget.responseData?.content}')),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0, left: 0.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(noticeCreatedAt),
+                            Text(createdAt.toString())
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0, right: 13.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(noticeUpdateAt),
+                            Text(updatedAt.toString())
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0),
+                        child: ElevatedButton(
+                            onPressed: () {
+                              print("Güncelle");
+                            },
+                            child: Text(updateButtonText)),
+                      )
                     ],
                   ),
                 ),

@@ -39,6 +39,37 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
     });
   }
 
+  final _$deleteResponseDataAtom =
+      Atom(name: '_HomeViewModelBase.deleteResponseData');
+
+  @override
+  NoticeDeleteResponseModel? get deleteResponseData {
+    _$deleteResponseDataAtom.reportRead();
+    return super.deleteResponseData;
+  }
+
+  @override
+  set deleteResponseData(NoticeDeleteResponseModel? value) {
+    _$deleteResponseDataAtom.reportWrite(value, super.deleteResponseData, () {
+      super.deleteResponseData = value;
+    });
+  }
+
+  final _$photoAtom = Atom(name: '_HomeViewModelBase.photo');
+
+  @override
+  dynamic get photo {
+    _$photoAtom.reportRead();
+    return super.photo;
+  }
+
+  @override
+  set photo(dynamic value) {
+    _$photoAtom.reportWrite(value, super.photo, () {
+      super.photo = value;
+    });
+  }
+
   final _$getAllNoticeAsyncAction =
       AsyncAction('_HomeViewModelBase.getAllNotice');
 
@@ -57,15 +88,17 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
   final _$deleteAsyncAction = AsyncAction('_HomeViewModelBase.delete');
 
   @override
-  Future<void> delete() {
-    return _$deleteAsyncAction.run(() => super.delete());
+  Future<dynamic> delete(int? id) {
+    return _$deleteAsyncAction.run(() => super.delete(id));
   }
 
   @override
   String toString() {
     return '''
 dio: ${dio},
-responseData: ${responseData}
+responseData: ${responseData},
+deleteResponseData: ${deleteResponseData},
+photo: ${photo}
     ''';
   }
 }

@@ -1,3 +1,4 @@
+import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_delete_response_model.dart';
 import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_getall_response_model.dart';
 import 'package:login_work/export_import.dart';
 import 'package:mobx/mobx.dart';
@@ -11,6 +12,8 @@ abstract class _HomeViewModelBase with Store {
   Dio dio = Dio();
   @observable
   NoticeGetAllResponseModel? responseData = NoticeGetAllResponseModel();
+  @observable
+  NoticeDeleteResponseModel? deleteResponseData = NoticeDeleteResponseModel();
 
   @observable
   var photo;
@@ -60,13 +63,10 @@ abstract class _HomeViewModelBase with Store {
     dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
     dio.interceptors.clear();
     try {
-      Response<List<int>> response = await dio.get<List<int>>(
-          'https://192.168.1.106:5001/api/Notice/image',
+      Response<List<int>> response = await dio.get<List<int>>(noticeImageUrl,
           queryParameters: {'fileName': fileName},
           options: Options(responseType: ResponseType.bytes));
       if (response.statusCode == HttpStatus.ok) {
-        //   print(response.data);
-        print("finished");
         return response.data;
       } else {
         null;
@@ -79,10 +79,10 @@ abstract class _HomeViewModelBase with Store {
       }
     }
   }
-//-----------------------Delete-------------------------
 
+//-----------------------Delete-------------------------
   @action
-  Future<void> delete() async {
+  Future<dynamic> delete(int? id) async {
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =
@@ -90,15 +90,19 @@ abstract class _HomeViewModelBase with Store {
       return client;
     };
     dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
+    String loginResponseText = await CacheManager().getLoginResponse();
+    LoginResponseModel loginResponseModel =
+        LoginResponseModel.fromJson(jsonDecode(loginResponseText));
+    print(loginResponseText);
+    String token = loginResponseModel.token ?? "";
+    dio.options.headers['Authorization'] = 'Bearer ${token}';
     dio.interceptors.clear();
 
     try {
-      final response = await dio.delete(noticegetAll);
+      final response = await dio.delete(noticedelete, data: {'id': id});
       if (response.statusCode == HttpStatus.ok) {
-        responseData = NoticeGetAllResponseModel.fromJson(response.data);
-        print("noticce getall");
-        print(responseData?.data?.length);
-        print(response.data);
+        deleteResponseData = NoticeDeleteResponseModel.fromJson(response.data);
+        return deleteResponseData;
       } else {
         null;
       }
