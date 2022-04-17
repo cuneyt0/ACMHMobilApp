@@ -34,11 +34,6 @@ export 'package:login_work/app/home/screens/exam_information_system_screen/exam_
 //URL CONSTANTS
 export 'package:login_work/app/constants/url_constants.dart';
 //DUYURU
-export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/widget/image_added_screen.dart';
-export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/widget/notice_added_screen.dart';
-export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/widget/notice_department_row.dart';
-export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/widget/text_form_field_content.dart';
-export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/widget/text_form_field_title.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/viewmodel/announcement_view_model.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/photo_added_screen.dart';
 export 'package:another_flushbar/flushbar.dart';
@@ -50,3 +45,16 @@ export 'package:image_picker/image_picker.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_response_model.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_request_model.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/service/IAnnouncementService.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/announcement_detail_screen.dart';
+export 'package:login_work/app/home/viewmodel/home_view_model.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/announcement_update_screen.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/viewmodel/update/announcement_update_view_model.dart';
+
+export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/photo_update_screen.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/all_announcement_screen.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_getall_response_model.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_update/update_content_text_field.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_update/update_dropdown_widget.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_update/update_image_widget.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_update/update_save_button_widget.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_update/update_title_text_field.dart';

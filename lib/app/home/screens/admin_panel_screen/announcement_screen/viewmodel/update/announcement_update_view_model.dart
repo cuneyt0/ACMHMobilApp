@@ -1,37 +1,39 @@
 import 'package:image_cropper/image_cropper.dart';
+import 'package:login_work/app/baseViewmodel/base_viewmodel_protocol.dart';
+import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_getall_response_model.dart';
 import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/service/announcementService.dart';
 import 'package:login_work/export_import.dart';
 import 'package:mobx/mobx.dart';
+part 'announcement_update_view_model.g.dart';
 
-part 'announcement_view_model.g.dart';
+class AnnouncementUpdateViewModel = _AnnouncementUpdateViewModelBase
+    with _$AnnouncementUpdateViewModel;
 
-class AnnouncementViewModel = _AnnouncementViewModelBase
-    with _$AnnouncementViewModel;
-
-abstract class _AnnouncementViewModelBase with Store {
+abstract class _AnnouncementUpdateViewModelBase extends BaseViewModelProtocol
+    with Store {
   @observable
-  DepartmentResponseModel? responseData = DepartmentResponseModel();
-
-  @observable
-  IAnnouncementService service =
-      AnnouncementService(dio: Dio(BaseOptions(baseUrl: noticeAdd)));
-
+  int? id;
   @observable
   Dio dio = Dio();
   @observable
+  DepartmentResponseModel? responseData = DepartmentResponseModel();
+  @observable
+  IAnnouncementService service = AnnouncementService(
+      dio: Dio(BaseOptions(baseUrl: 'https://192.168.1.102:5001/api/Notice')));
+  @observable
   Data? dropdownvalue;
+  @observable
+  int? selectedDepartmentId;
+  @observable
+  String? addedPhoto;
+  @observable
+  String? photo;
   @observable
   var selectedImagePath = '';
   @observable
   var selectedImageSize = '';
   @observable
   var issave = false;
-  @observable
-  String? photo;
-  @observable
-  String? addedPhoto;
-  @observable
-  int? selectedDepartmentId;
   //crop code
   @observable
   var cropImagePath = '';
@@ -45,25 +47,42 @@ abstract class _AnnouncementViewModelBase with Store {
   var compressImageSize = '';
   @observable
   bool isLoading = false;
-
-  @observable
-  TextEditingController titleController = TextEditingController();
-  @observable
-  TextEditingController contentController = TextEditingController();
   @observable
   GlobalKey<FormState> formKey = GlobalKey();
   @observable
-  @action
-  String? noticeStringValidation(String? value) {
-    if ((value ?? '').length > 0) {
-      return null;
-    }
-    return "Boş Bırakılamaz";
-  }
-
+  TextEditingController? textEditingTitleController = TextEditingController();
+  @observable
+  TextEditingController? textEditingContentController = TextEditingController();
   @action
   void changeLoadingView() {
     isLoading = !isLoading;
+  }
+
+  @action
+  Future<void> updateNotice() async {
+    if (formKey.currentState != null &&
+        formKey.currentState!.validate() &&
+        selectedDepartmentId != null) {
+      changeLoadingView();
+      final data = await service.updateNotice(NoticeRequestModel.ID(
+          id: id,
+          title: textEditingTitleController?.text,
+          content: textEditingContentController?.text,
+          departmentId: selectedDepartmentId,
+          imagePath: addedPhoto));
+      print(data);
+      changeLoadingView();
+      if (data is NoticeResponseModel) {
+        print("Success");
+      } else if (data is String) {
+        ScaffoldMessenger.of(buildContext)
+            .showSnackBar(SnackBar(content: Text(data)));
+      } else {}
+    } else {
+      changeLoadingView();
+
+      await Future.delayed(const Duration(milliseconds: 250));
+    }
   }
 
   @action
@@ -88,8 +107,6 @@ abstract class _AnnouncementViewModelBase with Store {
             CropAspectRatioPreset.ratio7x5,
             CropAspectRatioPreset.ratio16x9,
           ],
-          //maxWidth: 1024,
-          //maxHeight: 1024,
           compressFormat: ImageCompressFormat.jpg);
       cropImagePath = cropImageFile!.path;
 
@@ -116,32 +133,6 @@ abstract class _AnnouncementViewModelBase with Store {
   @action
   void deleteMemoryImage() {
     cropImagePath = '';
-  }
-
-  @action
-  Future<void> postNotice() async {
-    if (formKey.currentState != null &&
-        formKey.currentState!.validate() &&
-        dropdownvalue?.id != null) {
-      changeLoadingView();
-      final data = await service.postNotice(NoticeRequestModel(
-          title: titleController.text,
-          content: contentController.text,
-          departmentId: selectedDepartmentId,
-          imagePath: addedPhoto));
-      print(data);
-      changeLoadingView();
-
-      if (data is NoticeResponseModel) {
-        print(data);
-        print("BAŞARILIIII");
-      } else {
-        print(data);
-        print("BAŞARISIZZZZ");
-      }
-    } else {
-      print(" BAŞARISIZZZZ");
-    }
   }
 
   @action
@@ -172,4 +163,8 @@ abstract class _AnnouncementViewModelBase with Store {
       }
     }
   }
+
+  @override
+  void setBuildContext(BuildContext buildContext) =>
+      this.buildContext = buildContext;
 }

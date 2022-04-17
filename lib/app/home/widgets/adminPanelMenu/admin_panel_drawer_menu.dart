@@ -1,3 +1,4 @@
+import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/all_announcement_screen.dart';
 import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/announcement_screen.dart';
 import 'package:login_work/export_import.dart';
 
@@ -52,7 +53,7 @@ Widget _buildAdminMenuBody(
       itemCount: AdminPanelMenu.length,
       itemBuilder: (context, index) => ListTile(
         title: Text(AdminPanelMenu[index]),
-        onTap: () {
+        onTap: () async {
           if (AdminPanelMenu[index] == mHome) {
             Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
@@ -63,6 +64,7 @@ Widget _buildAdminMenuBody(
                 (Route<dynamic> route) => false);
           }
           if (AdminPanelMenu[index] == mAddedAnnouncement) {
+            Navigator.of(context).pop();
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => AnnouncementScreen(),
@@ -70,7 +72,14 @@ Widget _buildAdminMenuBody(
             );
           }
           if (AdminPanelMenu[index] == mShowAnnouncement) {
-            Navigation.pushReplacementNamed(root: Routes.getAllNotice);
+            Navigator.of(context).pop();
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => AllAnnouncementScreen(
+                  model: model,
+                ),
+              ),
+            );
           }
         },
       ),

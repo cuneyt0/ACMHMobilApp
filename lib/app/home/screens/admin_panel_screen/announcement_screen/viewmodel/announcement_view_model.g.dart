@@ -148,19 +148,20 @@ mixin _$AnnouncementViewModel on _AnnouncementViewModelBase, Store {
     });
   }
 
-  final _$selectedPhotoIdAtom =
-      Atom(name: '_AnnouncementViewModelBase.selectedPhotoId');
+  final _$selectedDepartmentIdAtom =
+      Atom(name: '_AnnouncementViewModelBase.selectedDepartmentId');
 
   @override
-  int? get selectedPhotoId {
-    _$selectedPhotoIdAtom.reportRead();
-    return super.selectedPhotoId;
+  int? get selectedDepartmentId {
+    _$selectedDepartmentIdAtom.reportRead();
+    return super.selectedDepartmentId;
   }
 
   @override
-  set selectedPhotoId(int? value) {
-    _$selectedPhotoIdAtom.reportWrite(value, super.selectedPhotoId, () {
-      super.selectedPhotoId = value;
+  set selectedDepartmentId(int? value) {
+    _$selectedDepartmentIdAtom.reportWrite(value, super.selectedDepartmentId,
+        () {
+      super.selectedDepartmentId = value;
     });
   }
 
@@ -370,7 +371,7 @@ selectedImageSize: ${selectedImageSize},
 issave: ${issave},
 photo: ${photo},
 addedPhoto: ${addedPhoto},
-selectedPhotoId: ${selectedPhotoId},
+selectedDepartmentId: ${selectedDepartmentId},
 cropImagePath: ${cropImagePath},
 cropImageSize: ${cropImageSize},
 compressImagePath: ${compressImagePath},

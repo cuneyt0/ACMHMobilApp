@@ -1,14 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_getall_response_model.dart';
+import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/announcement_update_screen.dart';
 import 'package:login_work/export_import.dart';
 
 import '../../../../viewmodel/home_view_model.dart';
 
 class AnnouncementDetail extends StatefulWidget {
   final NoticeData? responseData;
-
-  const AnnouncementDetail({Key? key, this.responseData}) : super(key: key);
+  final LoginResponseModel? model;
+  const AnnouncementDetail({Key? key, this.responseData, this.model})
+      : super(key: key);
 
   @override
   State<AnnouncementDetail> createState() => _AnnouncementDetailState();
@@ -81,10 +83,26 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
                         ),
                       ),
                       Padding(
+                        padding: const EdgeInsets.only(top: 10.0, right: 13.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text("Department Name"),
+                            Text(widget.responseData!.departmentId.toString())
+                          ],
+                        ),
+                      ),
+                      Padding(
                         padding: const EdgeInsets.only(top: 20.0),
                         child: ElevatedButton(
                             onPressed: () {
-                              print("Güncelle");
+                              Navigator.of(context).pop();
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      AnnouncementUpdateScreen(
+                                        data: widget.responseData,
+                                        model: widget.model,
+                                      )));
                             },
                             child: Text(updateButtonText)),
                       )

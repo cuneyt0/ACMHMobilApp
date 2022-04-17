@@ -1,8 +1,7 @@
 import 'package:login_work/export_import.dart';
 
-Row noticeDepartmentRow(
-  AnnouncementViewModel? _viewModel,
-) {
+Row UpdateDropdown(AnnouncementUpdateScreen widget,
+    final AnnouncementUpdateViewModel? _viewModel) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceAround,
     children: [
@@ -26,9 +25,9 @@ Row noticeDepartmentRow(
                   }).toList(),
                   onChanged: (Data? selected) {
                     _viewModel?.dropdownvalue = selected;
-                    _viewModel?.selectedPhotoId = selected?.id;
+                    _viewModel?.selectedDepartmentId = selected?.id;
                     print(_viewModel?.dropdownvalue?.departmentName.toString());
-                    print(_viewModel?.selectedPhotoId.toString());
+                    print(_viewModel?.selectedDepartmentId.toString());
                   }),
             ),
           ),
