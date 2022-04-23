@@ -55,6 +55,6 @@ export 'package:login_work/app/home/screens/admin_panel_screen/announcement_scre
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_getall_response_model.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_update/update_content_text_field.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_update/update_dropdown_widget.dart';
-export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_update/update_image_widget.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/update_image_widget.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_update/update_save_button_widget.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_update/update_title_text_field.dart';

@@ -3,7 +3,10 @@ import '../../../../../../export_import.dart';
 class AnnouncementUpdateScreen extends StatefulWidget {
   final NoticeData? data;
   final LoginResponseModel? model;
-  const AnnouncementUpdateScreen({Key? key, this.data, this.model})
+  final AnnouncementUpdateViewModel? viewModel;
+  final List<DropdownMenuItem<Data>>? items;
+  const AnnouncementUpdateScreen(
+      {Key? key, this.data, this.model, this.viewModel, this.items})
       : super(key: key);
 
   @override
@@ -12,12 +15,12 @@ class AnnouncementUpdateScreen extends StatefulWidget {
 }
 
 class _AnnouncementUpdateScreenState extends State<AnnouncementUpdateScreen> {
-  AnnouncementUpdateViewModel? _viewModel = AnnouncementUpdateViewModel();
+  AnnouncementUpdateViewModel? _viewModel;
+
   @override
   void initState() {
-    // TODO: implement initState
+    _viewModel = widget.viewModel;
     super.initState();
-    _viewModel?.getAllDepartment();
     _viewModel?.id = widget.data?.id;
     _viewModel?.setBuildContext(context);
   }
@@ -39,7 +42,7 @@ class _AnnouncementUpdateScreenState extends State<AnnouncementUpdateScreen> {
                           widget: widget, viewModel: _viewModel),
                       UpdateContentTextField(
                           widget: widget, viewModel: _viewModel),
-                      UpdateDropdown(widget, _viewModel),
+                      UpdateDropdown(widget, widget.items, _viewModel),
                       UpdateImageWidget(viewModel: _viewModel, widget: widget),
                       UpdateSaveButtonWidget(
                         viewModel: _viewModel,

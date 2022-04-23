@@ -280,13 +280,13 @@ mixin _$AnnouncementUpdateViewModel on _AnnouncementUpdateViewModelBase, Store {
       Atom(name: '_AnnouncementUpdateViewModelBase.textEditingTitleController');
 
   @override
-  TextEditingController? get textEditingTitleController {
+  TextEditingController get textEditingTitleController {
     _$textEditingTitleControllerAtom.reportRead();
     return super.textEditingTitleController;
   }
 
   @override
-  set textEditingTitleController(TextEditingController? value) {
+  set textEditingTitleController(TextEditingController value) {
     _$textEditingTitleControllerAtom
         .reportWrite(value, super.textEditingTitleController, () {
       super.textEditingTitleController = value;
@@ -297,16 +297,31 @@ mixin _$AnnouncementUpdateViewModel on _AnnouncementUpdateViewModelBase, Store {
       name: '_AnnouncementUpdateViewModelBase.textEditingContentController');
 
   @override
-  TextEditingController? get textEditingContentController {
+  TextEditingController get textEditingContentController {
     _$textEditingContentControllerAtom.reportRead();
     return super.textEditingContentController;
   }
 
   @override
-  set textEditingContentController(TextEditingController? value) {
+  set textEditingContentController(TextEditingController value) {
     _$textEditingContentControllerAtom
         .reportWrite(value, super.textEditingContentController, () {
       super.textEditingContentController = value;
+    });
+  }
+
+  final _$newFotoAtom = Atom(name: '_AnnouncementUpdateViewModelBase.newFoto');
+
+  @override
+  dynamic get newFoto {
+    _$newFotoAtom.reportRead();
+    return super.newFoto;
+  }
+
+  @override
+  set newFoto(dynamic value) {
+    _$newFotoAtom.reportWrite(value, super.newFoto, () {
+      super.newFoto = value;
     });
   }
 
@@ -332,6 +347,15 @@ mixin _$AnnouncementUpdateViewModel on _AnnouncementUpdateViewModelBase, Store {
   @override
   Future<String> GetPhoto() {
     return _$GetPhotoAsyncAction.run(() => super.GetPhoto());
+  }
+
+  final _$getNetworkImageAsyncAction =
+      AsyncAction('_AnnouncementUpdateViewModelBase.getNetworkImage');
+
+  @override
+  Future<dynamic> getNetworkImage(String fileName) {
+    return _$getNetworkImageAsyncAction
+        .run(() => super.getNetworkImage(fileName));
   }
 
   final _$getAllDepartmentAsyncAction =
@@ -392,7 +416,8 @@ compressImageSize: ${compressImageSize},
 isLoading: ${isLoading},
 formKey: ${formKey},
 textEditingTitleController: ${textEditingTitleController},
-textEditingContentController: ${textEditingContentController}
+textEditingContentController: ${textEditingContentController},
+newFoto: ${newFoto}
     ''';
   }
 }

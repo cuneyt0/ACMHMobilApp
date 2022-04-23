@@ -1,8 +1,11 @@
+import 'dart:typed_data';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_getall_response_model.dart';
 import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/announcement_update_screen.dart';
 import 'package:login_work/export_import.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../../../viewmodel/home_view_model.dart';
 
@@ -18,17 +21,58 @@ class AnnouncementDetail extends StatefulWidget {
 
 class _AnnouncementDetailState extends State<AnnouncementDetail> {
   HomeViewModel _viewModel = HomeViewModel();
+  AnnouncementUpdateViewModel? _updateViewModel = AnnouncementUpdateViewModel();
+  List<DropdownMenuItem<Data>>? items;
+  bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
+    _updateViewModel?.getAllDepartment().then(
+      (value) {
+        setState(() {
+          items = _updateViewModel?.responseData?.data?.map((e) {
+            return DropdownMenuItem<Data>(
+                value: e, child: Text(e.departmentName ?? "Null"));
+          }).toList();
+        });
+        print("--Items__");
+
+        print(items);
+      },
+    );
+    _updateViewModel?.dropdownvalue = Data(
+        id: widget.responseData?.departmentId,
+        departmentName: _updateViewModel?.responseData?.data
+            ?.firstWhere(
+                (element) => element.id == widget.responseData?.departmentId)
+            .departmentName);
+    _updateViewModel?.selectedDepartmentId =
+        _updateViewModel?.dropdownvalue?.id;
+
     _viewModel
         .getImage(widget.responseData?.imagePath ?? 'foto yok')
-        .then((value) {
-      if (value != null)
+        .then((value) async {
+      if (value != null) {
         setState(() {
           _viewModel.photo = value;
+          getTemporaryDirectory().then((temp) {
+            File file = File(temp.path + '/temp.jpg');
+            file.writeAsBytes(value as Uint8List);
+            _updateViewModel?.addedPhoto = file.path;
+            print(file.path);
+          });
+
+          //
+
+          //   _updateViewModel.addedPhoto = value;
         });
+      }
+      Future.delayed(Duration(milliseconds: 250)).then((value) {
+        setState(() {
+          isLoading = false;
+        });
+      });
     });
   }
 
@@ -48,9 +92,11 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
                     child: Container(
                         height: MediaQuery.of(context).size.height * 0.4,
                         width: MediaQuery.of(context).size.width * 1,
-                        child: _viewModel.photo != null
-                            ? Image.memory(_viewModel.photo)
-                            : Center(child: Image.asset(defaultImage))),
+                        child: isLoading
+                            ? Center(child: CircularProgressIndicator())
+                            : _viewModel.photo != null
+                                ? Image.memory(_viewModel.photo)
+                                : Center(child: Image.asset(defaultImage))),
                   ),
                 ),
                 Expanded(
@@ -100,7 +146,9 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) =>
                                       AnnouncementUpdateScreen(
+                                        viewModel: _updateViewModel,
                                         data: widget.responseData,
+                                        items: items,
                                         model: widget.model,
                                       )));
                             },

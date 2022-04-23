@@ -18,10 +18,11 @@ class UpdateContentTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
+        controller: _viewModel?.textEditingContentController,
         maxLines: 8,
         validator: (value) =>
             (value ?? '').length > 0 ? null : 'boş bırakılamaz',
-        initialValue: _viewModel?.textEditingContentController?.text,
+        // initialValue: _viewModel?.textEditingContentController.text ?? "",
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.black),

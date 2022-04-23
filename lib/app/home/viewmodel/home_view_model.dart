@@ -27,7 +27,13 @@ abstract class _HomeViewModelBase with Store {
       return client;
     };
     dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
-
+    String loginResponseText = await CacheManager().getLoginResponse();
+    LoginResponseModel loginResponseModel =
+        LoginResponseModel.fromJson(jsonDecode(loginResponseText));
+    print(loginResponseText);
+    String token = loginResponseModel.token ?? "";
+    print(token);
+    dio.options.headers['Authorization'] = 'Bearer ${token}';
     //dio.interceptors.add(PrettyDioLogger());
     dio.interceptors.clear();
 

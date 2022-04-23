@@ -13,12 +13,13 @@ class UpdateTitleTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _viewModel?.textEditingTitleController?.text =
+    _viewModel?.textEditingTitleController.text =
         widget.data?.title ?? ' Title boş';
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
-        initialValue: _viewModel?.textEditingTitleController?.text,
+        controller: _viewModel?.textEditingTitleController,
+        //     initialValue: _viewModel?.textEditingTitleController?.text ?? "",
         validator: (value) =>
             (value ?? '').length > 0 ? null : 'boş bırakılamaz',
         decoration: InputDecoration(

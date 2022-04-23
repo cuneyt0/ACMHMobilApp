@@ -50,13 +50,16 @@ abstract class _AnnouncementUpdateViewModelBase extends BaseViewModelProtocol
   @observable
   GlobalKey<FormState> formKey = GlobalKey();
   @observable
-  TextEditingController? textEditingTitleController = TextEditingController();
+  TextEditingController textEditingTitleController = TextEditingController();
   @observable
-  TextEditingController? textEditingContentController = TextEditingController();
+  TextEditingController textEditingContentController = TextEditingController();
   @action
   void changeLoadingView() {
     isLoading = !isLoading;
   }
+
+  @observable
+  var newFoto;
 
   @action
   Future<void> updateNotice() async {
@@ -66,13 +69,15 @@ abstract class _AnnouncementUpdateViewModelBase extends BaseViewModelProtocol
       changeLoadingView();
       final data = await service.updateNotice(NoticeRequestModel.ID(
           id: id,
-          title: textEditingTitleController?.text,
-          content: textEditingContentController?.text,
+          title: textEditingTitleController.text,
+          content: textEditingContentController.text,
           departmentId: selectedDepartmentId,
           imagePath: addedPhoto));
       print(data);
       changeLoadingView();
       if (data is NoticeResponseModel) {
+        print("seçilen department ID");
+        print(selectedDepartmentId);
         print("Success");
       } else if (data is String) {
         ScaffoldMessenger.of(buildContext)
@@ -82,6 +87,7 @@ abstract class _AnnouncementUpdateViewModelBase extends BaseViewModelProtocol
       changeLoadingView();
 
       await Future.delayed(const Duration(milliseconds: 250));
+      print('bla bla bla');
     }
   }
 
@@ -133,6 +139,35 @@ abstract class _AnnouncementUpdateViewModelBase extends BaseViewModelProtocol
   @action
   void deleteMemoryImage() {
     cropImagePath = '';
+  }
+
+//-------------------ShowImage--------------------------
+  @action
+  Future<dynamic> getNetworkImage(String fileName) async {
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
+    dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
+    dio.interceptors.clear();
+    try {
+      Response<List<int>> response = await dio.get<List<int>>(noticeImageUrl,
+          queryParameters: {'fileName': fileName},
+          options: Options(responseType: ResponseType.bytes));
+      if (response.statusCode == HttpStatus.ok) {
+        return response.data;
+      } else {
+        null;
+      }
+    } catch (e) {
+      if ((e as DioError).response != null) {
+        return null;
+      } else {
+        "Hata Gerçekleşti";
+      }
+    }
   }
 
   @action

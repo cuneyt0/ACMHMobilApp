@@ -10,6 +10,7 @@ class AllAnnouncementScreen extends StatefulWidget {
 
 class _AllAnnouncementScreenState extends State<AllAnnouncementScreen> {
   HomeViewModel _viewModel = HomeViewModel();
+
   @override
   void initState() {
     // TODO: implement initState

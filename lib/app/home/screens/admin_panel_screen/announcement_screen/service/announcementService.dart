@@ -23,10 +23,10 @@ class AnnouncementService extends IAnnouncementService {
 
     Map<String, dynamic> jsonData = model.toJson();
     if (model.imagePath != null) {
-      jsonData['ImagePath'] = await MultipartFile.fromFile(model.imagePath!,
+      jsonData['file'] = await MultipartFile.fromFile(model.imagePath!,
           filename: model.imagePath);
     } else {
-      jsonData.remove("imagePath");
+      jsonData.remove("file");
     }
     print(jsonData);
     //var formData = FormData.fromMap(});
@@ -70,10 +70,10 @@ class AnnouncementService extends IAnnouncementService {
 
     Map<String, dynamic> jsonData = model.toJson();
     if (model.imagePath != null) {
-      jsonData['ImagePath'] = await MultipartFile.fromFile(model.imagePath!,
+      jsonData['file'] = await MultipartFile.fromFile(model.imagePath!,
           filename: model.imagePath);
     } else {
-      jsonData.remove("imagePath");
+      jsonData.remove("file");
     }
     print(jsonData);
     //var formData = FormData.fromMap(});

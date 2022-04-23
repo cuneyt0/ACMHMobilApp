@@ -19,7 +19,7 @@ class UpdateSaveButtonWidget extends StatelessWidget {
                 top: 40.0, bottom: 20.0, left: 5, right: 5),
             child: ElevatedButton(
                 onPressed: (() async {
-                  if (_viewModel?.addedPhoto == null) {
+                  /* if (_viewModel?.addedPhoto == null) {
                     Flushbar(
                       message: 'Resim seçilmeden güncelleyemezsiniz',
                       flushbarPosition: FlushbarPosition.TOP,
@@ -27,27 +27,26 @@ class UpdateSaveButtonWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(2),
                       backgroundColor: Colors.black.withOpacity(0.5),
                     ).show(context);
-                  } else {
-                    _viewModel?.updateNotice().then(
-                          (value) => Flushbar(
-                            message: 'Duyuru Güncellendi',
-                            flushbarPosition: FlushbarPosition.TOP,
-                            duration: Duration(seconds: 1),
-                            borderRadius: BorderRadius.circular(2),
-                            backgroundColor: Colors.black.withOpacity(0.5),
-                          ).show(context).then((value) {
-                            Navigator.of(context).pop();
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => AdminPanelScreen(
-                                  model: widget.model,
-                                ),
+                  } else {*/
+                  await _viewModel?.updateNotice().then(
+                        (value) => Flushbar(
+                          message: 'Duyuru Güncellendi',
+                          flushbarPosition: FlushbarPosition.TOP,
+                          duration: Duration(seconds: 1),
+                          borderRadius: BorderRadius.circular(2),
+                          backgroundColor: Colors.black.withOpacity(0.5),
+                        ).show(context).then((value) {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => AdminPanelScreen(
+                                model: widget.model,
                               ),
-                            );
-                          }),
-                        );
-                  }
-                }),
+                            ),
+                          );
+                        }),
+                      );
+                } /*}*/),
                 child: Text("Kaydet"),
                 style: ButtonStyle(
                   maximumSize: MaterialStateProperty.all<Size>(
