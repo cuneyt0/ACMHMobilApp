@@ -23,7 +23,8 @@ class NoticeRequestModel {
       this.content,
       this.createdAt,
       this.updatedAt,
-      this.imagePath});
+      this.imagePath,
+      this.pdfPath});
 
   NoticeRequestModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

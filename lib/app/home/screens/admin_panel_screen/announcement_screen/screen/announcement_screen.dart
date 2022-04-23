@@ -39,6 +39,11 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                       textFormFieldTitle(_viewModel),
                       textFormFieldContent(_viewModel),
                       noticeDepartmentRow(_viewModel),
+                      ElevatedButton(
+                          onPressed: () {
+                            _viewModel?.uploadPdf();
+                          },
+                          child: Text("PDF YÜKLE")),
                       ImageAddedScreen(viewModel: _viewModel),
                       NoticeAddedScreen(viewModel: _viewModel),
                     ],

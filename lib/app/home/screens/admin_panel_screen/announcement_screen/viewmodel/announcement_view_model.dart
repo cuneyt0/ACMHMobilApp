@@ -1,7 +1,9 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/service/announcementService.dart';
 import 'package:login_work/export_import.dart';
 import 'package:mobx/mobx.dart';
+import 'package:path_provider/path_provider.dart';
 
 part 'announcement_view_model.g.dart';
 
@@ -66,6 +68,40 @@ abstract class _AnnouncementViewModelBase with Store {
     isLoading = !isLoading;
   }
 
+  @observable
+  FilePickerResult? result;
+  @observable
+  PlatformFile? file;
+  @observable
+  File? newFile;
+  @observable
+  String? newFilePath;
+  @observable
+  Directory? appStorage;
+  @action
+  Future<void> uploadPdf() async {
+    result = await FilePicker.platform.pickFiles();
+    if (result == null) return;
+    file = result?.files.first;
+    print('Name:${file?.name}');
+    print('bytes:${file?.bytes}');
+    print('size:${file?.size}');
+    print('extension:${file?.extension}');
+    print('path:${file?.path}');
+
+    newFile = await saveFilePermanently(file);
+    newFilePath = newFile?.path;
+    print('from Path:${file?.path}');
+    print('To Path:${newFile?.path}');
+  }
+
+  @action
+  Future<File> saveFilePermanently(file) async {
+    appStorage = await getApplicationDocumentsDirectory();
+    newFile = File('${appStorage?.path}/${file.name}');
+    return File(file.path!).copy(newFile!.path);
+  }
+
   @action
   Future<void> getImage(ImageSource imageSource) async {
     final pickedFile = await ImagePicker().pickImage(source: imageSource);
@@ -128,7 +164,8 @@ abstract class _AnnouncementViewModelBase with Store {
           title: titleController.text,
           content: contentController.text,
           departmentId: selectedDepartmentId,
-          imagePath: addedPhoto));
+          imagePath: addedPhoto,
+          pdfPath: newFilePath));
       print(data);
       changeLoadingView();
 

@@ -291,6 +291,99 @@ mixin _$AnnouncementViewModel on _AnnouncementViewModelBase, Store {
     });
   }
 
+  final _$resultAtom = Atom(name: '_AnnouncementViewModelBase.result');
+
+  @override
+  FilePickerResult? get result {
+    _$resultAtom.reportRead();
+    return super.result;
+  }
+
+  @override
+  set result(FilePickerResult? value) {
+    _$resultAtom.reportWrite(value, super.result, () {
+      super.result = value;
+    });
+  }
+
+  final _$fileAtom = Atom(name: '_AnnouncementViewModelBase.file');
+
+  @override
+  PlatformFile? get file {
+    _$fileAtom.reportRead();
+    return super.file;
+  }
+
+  @override
+  set file(PlatformFile? value) {
+    _$fileAtom.reportWrite(value, super.file, () {
+      super.file = value;
+    });
+  }
+
+  final _$newFileAtom = Atom(name: '_AnnouncementViewModelBase.newFile');
+
+  @override
+  File? get newFile {
+    _$newFileAtom.reportRead();
+    return super.newFile;
+  }
+
+  @override
+  set newFile(File? value) {
+    _$newFileAtom.reportWrite(value, super.newFile, () {
+      super.newFile = value;
+    });
+  }
+
+  final _$newFilePathAtom =
+      Atom(name: '_AnnouncementViewModelBase.newFilePath');
+
+  @override
+  String? get newFilePath {
+    _$newFilePathAtom.reportRead();
+    return super.newFilePath;
+  }
+
+  @override
+  set newFilePath(String? value) {
+    _$newFilePathAtom.reportWrite(value, super.newFilePath, () {
+      super.newFilePath = value;
+    });
+  }
+
+  final _$appStorageAtom = Atom(name: '_AnnouncementViewModelBase.appStorage');
+
+  @override
+  Directory? get appStorage {
+    _$appStorageAtom.reportRead();
+    return super.appStorage;
+  }
+
+  @override
+  set appStorage(Directory? value) {
+    _$appStorageAtom.reportWrite(value, super.appStorage, () {
+      super.appStorage = value;
+    });
+  }
+
+  final _$uploadPdfAsyncAction =
+      AsyncAction('_AnnouncementViewModelBase.uploadPdf');
+
+  @override
+  Future<void> uploadPdf() {
+    return _$uploadPdfAsyncAction.run(() => super.uploadPdf());
+  }
+
+  final _$saveFilePermanentlyAsyncAction =
+      AsyncAction('_AnnouncementViewModelBase.saveFilePermanently');
+
+  @override
+  Future<File> saveFilePermanently(dynamic file) {
+    return _$saveFilePermanentlyAsyncAction
+        .run(() => super.saveFilePermanently(file));
+  }
+
   final _$getImageAsyncAction =
       AsyncAction('_AnnouncementViewModelBase.getImage');
 
@@ -379,7 +472,12 @@ compressImageSize: ${compressImageSize},
 isLoading: ${isLoading},
 titleController: ${titleController},
 contentController: ${contentController},
-formKey: ${formKey}
+formKey: ${formKey},
+result: ${result},
+file: ${file},
+newFile: ${newFile},
+newFilePath: ${newFilePath},
+appStorage: ${appStorage}
     ''';
   }
 }
