@@ -23,18 +23,6 @@ class _UpdatePhotoScreenState extends State<UpdatePhotoScreen> {
     _viewModel.setBuildContext(context);
     print("----");
     print(widget.data?.imagePath.toString());
-    _viewModel
-        .getNetworkImage(widget.data?.imagePath ?? 'foto yok')
-        .then((value) {
-      if (value != null)
-        setState(() {
-          _viewModel.newFoto = value;
-          // _viewModel.photo = value;
-          print("value degeri: ${value}");
-          print("newFoto degeri: ${_viewModel.newFoto}");
-          print("photo degeri: ${_viewModel.photo}");
-        });
-    });
   }
 
   @override
@@ -94,12 +82,27 @@ class _UpdatePhotoScreenState extends State<UpdatePhotoScreen> {
             },
           ),
           body: Observer(
-              builder: (context) => _viewModel.newFoto != null
+              builder: (context) => _viewModel.cropImagePath == ''
                   ? Container(
-                      height: MediaQuery.of(context).size.height * 0.4,
-                      width: MediaQuery.of(context).size.width * 1,
-                      child: Image.memory(_viewModel.newFoto))
-                  : Center(child: Text("Select image from camera/gallery")))),
+                      height: MediaQuery.of(context).size.height,
+                      color: Colors.white,
+                      child: Center(
+                        child: Text(
+                          "Select image from camera/gallery",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    )
+                  : Container(
+                      height: MediaQuery.of(context).size.height,
+                      color: Colors.grey,
+                      child: Image.file(
+                        File(
+                          _viewModel.cropImagePath,
+                        ),
+                        height: MediaQuery.of(context).size.height,
+                        fit: BoxFit.cover,
+                      )))),
     ));
   }
 }

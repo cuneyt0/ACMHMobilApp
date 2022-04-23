@@ -1,13 +1,6 @@
 import 'dart:typed_data';
-
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_getall_response_model.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/announcement_update_screen.dart';
 import 'package:login_work/export_import.dart';
 import 'package:path_provider/path_provider.dart';
-
-import '../../../../viewmodel/home_view_model.dart';
 
 class AnnouncementDetail extends StatefulWidget {
   final NoticeData? responseData;
@@ -62,10 +55,6 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
             _updateViewModel?.addedPhoto = file.path;
             print(file.path);
           });
-
-          //
-
-          //   _updateViewModel.addedPhoto = value;
         });
       }
       Future.delayed(Duration(milliseconds: 250)).then((value) {
@@ -73,6 +62,13 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
           isLoading = false;
         });
       });
+    });
+    _viewModel
+        .getPdfShow(widget.responseData?.pdfPath ?? "Pdf yok")
+        .then((value) {
+      _viewModel.pdf = value;
+      print("---Value------");
+      print(value);
     });
   }
 
@@ -86,6 +82,14 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
       body: Observer(
         builder: ((context) => Column(
               children: [
+                ElevatedButton(
+                    onPressed: () {
+                      print("ShowPdf");
+                      print(_viewModel.data);
+                      _updateViewModel?.showPreview(
+                          data: _viewModel.data!, type: 'pdf', fileName: 'asd');
+                    },
+                    child: Text("Pdf göster")),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),

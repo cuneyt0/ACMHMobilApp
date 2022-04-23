@@ -1,9 +1,14 @@
+import 'dart:typed_data';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:login_work/app/baseViewmodel/base_viewmodel_protocol.dart';
 import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_getall_response_model.dart';
 import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/service/announcementService.dart';
 import 'package:login_work/export_import.dart';
 import 'package:mobx/mobx.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 part 'announcement_update_view_model.g.dart';
 
 class AnnouncementUpdateViewModel = _AnnouncementUpdateViewModelBase
@@ -59,7 +64,51 @@ abstract class _AnnouncementUpdateViewModelBase extends BaseViewModelProtocol
   }
 
   @observable
-  var newFoto;
+  FilePickerResult? result;
+  @observable
+  PlatformFile? file;
+  @observable
+  File? newFile;
+  @observable
+  String? newFilePath;
+  @observable
+  Directory? appStorage;
+  @action
+  Future<void> uploadPdf() async {
+    result = await FilePicker.platform.pickFiles();
+    if (result == null) return;
+    file = result?.files.first;
+    print('Name:${file?.name}');
+    print('bytes:${file?.bytes}');
+    print('size:${file?.size}');
+    print('extension:${file?.extension}');
+    print('path:${file?.path}');
+
+    newFile = await saveFilePermanently(file);
+    newFilePath = newFile?.path;
+    print('from Path:${file?.path}');
+    print('To Path:${newFile?.path}');
+  }
+
+  @action
+  Future<OpenResult> showPreview(
+      {required Uint8List data,
+      required String? type,
+      required String? fileName}) async {
+    final directory = await getTemporaryDirectory();
+    final file = File('${directory.path}/$fileName');
+    final openFile = await file.open(mode: FileMode.write);
+    final writeFile = await openFile.writeFrom(data);
+    final result = await OpenFile.open(writeFile.path, type: type);
+    return result;
+  }
+
+  @action
+  Future<File> saveFilePermanently(file) async {
+    appStorage = await getApplicationDocumentsDirectory();
+    newFile = File('${appStorage?.path}/${file.name}');
+    return File(file.path!).copy(newFile!.path);
+  }
 
   @action
   Future<void> updateNotice() async {
@@ -72,7 +121,8 @@ abstract class _AnnouncementUpdateViewModelBase extends BaseViewModelProtocol
           title: textEditingTitleController.text,
           content: textEditingContentController.text,
           departmentId: selectedDepartmentId,
-          imagePath: addedPhoto));
+          imagePath: addedPhoto,
+          pdfPath: newFilePath));
       print(data);
       changeLoadingView();
       if (data is NoticeResponseModel) {

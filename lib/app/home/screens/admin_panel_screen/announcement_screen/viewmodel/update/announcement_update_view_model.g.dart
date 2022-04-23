@@ -310,19 +310,110 @@ mixin _$AnnouncementUpdateViewModel on _AnnouncementUpdateViewModelBase, Store {
     });
   }
 
-  final _$newFotoAtom = Atom(name: '_AnnouncementUpdateViewModelBase.newFoto');
+  final _$resultAtom = Atom(name: '_AnnouncementUpdateViewModelBase.result');
 
   @override
-  dynamic get newFoto {
-    _$newFotoAtom.reportRead();
-    return super.newFoto;
+  FilePickerResult? get result {
+    _$resultAtom.reportRead();
+    return super.result;
   }
 
   @override
-  set newFoto(dynamic value) {
-    _$newFotoAtom.reportWrite(value, super.newFoto, () {
-      super.newFoto = value;
+  set result(FilePickerResult? value) {
+    _$resultAtom.reportWrite(value, super.result, () {
+      super.result = value;
     });
+  }
+
+  final _$fileAtom = Atom(name: '_AnnouncementUpdateViewModelBase.file');
+
+  @override
+  PlatformFile? get file {
+    _$fileAtom.reportRead();
+    return super.file;
+  }
+
+  @override
+  set file(PlatformFile? value) {
+    _$fileAtom.reportWrite(value, super.file, () {
+      super.file = value;
+    });
+  }
+
+  final _$newFileAtom = Atom(name: '_AnnouncementUpdateViewModelBase.newFile');
+
+  @override
+  File? get newFile {
+    _$newFileAtom.reportRead();
+    return super.newFile;
+  }
+
+  @override
+  set newFile(File? value) {
+    _$newFileAtom.reportWrite(value, super.newFile, () {
+      super.newFile = value;
+    });
+  }
+
+  final _$newFilePathAtom =
+      Atom(name: '_AnnouncementUpdateViewModelBase.newFilePath');
+
+  @override
+  String? get newFilePath {
+    _$newFilePathAtom.reportRead();
+    return super.newFilePath;
+  }
+
+  @override
+  set newFilePath(String? value) {
+    _$newFilePathAtom.reportWrite(value, super.newFilePath, () {
+      super.newFilePath = value;
+    });
+  }
+
+  final _$appStorageAtom =
+      Atom(name: '_AnnouncementUpdateViewModelBase.appStorage');
+
+  @override
+  Directory? get appStorage {
+    _$appStorageAtom.reportRead();
+    return super.appStorage;
+  }
+
+  @override
+  set appStorage(Directory? value) {
+    _$appStorageAtom.reportWrite(value, super.appStorage, () {
+      super.appStorage = value;
+    });
+  }
+
+  final _$uploadPdfAsyncAction =
+      AsyncAction('_AnnouncementUpdateViewModelBase.uploadPdf');
+
+  @override
+  Future<void> uploadPdf() {
+    return _$uploadPdfAsyncAction.run(() => super.uploadPdf());
+  }
+
+  final _$showPreviewAsyncAction =
+      AsyncAction('_AnnouncementUpdateViewModelBase.showPreview');
+
+  @override
+  Future<OpenResult> showPreview(
+      {required Uint8List data,
+      required String? type,
+      required String? fileName}) {
+    return _$showPreviewAsyncAction.run(
+        () => super.showPreview(data: data, type: type, fileName: fileName));
+  }
+
+  final _$saveFilePermanentlyAsyncAction =
+      AsyncAction('_AnnouncementUpdateViewModelBase.saveFilePermanently');
+
+  @override
+  Future<File> saveFilePermanently(dynamic file) {
+    return _$saveFilePermanentlyAsyncAction
+        .run(() => super.saveFilePermanently(file));
   }
 
   final _$updateNoticeAsyncAction =
@@ -417,7 +508,11 @@ isLoading: ${isLoading},
 formKey: ${formKey},
 textEditingTitleController: ${textEditingTitleController},
 textEditingContentController: ${textEditingContentController},
-newFoto: ${newFoto}
+result: ${result},
+file: ${file},
+newFile: ${newFile},
+newFilePath: ${newFilePath},
+appStorage: ${appStorage}
     ''';
   }
 }

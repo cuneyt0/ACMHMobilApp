@@ -6,6 +6,7 @@ class NoticeRequestModel {
   String? createdAt;
   String? updatedAt;
   String? imagePath;
+  String? pdfPath;
 
   NoticeRequestModel.ID(
       {this.id,
@@ -14,7 +15,8 @@ class NoticeRequestModel {
       this.content,
       this.createdAt,
       this.updatedAt,
-      this.imagePath});
+      this.imagePath,
+      this.pdfPath});
   NoticeRequestModel(
       {this.departmentId,
       this.title,
@@ -31,6 +33,7 @@ class NoticeRequestModel {
     createdAt = json['created_At'];
     updatedAt = json['updated_At'];
     imagePath = json['imagePath'];
+    pdfPath = json['pdfPath'];
   }
 
   Map<String, dynamic> toJson() {
@@ -42,6 +45,7 @@ class NoticeRequestModel {
     data['created_At'] = createdAt;
     data['updated_At'] = updatedAt;
     data['imagePath'] = imagePath;
+    data['pdfPath'] = pdfPath;
     return data;
   }
 }

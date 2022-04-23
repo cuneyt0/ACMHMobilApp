@@ -75,6 +75,12 @@ class AnnouncementService extends IAnnouncementService {
     } else {
       jsonData.remove("file");
     }
+    if (model.pdfPath != null) {
+      jsonData['pdfFile'] =
+          await MultipartFile.fromFile(model.pdfPath!, filename: model.pdfPath);
+    } else {
+      jsonData.remove("pdfFile");
+    }
     print(jsonData);
     //var formData = FormData.fromMap(});
 

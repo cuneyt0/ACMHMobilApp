@@ -1,7 +1,10 @@
+import 'dart:typed_data';
+
 import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_delete_response_model.dart';
 import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_getall_response_model.dart';
 import 'package:login_work/export_import.dart';
 import 'package:mobx/mobx.dart';
+import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 part 'home_view_model.g.dart';
 
@@ -17,7 +20,10 @@ abstract class _HomeViewModelBase with Store {
 
   @observable
   var photo;
-
+  @observable
+  var pdf;
+  @observable
+  Uint8List? data;
   @action
   Future<void> getAllNotice() async {
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
@@ -45,6 +51,7 @@ abstract class _HomeViewModelBase with Store {
         print(responseData?.data?.length);
         print(response.data);
       } else {
+        print("getall null");
         null;
       }
     } catch (e) {
@@ -75,6 +82,7 @@ abstract class _HomeViewModelBase with Store {
       if (response.statusCode == HttpStatus.ok) {
         return response.data;
       } else {
+        print("getall null");
         null;
       }
     } catch (e) {
@@ -84,6 +92,49 @@ abstract class _HomeViewModelBase with Store {
         "Hata Gerçekleşti";
       }
     }
+  }
+
+  @action
+  Future<OpenResult> showPreview(
+      {required Uint8List data,
+      required String? type,
+      required String? fileName}) async {
+    final directory = await getTemporaryDirectory();
+    final file = File(
+        '${directory.path}/$fileName'); //File('/storage/emulated/0/Download/xa.pdf');
+    final openFile = await file.open(mode: FileMode.write);
+    final writeFile = await openFile.writeFrom(data);
+    final result = await OpenFile.open(writeFile.path, type: type);
+    return result;
+  }
+
+  //-------------------ShowPdf--------------------------
+  @action
+  Future<dynamic> getPdfShow(String fileName) async {
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
+    dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
+    dio.interceptors.clear();
+    try {
+      Response<dynamic> response = await dio.get(noticePdfUrl,
+          queryParameters: {'fileName': fileName},
+          options: Options(responseType: ResponseType.bytes));
+      if (response.statusCode == HttpStatus.ok) {
+        data = response.data;
+        print("-----------------");
+        /* var deneme = await showPreview(
+            data: response.data, type: "pdf", fileName: "deneme");
+        print("deneme${deneme.message}");*/
+        return response.data;
+      } else {
+        print("asdasdasd");
+        null;
+      }
+    } catch (e) {}
   }
 
 //-----------------------Delete-------------------------
@@ -110,6 +161,7 @@ abstract class _HomeViewModelBase with Store {
         deleteResponseData = NoticeDeleteResponseModel.fromJson(response.data);
         return deleteResponseData;
       } else {
+        print("delete null");
         null;
       }
     } catch (e) {

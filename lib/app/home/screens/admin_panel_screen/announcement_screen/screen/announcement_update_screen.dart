@@ -43,6 +43,12 @@ class _AnnouncementUpdateScreenState extends State<AnnouncementUpdateScreen> {
                       UpdateContentTextField(
                           widget: widget, viewModel: _viewModel),
                       UpdateDropdown(widget, widget.items, _viewModel),
+                      ElevatedButton(
+                          onPressed: () {
+                            print("tıkla");
+                            _viewModel?.uploadPdf();
+                          },
+                          child: Text("Dosya yükle")),
                       UpdateImageWidget(viewModel: _viewModel, widget: widget),
                       UpdateSaveButtonWidget(
                         viewModel: _viewModel,

@@ -35,7 +35,9 @@ class NoticeData {
   String? createdAt;
   String? updatedAt;
   String? imagePath;
+  String? pdfPath;
   Null? file;
+  Null? pdfFile;
 
   NoticeData(
       {this.id,
@@ -45,7 +47,9 @@ class NoticeData {
       this.createdAt,
       this.updatedAt,
       this.imagePath,
-      this.file});
+      this.pdfPath,
+      this.file,
+      this.pdfFile});
 
   NoticeData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -55,7 +59,9 @@ class NoticeData {
     createdAt = json['created_At'];
     updatedAt = json['updated_At'];
     imagePath = json['imagePath'];
+    pdfPath = json['pdfPath'];
     file = json['file'];
+    pdfFile = json['pdfFile'];
   }
 
   Map<String, dynamic> toJson() {
@@ -67,7 +73,9 @@ class NoticeData {
     data['created_At'] = this.createdAt;
     data['updated_At'] = this.updatedAt;
     data['imagePath'] = this.imagePath;
+    data['pdfPath'] = this.pdfPath;
     data['file'] = this.file;
+    data['pdfFile'] = this.pdfFile;
     return data;
   }
 }
