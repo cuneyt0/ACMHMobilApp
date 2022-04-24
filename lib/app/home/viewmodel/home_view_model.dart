@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_delete_response_model.dart';
 import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_getall_response_model.dart';
+import 'package:login_work/core/download/download_helper.dart';
 import 'package:login_work/export_import.dart';
 import 'package:mobx/mobx.dart';
 import 'package:open_file/open_file.dart';
@@ -17,13 +18,12 @@ abstract class _HomeViewModelBase with Store {
   NoticeGetAllResponseModel? responseData = NoticeGetAllResponseModel();
   @observable
   NoticeDeleteResponseModel? deleteResponseData = NoticeDeleteResponseModel();
-
   @observable
   var photo;
   @observable
-  var pdf;
-  @observable
   Uint8List? data;
+  @observable
+  File? file;
   @action
   Future<void> getAllNotice() async {
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
@@ -82,7 +82,7 @@ abstract class _HomeViewModelBase with Store {
       if (response.statusCode == HttpStatus.ok) {
         return response.data;
       } else {
-        print("getall null");
+        print("getImage null");
         null;
       }
     } catch (e) {
@@ -92,20 +92,6 @@ abstract class _HomeViewModelBase with Store {
         "Hata Gerçekleşti";
       }
     }
-  }
-
-  @action
-  Future<OpenResult> showPreview(
-      {required Uint8List data,
-      required String? type,
-      required String? fileName}) async {
-    final directory = await getTemporaryDirectory();
-    final file = File(
-        '${directory.path}/$fileName'); //File('/storage/emulated/0/Download/xa.pdf');
-    final openFile = await file.open(mode: FileMode.write);
-    final writeFile = await openFile.writeFrom(data);
-    final result = await OpenFile.open(writeFile.path, type: type);
-    return result;
   }
 
   //-------------------ShowPdf--------------------------
@@ -125,13 +111,14 @@ abstract class _HomeViewModelBase with Store {
           options: Options(responseType: ResponseType.bytes));
       if (response.statusCode == HttpStatus.ok) {
         data = response.data;
-        print("-----------------");
-        /* var deneme = await showPreview(
-            data: response.data, type: "pdf", fileName: "deneme");
-        print("deneme${deneme.message}");*/
+        file = await SaveFileManager.saveFileFolder(
+            data: response.data, fileName: fileName, contentType: "pdf");
+
+        /*final deneme = await OpenFile.open(file?.path);*/
+        /*print("deneme${deneme.message}");*/
         return response.data;
       } else {
-        print("asdasdasd");
+        print("getPdfShow null");
         null;
       }
     } catch (e) {}

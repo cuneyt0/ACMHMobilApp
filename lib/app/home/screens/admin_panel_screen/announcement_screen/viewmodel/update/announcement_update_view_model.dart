@@ -91,19 +91,6 @@ abstract class _AnnouncementUpdateViewModelBase extends BaseViewModelProtocol
   }
 
   @action
-  Future<OpenResult> showPreview(
-      {required Uint8List data,
-      required String? type,
-      required String? fileName}) async {
-    final directory = await getTemporaryDirectory();
-    final file = File('${directory.path}/$fileName');
-    final openFile = await file.open(mode: FileMode.write);
-    final writeFile = await openFile.writeFrom(data);
-    final result = await OpenFile.open(writeFile.path, type: type);
-    return result;
-  }
-
-  @action
   Future<File> saveFilePermanently(file) async {
     appStorage = await getApplicationDocumentsDirectory();
     newFile = File('${appStorage?.path}/${file.name}');

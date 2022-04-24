@@ -395,18 +395,6 @@ mixin _$AnnouncementUpdateViewModel on _AnnouncementUpdateViewModelBase, Store {
     return _$uploadPdfAsyncAction.run(() => super.uploadPdf());
   }
 
-  final _$showPreviewAsyncAction =
-      AsyncAction('_AnnouncementUpdateViewModelBase.showPreview');
-
-  @override
-  Future<OpenResult> showPreview(
-      {required Uint8List data,
-      required String? type,
-      required String? fileName}) {
-    return _$showPreviewAsyncAction.run(
-        () => super.showPreview(data: data, type: type, fileName: fileName));
-  }
-
   final _$saveFilePermanentlyAsyncAction =
       AsyncAction('_AnnouncementUpdateViewModelBase.saveFilePermanently');
 

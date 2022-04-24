@@ -1,10 +1,14 @@
 import 'dart:typed_data';
 import 'package:login_work/export_import.dart';
+import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
+
+import '../../../../../../core/download/download_helper.dart';
 
 class AnnouncementDetail extends StatefulWidget {
   final NoticeData? responseData;
   final LoginResponseModel? model;
+
   const AnnouncementDetail({Key? key, this.responseData, this.model})
       : super(key: key);
 
@@ -29,9 +33,6 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
                 value: e, child: Text(e.departmentName ?? "Null"));
           }).toList();
         });
-        print("--Items__");
-
-        print(items);
       },
     );
     _updateViewModel?.dropdownvalue = Data(
@@ -63,12 +64,20 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
         });
       });
     });
+
     _viewModel
         .getPdfShow(widget.responseData?.pdfPath ?? "Pdf yok")
         .then((value) {
-      _viewModel.pdf = value;
-      print("---Value------");
-      print(value);
+      if (value != null) {
+        setState(() {
+          getApplicationDocumentsDirectory().then((dic) {
+            File file = File(dic.path + '/dic.pdf');
+            file.writeAsBytes(value as Uint8List);
+            _updateViewModel?.newFilePath = file.path;
+            print(file.path);
+          });
+        });
+      }
     });
   }
 
@@ -82,14 +91,6 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
       body: Observer(
         builder: ((context) => Column(
               children: [
-                ElevatedButton(
-                    onPressed: () {
-                      print("ShowPdf");
-                      print(_viewModel.data);
-                      _updateViewModel?.showPreview(
-                          data: _viewModel.data!, type: 'pdf', fileName: 'asd');
-                    },
-                    child: Text("Pdf göster")),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
@@ -143,20 +144,48 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
                         ),
                       ),
                       Padding(
+                        padding: const EdgeInsets.only(top: 30.0),
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.width * 0.1,
+                          width: MediaQuery.of(context).size.width * 0.98,
+                          child: ElevatedButton(
+                              onPressed: () async {
+                                if (_viewModel.file?.path == null) {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          title: Center(child: Text('PDF YOK')),
+                                        );
+                                      });
+                                } else {
+                                  await OpenFile.open(_viewModel.file?.path ??
+                                      'file path null');
+                                }
+                              },
+                              child: isLoading
+                                  ? Center(child: CircularProgressIndicator())
+                                  : Text("Pdf göster")),
+                        ),
+                      ),
+                      Padding(
                         padding: const EdgeInsets.only(top: 20.0),
-                        child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      AnnouncementUpdateScreen(
-                                        viewModel: _updateViewModel,
-                                        data: widget.responseData,
-                                        items: items,
-                                        model: widget.model,
-                                      )));
-                            },
-                            child: Text(updateButtonText)),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.98,
+                          child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        AnnouncementUpdateScreen(
+                                          viewModel: _updateViewModel,
+                                          data: widget.responseData,
+                                          items: items,
+                                          model: widget.model,
+                                        )));
+                              },
+                              child: Text(updateButtonText)),
+                        ),
                       )
                     ],
                   ),

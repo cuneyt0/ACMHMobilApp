@@ -1,16 +1,17 @@
 import 'package:login_work/export_import.dart';
 
 class UpdateSaveButtonWidget extends StatelessWidget {
-  const UpdateSaveButtonWidget({
-    Key? key,
-    required AnnouncementUpdateViewModel? viewModel,
-    required this.widget,
-  })  : _viewModel = viewModel,
+  const UpdateSaveButtonWidget(
+      {Key? key,
+      required AnnouncementUpdateViewModel? viewModel,
+      required this.widget,
+   })
+      : _viewModel = viewModel,
         super(key: key);
 
   final AnnouncementUpdateViewModel? _viewModel;
   final AnnouncementUpdateScreen widget;
-
+ 
   @override
   Widget build(BuildContext context) {
     return Observer(

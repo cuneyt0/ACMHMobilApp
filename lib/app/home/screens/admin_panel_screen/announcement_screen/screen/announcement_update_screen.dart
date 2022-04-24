@@ -5,8 +5,13 @@ class AnnouncementUpdateScreen extends StatefulWidget {
   final LoginResponseModel? model;
   final AnnouncementUpdateViewModel? viewModel;
   final List<DropdownMenuItem<Data>>? items;
+
   const AnnouncementUpdateScreen(
-      {Key? key, this.data, this.model, this.viewModel, this.items})
+      {Key? key,
+      this.data,
+      this.model,
+      this.viewModel,
+      this.items})
       : super(key: key);
 
   @override
@@ -23,6 +28,8 @@ class _AnnouncementUpdateScreenState extends State<AnnouncementUpdateScreen> {
     super.initState();
     _viewModel?.id = widget.data?.id;
     _viewModel?.setBuildContext(context);
+    /*print("NewFilePath");
+    _viewModel?.newFilePath = widget.data?.file;*/
   }
 
   @override
@@ -48,7 +55,7 @@ class _AnnouncementUpdateScreenState extends State<AnnouncementUpdateScreen> {
                             print("tıkla");
                             _viewModel?.uploadPdf();
                           },
-                          child: Text("Dosya yükle")),
+                          child: Text("Pdf yükle yükle")),
                       UpdateImageWidget(viewModel: _viewModel, widget: widget),
                       UpdateSaveButtonWidget(
                         viewModel: _viewModel,

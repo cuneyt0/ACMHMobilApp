@@ -70,21 +70,6 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
     });
   }
 
-  final _$pdfAtom = Atom(name: '_HomeViewModelBase.pdf');
-
-  @override
-  dynamic get pdf {
-    _$pdfAtom.reportRead();
-    return super.pdf;
-  }
-
-  @override
-  set pdf(dynamic value) {
-    _$pdfAtom.reportWrite(value, super.pdf, () {
-      super.pdf = value;
-    });
-  }
-
   final _$dataAtom = Atom(name: '_HomeViewModelBase.data');
 
   @override
@@ -97,6 +82,21 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
   set data(Uint8List? value) {
     _$dataAtom.reportWrite(value, super.data, () {
       super.data = value;
+    });
+  }
+
+  final _$fileAtom = Atom(name: '_HomeViewModelBase.file');
+
+  @override
+  File? get file {
+    _$fileAtom.reportRead();
+    return super.file;
+  }
+
+  @override
+  set file(File? value) {
+    _$fileAtom.reportWrite(value, super.file, () {
+      super.file = value;
     });
   }
 
@@ -113,18 +113,6 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
   @override
   Future<dynamic> getImage(String fileName) {
     return _$getImageAsyncAction.run(() => super.getImage(fileName));
-  }
-
-  final _$showPreviewAsyncAction =
-      AsyncAction('_HomeViewModelBase.showPreview');
-
-  @override
-  Future<OpenResult> showPreview(
-      {required Uint8List data,
-      required String? type,
-      required String? fileName}) {
-    return _$showPreviewAsyncAction.run(
-        () => super.showPreview(data: data, type: type, fileName: fileName));
   }
 
   final _$getPdfShowAsyncAction = AsyncAction('_HomeViewModelBase.getPdfShow');
@@ -148,8 +136,8 @@ dio: ${dio},
 responseData: ${responseData},
 deleteResponseData: ${deleteResponseData},
 photo: ${photo},
-pdf: ${pdf},
-data: ${data}
+data: ${data},
+file: ${file}
     ''';
   }
 }
