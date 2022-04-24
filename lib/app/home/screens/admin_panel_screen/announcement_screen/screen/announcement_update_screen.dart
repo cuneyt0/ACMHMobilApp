@@ -28,8 +28,6 @@ class _AnnouncementUpdateScreenState extends State<AnnouncementUpdateScreen> {
     super.initState();
     _viewModel?.id = widget.data?.id;
     _viewModel?.setBuildContext(context);
-    /*print("NewFilePath");
-    _viewModel?.newFilePath = widget.data?.file;*/
   }
 
   @override

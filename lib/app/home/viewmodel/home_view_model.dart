@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:login_work/app/home/model/department_getbyid_response_model.dart';
 import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_delete_response_model.dart';
 import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_getall_response_model.dart';
 import 'package:login_work/core/download/download_helper.dart';
@@ -18,6 +19,9 @@ abstract class _HomeViewModelBase with Store {
   NoticeGetAllResponseModel? responseData = NoticeGetAllResponseModel();
   @observable
   NoticeDeleteResponseModel? deleteResponseData = NoticeDeleteResponseModel();
+  @observable
+  DepartmentGetByIdModel? departmentGetByIdResponseModel =
+      DepartmentGetByIdModel();
   @observable
   var photo;
   @observable
@@ -52,6 +56,47 @@ abstract class _HomeViewModelBase with Store {
         print(response.data);
       } else {
         print("getall null");
+        null;
+      }
+    } catch (e) {
+      if ((e as DioError).response != null) {
+        print(e.response?.data);
+        return e.response?.data;
+      } else {
+        "Hata Gerçekleşti";
+      }
+    }
+  }
+
+  //---DepartmentGetById-----------
+  @action
+  Future<dynamic> getByIdDepartment(int? id) async {
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
+    dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
+    String loginResponseText = await CacheManager().getLoginResponse();
+    LoginResponseModel loginResponseModel =
+        LoginResponseModel.fromJson(jsonDecode(loginResponseText));
+    print(loginResponseText);
+    String token = loginResponseModel.token ?? "";
+    dio.options.headers['Authorization'] = 'Bearer ${token}';
+    dio.interceptors.clear();
+
+    try {
+      final response = await dio.get(
+          'https://192.168.1.102:5001/api/department/getbyid',
+          queryParameters: {'id': id});
+      if (response.statusCode == HttpStatus.ok) {
+        departmentGetByIdResponseModel =
+            DepartmentGetByIdModel.fromJson(response.data);
+        print("LoLOlO:${departmentGetByIdResponseModel}");
+        return departmentGetByIdResponseModel;
+      } else {
+        print("getByIdDepartment null");
         null;
       }
     } catch (e) {

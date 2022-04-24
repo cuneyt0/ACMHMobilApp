@@ -55,6 +55,23 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
     });
   }
 
+  final _$departmentGetByIdResponseModelAtom =
+      Atom(name: '_HomeViewModelBase.departmentGetByIdResponseModel');
+
+  @override
+  DepartmentGetByIdModel? get departmentGetByIdResponseModel {
+    _$departmentGetByIdResponseModelAtom.reportRead();
+    return super.departmentGetByIdResponseModel;
+  }
+
+  @override
+  set departmentGetByIdResponseModel(DepartmentGetByIdModel? value) {
+    _$departmentGetByIdResponseModelAtom
+        .reportWrite(value, super.departmentGetByIdResponseModel, () {
+      super.departmentGetByIdResponseModel = value;
+    });
+  }
+
   final _$photoAtom = Atom(name: '_HomeViewModelBase.photo');
 
   @override
@@ -108,6 +125,15 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
     return _$getAllNoticeAsyncAction.run(() => super.getAllNotice());
   }
 
+  final _$getByIdDepartmentAsyncAction =
+      AsyncAction('_HomeViewModelBase.getByIdDepartment');
+
+  @override
+  Future<dynamic> getByIdDepartment(int? id) {
+    return _$getByIdDepartmentAsyncAction
+        .run(() => super.getByIdDepartment(id));
+  }
+
   final _$getImageAsyncAction = AsyncAction('_HomeViewModelBase.getImage');
 
   @override
@@ -135,6 +161,7 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
 dio: ${dio},
 responseData: ${responseData},
 deleteResponseData: ${deleteResponseData},
+departmentGetByIdResponseModel: ${departmentGetByIdResponseModel},
 photo: ${photo},
 data: ${data},
 file: ${file}

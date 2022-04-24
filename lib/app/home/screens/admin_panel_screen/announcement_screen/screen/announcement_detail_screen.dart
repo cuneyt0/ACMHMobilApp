@@ -9,8 +9,11 @@ class AnnouncementDetail extends StatefulWidget {
   final NoticeData? responseData;
   final LoginResponseModel? model;
 
-  const AnnouncementDetail({Key? key, this.responseData, this.model})
-      : super(key: key);
+  const AnnouncementDetail({
+    Key? key,
+    this.responseData,
+    this.model,
+  }) : super(key: key);
 
   @override
   State<AnnouncementDetail> createState() => _AnnouncementDetailState();
@@ -79,6 +82,8 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
         });
       }
     });
+    _viewModel.getByIdDepartment(widget.responseData?.departmentId);
+
   }
 
   @override
@@ -139,7 +144,8 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text("Department Name"),
-                            Text(widget.responseData!.departmentId.toString())
+                            Text(
+                                '${_viewModel.departmentGetByIdResponseModel?.data?.departmentName}'),
                           ],
                         ),
                       ),
