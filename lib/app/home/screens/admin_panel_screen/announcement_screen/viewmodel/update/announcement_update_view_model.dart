@@ -19,6 +19,9 @@ abstract class _AnnouncementUpdateViewModelBase extends BaseViewModelProtocol
   @observable
   int? id;
   @observable
+  int? userId;
+
+  @observable
   Dio dio = Dio();
   @observable
   DepartmentResponseModel? responseData = DepartmentResponseModel();
@@ -109,7 +112,8 @@ abstract class _AnnouncementUpdateViewModelBase extends BaseViewModelProtocol
           content: textEditingContentController.text,
           departmentId: selectedDepartmentId,
           imagePath: addedPhoto,
-          pdfPath: newFilePath));
+          pdfPath: newFilePath,
+          userId: userId));
       print(data);
       changeLoadingView();
       if (data is NoticeResponseModel) {

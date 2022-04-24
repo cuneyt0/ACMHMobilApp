@@ -165,6 +165,21 @@ mixin _$AnnouncementViewModel on _AnnouncementViewModelBase, Store {
     });
   }
 
+  final _$userIdAtom = Atom(name: '_AnnouncementViewModelBase.userId');
+
+  @override
+  int? get userId {
+    _$userIdAtom.reportRead();
+    return super.userId;
+  }
+
+  @override
+  set userId(int? value) {
+    _$userIdAtom.reportWrite(value, super.userId, () {
+      super.userId = value;
+    });
+  }
+
   final _$cropImagePathAtom =
       Atom(name: '_AnnouncementViewModelBase.cropImagePath');
 
@@ -465,6 +480,7 @@ issave: ${issave},
 photo: ${photo},
 addedPhoto: ${addedPhoto},
 selectedDepartmentId: ${selectedDepartmentId},
+userId: ${userId},
 cropImagePath: ${cropImagePath},
 cropImageSize: ${cropImageSize},
 compressImagePath: ${compressImagePath},

@@ -67,7 +67,7 @@ Widget _buildAdminMenuBody(
             Navigator.of(context).pop();
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => AnnouncementScreen(),
+                builder: (context) => AnnouncementScreen(model: model),
               ),
             );
           }

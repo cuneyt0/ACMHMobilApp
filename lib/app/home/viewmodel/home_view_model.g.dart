@@ -72,6 +72,22 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
     });
   }
 
+  final _$userGetByIdModelAtom =
+      Atom(name: '_HomeViewModelBase.userGetByIdModel');
+
+  @override
+  UserGetByIdModel? get userGetByIdModel {
+    _$userGetByIdModelAtom.reportRead();
+    return super.userGetByIdModel;
+  }
+
+  @override
+  set userGetByIdModel(UserGetByIdModel? value) {
+    _$userGetByIdModelAtom.reportWrite(value, super.userGetByIdModel, () {
+      super.userGetByIdModel = value;
+    });
+  }
+
   final _$photoAtom = Atom(name: '_HomeViewModelBase.photo');
 
   @override
@@ -134,6 +150,14 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
         .run(() => super.getByIdDepartment(id));
   }
 
+  final _$getByIdUserAsyncAction =
+      AsyncAction('_HomeViewModelBase.getByIdUser');
+
+  @override
+  Future<dynamic> getByIdUser(int? id) {
+    return _$getByIdUserAsyncAction.run(() => super.getByIdUser(id));
+  }
+
   final _$getImageAsyncAction = AsyncAction('_HomeViewModelBase.getImage');
 
   @override
@@ -162,6 +186,7 @@ dio: ${dio},
 responseData: ${responseData},
 deleteResponseData: ${deleteResponseData},
 departmentGetByIdResponseModel: ${departmentGetByIdResponseModel},
+userGetByIdModel: ${userGetByIdModel},
 photo: ${photo},
 data: ${data},
 file: ${file}

@@ -7,11 +7,7 @@ class AnnouncementUpdateScreen extends StatefulWidget {
   final List<DropdownMenuItem<Data>>? items;
 
   const AnnouncementUpdateScreen(
-      {Key? key,
-      this.data,
-      this.model,
-      this.viewModel,
-      this.items})
+      {Key? key, this.data, this.model, this.viewModel, this.items})
       : super(key: key);
 
   @override
@@ -28,6 +24,11 @@ class _AnnouncementUpdateScreenState extends State<AnnouncementUpdateScreen> {
     super.initState();
     _viewModel?.id = widget.data?.id;
     _viewModel?.setBuildContext(context);
+    print("login kullanıcı id");
+    print(widget.model?.user?.id);
+    _viewModel?.userId = widget.model?.user?.id;
+    print("updateViewModel User id");
+    print(_viewModel?.userId);
   }
 
   @override

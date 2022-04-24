@@ -7,7 +7,8 @@ import 'package:login_work/app/home/screens/admin_panel_screen/announcement_scre
 import 'package:login_work/export_import.dart';
 
 class AnnouncementScreen extends StatefulWidget {
-  AnnouncementScreen();
+  final LoginResponseModel? model;
+  AnnouncementScreen({this.model});
 
   @override
   State<AnnouncementScreen> createState() => _AnnouncementScreenState();
@@ -21,6 +22,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
     // TODO: implement initState
     super.initState();
     _viewModel?.getAllDepartment();
+    _viewModel?.userId = widget.model?.user?.id;
   }
 
   @override

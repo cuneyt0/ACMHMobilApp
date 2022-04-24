@@ -34,6 +34,8 @@ abstract class _AnnouncementViewModelBase with Store {
   String? addedPhoto;
   @observable
   int? selectedDepartmentId;
+  @observable
+  int? userId;
   //crop code
   @observable
   var cropImagePath = '';
@@ -165,7 +167,8 @@ abstract class _AnnouncementViewModelBase with Store {
           content: contentController.text,
           departmentId: selectedDepartmentId,
           imagePath: addedPhoto,
-          pdfPath: newFilePath));
+          pdfPath: newFilePath,
+          userId: userId));
       print(data);
       changeLoadingView();
 

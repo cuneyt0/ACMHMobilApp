@@ -54,7 +54,7 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
         setState(() {
           _viewModel.photo = value;
           getTemporaryDirectory().then((temp) {
-            File file = File(temp.path + '/temp.jpg');
+            File file = File(temp.path + '/.jpg');
             file.writeAsBytes(value as Uint8List);
             _updateViewModel?.addedPhoto = file.path;
             print(file.path);
@@ -74,7 +74,7 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
       if (value != null) {
         setState(() {
           getApplicationDocumentsDirectory().then((dic) {
-            File file = File(dic.path + '/dic.pdf');
+            File file = File(dic.path + '/.pdf');
             file.writeAsBytes(value as Uint8List);
             _updateViewModel?.newFilePath = file.path;
             print(file.path);
@@ -83,7 +83,9 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
       }
     });
     _viewModel.getByIdDepartment(widget.responseData?.departmentId);
-
+    _viewModel.getByIdUser(widget.model?.user?.id);
+    print("asdasdasdasd");
+    print(widget.model?.user?.id);
   }
 
   @override
@@ -146,6 +148,17 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
                             Text("Department Name"),
                             Text(
                                 '${_viewModel.departmentGetByIdResponseModel?.data?.departmentName}'),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0, right: 13.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text("Olusturan kişi"),
+                            Text(
+                                '${_viewModel.userGetByIdModel?.data?.firstName} ${_viewModel.userGetByIdModel?.data?.lastName}'),
                           ],
                         ),
                       ),

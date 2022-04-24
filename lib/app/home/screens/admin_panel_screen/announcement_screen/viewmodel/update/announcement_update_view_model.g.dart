@@ -24,6 +24,21 @@ mixin _$AnnouncementUpdateViewModel on _AnnouncementUpdateViewModelBase, Store {
     });
   }
 
+  final _$userIdAtom = Atom(name: '_AnnouncementUpdateViewModelBase.userId');
+
+  @override
+  int? get userId {
+    _$userIdAtom.reportRead();
+    return super.userId;
+  }
+
+  @override
+  set userId(int? value) {
+    _$userIdAtom.reportWrite(value, super.userId, () {
+      super.userId = value;
+    });
+  }
+
   final _$dioAtom = Atom(name: '_AnnouncementUpdateViewModelBase.dio');
 
   @override
@@ -478,6 +493,7 @@ mixin _$AnnouncementUpdateViewModel on _AnnouncementUpdateViewModelBase, Store {
   String toString() {
     return '''
 id: ${id},
+userId: ${userId},
 dio: ${dio},
 responseData: ${responseData},
 service: ${service},
