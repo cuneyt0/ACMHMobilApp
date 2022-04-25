@@ -126,8 +126,6 @@ abstract class _AnnouncementViewModelBase with Store {
             CropAspectRatioPreset.ratio7x5,
             CropAspectRatioPreset.ratio16x9,
           ],
-          //maxWidth: 1024,
-          //maxHeight: 1024,
           compressFormat: ImageCompressFormat.jpg);
       cropImagePath = cropImageFile!.path;
 
@@ -173,14 +171,12 @@ abstract class _AnnouncementViewModelBase with Store {
       changeLoadingView();
 
       if (data is NoticeResponseModel) {
-        print(data);
-        print("BAŞARILIIII");
+        print(" Notice post işlemi Başarılı");
       } else {
-        print(data);
-        print("BAŞARISIZZZZ");
+        print(" Notice post işlemi Başarısız");
       }
     } else {
-      print(" BAŞARISIZZZZ");
+      print(" Notice post işleminde validasyonlar karşılanmadı");
     }
   }
 
@@ -193,7 +189,8 @@ abstract class _AnnouncementViewModelBase with Store {
       return client;
     };
     dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
-
+    await GetToken.getToken();
+    dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
     dio.interceptors.add(PrettyDioLogger());
 
     try {
@@ -205,7 +202,6 @@ abstract class _AnnouncementViewModelBase with Store {
       }
     } catch (e) {
       if ((e as DioError).response != null) {
-        print(e.response?.data);
         return e.response?.data;
       } else {
         "Hata Gerçekleşti";
