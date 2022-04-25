@@ -46,7 +46,6 @@ abstract class _HomeViewModelBase with Store {
       }
     } catch (e) {
       if ((e as DioError).response != null) {
-        print(e.response?.data);
         return e.response?.data;
       } else {
         "Hata Gerçekleşti";
@@ -76,8 +75,7 @@ abstract class _HomeViewModelBase with Store {
             DepartmentGetByIdModel.fromJson(response.data);
         return departmentGetByIdResponseModel;
       } else {
-        print("getByIdDepartment null");
-        null;
+        return null;
       }
     } catch (e) {
       if ((e as DioError).response != null) {
@@ -102,7 +100,6 @@ abstract class _HomeViewModelBase with Store {
     await GetToken.getToken();
     dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
     dio.interceptors.clear();
-
     try {
       final response =
           await dio.get(getByIdUserUrl, queryParameters: {'id': id});
@@ -144,7 +141,7 @@ abstract class _HomeViewModelBase with Store {
       }
     } catch (e) {
       if ((e as DioError).response != null) {
-        return null;
+        return e.response?.data;
       } else {
         "Hata Gerçekleşti";
       }
@@ -172,10 +169,15 @@ abstract class _HomeViewModelBase with Store {
             data: response.data, fileName: fileName, contentType: "pdf");
         return response.data;
       } else {
-        print("getPdfShow null");
-        null;
+        return null;
       }
-    } catch (e) {}
+    } catch (e) {
+      if ((e as DioError).response != null) {
+        return e.response?.data;
+      } else {
+        "Hata Gerçekleşti";
+      }
+    }
   }
 
 //-----------------------Delete-------------------------
@@ -201,7 +203,6 @@ abstract class _HomeViewModelBase with Store {
       }
     } catch (e) {
       if ((e as DioError).response != null) {
-        print(e.response?.data);
         return e.response?.data;
       } else {
         "Hata Gerçekleşti";
