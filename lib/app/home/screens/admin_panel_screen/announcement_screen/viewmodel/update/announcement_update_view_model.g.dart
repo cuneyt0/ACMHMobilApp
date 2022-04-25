@@ -447,7 +447,7 @@ mixin _$AnnouncementUpdateViewModel on _AnnouncementUpdateViewModelBase, Store {
       AsyncAction('_AnnouncementUpdateViewModelBase.getNetworkImage');
 
   @override
-  Future<dynamic> getNetworkImage(String fileName) {
+  Future<List<int>?> getNetworkImage(String fileName) {
     return _$getNetworkImageAsyncAction
         .run(() => super.getNetworkImage(fileName));
   }

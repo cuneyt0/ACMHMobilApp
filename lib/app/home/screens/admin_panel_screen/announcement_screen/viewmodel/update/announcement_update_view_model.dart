@@ -1,14 +1,6 @@
-import 'dart:typed_data';
-
-import 'package:file_picker/file_picker.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:login_work/app/baseViewmodel/base_viewmodel_protocol.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_getall_response_model.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/service/announcementService.dart';
 import 'package:login_work/export_import.dart';
 import 'package:mobx/mobx.dart';
-import 'package:open_file/open_file.dart';
-import 'package:path_provider/path_provider.dart';
+
 part 'announcement_update_view_model.g.dart';
 
 class AnnouncementUpdateViewModel = _AnnouncementUpdateViewModelBase
@@ -20,7 +12,6 @@ abstract class _AnnouncementUpdateViewModelBase extends BaseViewModelProtocol
   int? id;
   @observable
   int? userId;
-
   @observable
   Dio dio = Dio();
   @observable
@@ -47,7 +38,6 @@ abstract class _AnnouncementUpdateViewModelBase extends BaseViewModelProtocol
   var cropImagePath = '';
   @observable
   var cropImageSize = '';
-
   // Compress code
   @observable
   var compressImagePath = '';
@@ -117,8 +107,7 @@ abstract class _AnnouncementUpdateViewModelBase extends BaseViewModelProtocol
       print(data);
       changeLoadingView();
       if (data is NoticeResponseModel) {
-        print("seçilen department ID");
-        print(selectedDepartmentId);
+        print(data);
         print("Success");
       } else if (data is String) {
         ScaffoldMessenger.of(buildContext)
@@ -126,9 +115,7 @@ abstract class _AnnouncementUpdateViewModelBase extends BaseViewModelProtocol
       } else {}
     } else {
       changeLoadingView();
-
       await Future.delayed(const Duration(milliseconds: 250));
-      print('bla bla bla');
     }
   }
 
@@ -156,7 +143,6 @@ abstract class _AnnouncementUpdateViewModelBase extends BaseViewModelProtocol
           ],
           compressFormat: ImageCompressFormat.jpg);
       cropImagePath = cropImageFile!.path;
-
       cropImageSize = ((File(cropImagePath)).lengthSync() / 1024 / 1024)
               .toStringAsFixed(2) +
           " Mb";
@@ -184,7 +170,7 @@ abstract class _AnnouncementUpdateViewModelBase extends BaseViewModelProtocol
 
 //-------------------ShowImage--------------------------
   @action
-  Future<dynamic> getNetworkImage(String fileName) async {
+  Future<List<int>?> getNetworkImage(String fileName) async {
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =
@@ -220,9 +206,7 @@ abstract class _AnnouncementUpdateViewModelBase extends BaseViewModelProtocol
       return client;
     };
     dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
-
     dio.interceptors.add(PrettyDioLogger());
-
     try {
       final response = await dio.get(departmentgetAll);
       if (response.statusCode == HttpStatus.ok) {
@@ -232,7 +216,6 @@ abstract class _AnnouncementUpdateViewModelBase extends BaseViewModelProtocol
       }
     } catch (e) {
       if ((e as DioError).response != null) {
-        print(e.response?.data);
         return e.response?.data;
       } else {
         "Hata Gerçekleşti";
