@@ -1,14 +1,6 @@
-import 'dart:typed_data';
-
-import 'package:login_work/app/home/model/department_getbyid_response_model.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_delete_response_model.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_getall_response_model.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/user_getbyid_response_model.dart';
-import 'package:login_work/core/download/download_helper.dart';
 import 'package:login_work/export_import.dart';
 import 'package:mobx/mobx.dart';
-import 'package:open_file/open_file.dart';
-import 'package:path_provider/path_provider.dart';
+
 part 'home_view_model.g.dart';
 
 class HomeViewModel = _HomeViewModelBase with _$HomeViewModel;
@@ -32,7 +24,7 @@ abstract class _HomeViewModelBase with Store {
   @observable
   File? file;
   @action
-  Future<void> getAllNotice() async {
+  Future<NoticeGetAllResponseModel?> getAllNotice() async {
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =
@@ -40,26 +32,17 @@ abstract class _HomeViewModelBase with Store {
       return client;
     };
     dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
-    String loginResponseText = await CacheManager().getLoginResponse();
-    LoginResponseModel loginResponseModel =
-        LoginResponseModel.fromJson(jsonDecode(loginResponseText));
-    print(loginResponseText);
-    String token = loginResponseModel.token ?? "";
-    print(token);
-    dio.options.headers['Authorization'] = 'Bearer ${token}';
+    await GetToken.getToken();
+    dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
     //dio.interceptors.add(PrettyDioLogger());
     dio.interceptors.clear();
-
     try {
       final response = await dio.get(noticegetAll);
       if (response.statusCode == HttpStatus.ok) {
         responseData = NoticeGetAllResponseModel.fromJson(response.data);
-        print("noticce getall");
-        print(responseData?.data?.length);
-        print(response.data);
+        return responseData;
       } else {
-        print("getall null");
-        null;
+        return null;
       }
     } catch (e) {
       if ((e as DioError).response != null) {
@@ -71,9 +54,9 @@ abstract class _HomeViewModelBase with Store {
     }
   }
 
-  //---DepartmentGetById-----------
+  //--------------------DepartmentGetById-----------
   @action
-  Future<dynamic> getByIdDepartment(int? id) async {
+  Future<DepartmentGetByIdModel?> getByIdDepartment(int? id) async {
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =
@@ -81,22 +64,16 @@ abstract class _HomeViewModelBase with Store {
       return client;
     };
     dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
-    String loginResponseText = await CacheManager().getLoginResponse();
-    LoginResponseModel loginResponseModel =
-        LoginResponseModel.fromJson(jsonDecode(loginResponseText));
-    print(loginResponseText);
-    String token = loginResponseModel.token ?? "";
-    dio.options.headers['Authorization'] = 'Bearer ${token}';
+    await GetToken.getToken();
+    dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
     dio.interceptors.clear();
 
     try {
-      final response = await dio.get(
-          'https://192.168.1.102:5001/api/department/getbyid',
-          queryParameters: {'id': id});
+      final response =
+          await dio.get(departmentGetByIdUrl, queryParameters: {'id': id});
       if (response.statusCode == HttpStatus.ok) {
         departmentGetByIdResponseModel =
             DepartmentGetByIdModel.fromJson(response.data);
-        print("LoLOlO:${departmentGetByIdResponseModel}");
         return departmentGetByIdResponseModel;
       } else {
         print("getByIdDepartment null");
@@ -112,9 +89,9 @@ abstract class _HomeViewModelBase with Store {
     }
   }
 
-  //---DepartmentGetById-----------
+  //---------------------getByIdUser-----------
   @action
-  Future<dynamic> getByIdUser(int? id) async {
+  Future<UserGetByIdModel?> getByIdUser(int? id) async {
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =
@@ -122,25 +99,18 @@ abstract class _HomeViewModelBase with Store {
       return client;
     };
     dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
-    String loginResponseText = await CacheManager().getLoginResponse();
-    LoginResponseModel loginResponseModel =
-        LoginResponseModel.fromJson(jsonDecode(loginResponseText));
-    print(loginResponseText);
-    String token = loginResponseModel.token ?? "";
-    dio.options.headers['Authorization'] = 'Bearer ${token}';
+    await GetToken.getToken();
+    dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
     dio.interceptors.clear();
 
     try {
-      final response = await dio.get(
-          'https://192.168.1.102:5001/api/User/getbyid',
-          queryParameters: {'id': id});
+      final response =
+          await dio.get(getByIdUserUrl, queryParameters: {'id': id});
       if (response.statusCode == HttpStatus.ok) {
         userGetByIdModel = UserGetByIdModel.fromJson(response.data);
-        print("userGetByIdModel:${userGetByIdModel}");
         return userGetByIdModel;
       } else {
-        print("userGetByIdModel null");
-        null;
+        return null;
       }
     } catch (e) {
       if ((e as DioError).response != null) {
@@ -154,7 +124,7 @@ abstract class _HomeViewModelBase with Store {
 
 //-------------------ShowImage--------------------------
   @action
-  Future<dynamic> getImage(String fileName) async {
+  Future<List<int>?> getImage(String fileName) async {
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =
@@ -170,8 +140,7 @@ abstract class _HomeViewModelBase with Store {
       if (response.statusCode == HttpStatus.ok) {
         return response.data;
       } else {
-        print("getImage null");
-        null;
+        return null;
       }
     } catch (e) {
       if ((e as DioError).response != null) {
@@ -201,9 +170,6 @@ abstract class _HomeViewModelBase with Store {
         data = response.data;
         file = await SaveFileManager.saveFileFolder(
             data: response.data, fileName: fileName, contentType: "pdf");
-
-        /*final deneme = await OpenFile.open(file?.path);*/
-        /*print("deneme${deneme.message}");*/
         return response.data;
       } else {
         print("getPdfShow null");
@@ -214,7 +180,7 @@ abstract class _HomeViewModelBase with Store {
 
 //-----------------------Delete-------------------------
   @action
-  Future<dynamic> delete(int? id) async {
+  Future<NoticeDeleteResponseModel?> delete(int? id) async {
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =
@@ -222,22 +188,16 @@ abstract class _HomeViewModelBase with Store {
       return client;
     };
     dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
-    String loginResponseText = await CacheManager().getLoginResponse();
-    LoginResponseModel loginResponseModel =
-        LoginResponseModel.fromJson(jsonDecode(loginResponseText));
-    print(loginResponseText);
-    String token = loginResponseModel.token ?? "";
-    dio.options.headers['Authorization'] = 'Bearer ${token}';
+    await GetToken.getToken();
+    dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
     dio.interceptors.clear();
-
     try {
       final response = await dio.delete(noticedelete, data: {'id': id});
       if (response.statusCode == HttpStatus.ok) {
         deleteResponseData = NoticeDeleteResponseModel.fromJson(response.data);
         return deleteResponseData;
       } else {
-        print("delete null");
-        null;
+        return null;
       }
     } catch (e) {
       if ((e as DioError).response != null) {

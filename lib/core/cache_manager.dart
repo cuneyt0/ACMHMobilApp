@@ -24,4 +24,4 @@ class CacheManager {
   }
 }
 
-enum CacheManagerKey { TOKEN, EXPIRATION, USER, LOGINRESPONSE }
+enum CacheManagerKey {  LOGINRESPONSE }

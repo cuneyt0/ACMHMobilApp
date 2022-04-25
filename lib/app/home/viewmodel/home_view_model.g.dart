@@ -137,7 +137,7 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
       AsyncAction('_HomeViewModelBase.getAllNotice');
 
   @override
-  Future<void> getAllNotice() {
+  Future<NoticeGetAllResponseModel?> getAllNotice() {
     return _$getAllNoticeAsyncAction.run(() => super.getAllNotice());
   }
 
@@ -145,7 +145,7 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
       AsyncAction('_HomeViewModelBase.getByIdDepartment');
 
   @override
-  Future<dynamic> getByIdDepartment(int? id) {
+  Future<DepartmentGetByIdModel?> getByIdDepartment(int? id) {
     return _$getByIdDepartmentAsyncAction
         .run(() => super.getByIdDepartment(id));
   }
@@ -154,14 +154,14 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
       AsyncAction('_HomeViewModelBase.getByIdUser');
 
   @override
-  Future<dynamic> getByIdUser(int? id) {
+  Future<UserGetByIdModel?> getByIdUser(int? id) {
     return _$getByIdUserAsyncAction.run(() => super.getByIdUser(id));
   }
 
   final _$getImageAsyncAction = AsyncAction('_HomeViewModelBase.getImage');
 
   @override
-  Future<dynamic> getImage(String fileName) {
+  Future<List<int>?> getImage(String fileName) {
     return _$getImageAsyncAction.run(() => super.getImage(fileName));
   }
 
@@ -175,7 +175,7 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
   final _$deleteAsyncAction = AsyncAction('_HomeViewModelBase.delete');
 
   @override
-  Future<dynamic> delete(int? id) {
+  Future<NoticeDeleteResponseModel?> delete(int? id) {
     return _$deleteAsyncAction.run(() => super.delete(id));
   }
 

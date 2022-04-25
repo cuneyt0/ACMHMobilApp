@@ -26,8 +26,8 @@ abstract class _AnnouncementUpdateViewModelBase extends BaseViewModelProtocol
   @observable
   DepartmentResponseModel? responseData = DepartmentResponseModel();
   @observable
-  IAnnouncementService service = AnnouncementService(
-      dio: Dio(BaseOptions(baseUrl: 'https://192.168.1.102:5001/api/Notice')));
+  IAnnouncementService service =
+      AnnouncementService(dio: Dio(BaseOptions(baseUrl: noticeUpdateUrl)));
   @observable
   Data? dropdownvalue;
   @observable
