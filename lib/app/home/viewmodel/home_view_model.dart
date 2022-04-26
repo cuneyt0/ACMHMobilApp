@@ -120,8 +120,9 @@ abstract class _HomeViewModelBase with Store {
   }
 
 //-------------------ShowImage--------------------------
+  //-------------------ShowImage--------------------------
   @action
-  Future<List<int>?> getImage(String fileName) async {
+  Future<dynamic> getImage(String fileName) async {
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =
@@ -137,11 +138,12 @@ abstract class _HomeViewModelBase with Store {
       if (response.statusCode == HttpStatus.ok) {
         return response.data;
       } else {
-        return null;
+        print("getImage null");
+        null;
       }
     } catch (e) {
       if ((e as DioError).response != null) {
-        return e.response?.data;
+        return null;
       } else {
         "Hata Gerçekleşti";
       }

@@ -161,7 +161,7 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
   final _$getImageAsyncAction = AsyncAction('_HomeViewModelBase.getImage');
 
   @override
-  Future<List<int>?> getImage(String fileName) {
+  Future<dynamic> getImage(String fileName) {
     return _$getImageAsyncAction.run(() => super.getImage(fileName));
   }
 

@@ -108,7 +108,7 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
                             ? Center(child: CircularProgressIndicator())
                             : _viewModel.photo != null
                                 ? Image.memory(_viewModel.photo)
-                                : Center(child: Image.asset(defaultImage))),
+                                : Center(child: Image.asset(assetNeuLogo))),
                   ),
                 ),
                 Expanded(
