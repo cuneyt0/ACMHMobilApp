@@ -94,14 +94,17 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.only(bottom: 10.0),
                       child: Container(
                           height: MediaQuery.of(context).size.height * 0.4,
                           width: MediaQuery.of(context).size.width * 1,
                           child: isLoading
                               ? Center(child: CircularProgressIndicator())
                               : _viewModel.photo != null
-                                  ? Image.memory(_viewModel.photo)
+                                  ? Image.memory(
+                                      _viewModel.photo,
+                                      fit: BoxFit.cover,
+                                    )
                                   : Center(child: Image.asset(assetNeuLogo))),
                     ),
                   ),
