@@ -168,35 +168,6 @@ abstract class _AnnouncementUpdateViewModelBase extends BaseViewModelProtocol
     cropImagePath = '';
   }
 
-//-------------------ShowImage--------------------------
-  @action
-  Future<List<int>?> getNetworkImage(String fileName) async {
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (HttpClient client) {
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-      return client;
-    };
-    dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
-    dio.interceptors.clear();
-    try {
-      Response<List<int>> response = await dio.get<List<int>>(noticeImageUrl,
-          queryParameters: {'fileName': fileName},
-          options: Options(responseType: ResponseType.bytes));
-      if (response.statusCode == HttpStatus.ok) {
-        return response.data;
-      } else {
-        null;
-      }
-    } catch (e) {
-      if ((e as DioError).response != null) {
-        return null;
-      } else {
-        "Hata Gerçekleşti";
-      }
-    }
-  }
-
   @action
   Future<void> getAllDepartment() async {
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =

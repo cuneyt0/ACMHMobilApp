@@ -106,37 +106,3 @@ class _UpdatePhotoScreenState extends State<UpdatePhotoScreen> {
     ));
   }
 }
-/*
-
-Container(
-                height: MediaQuery.of(context).size.height * 0.4,
-                width: MediaQuery.of(context).size.width * 1,
-                child: _viewModel.newFoto != null
-                    ? Image.memory(_viewModel.newFoto)
-                    : Center(child: Image.asset(defaultImage)))
-Text('${widget.data?.imagePath}')
-
-Observer(
-                  builder: (context) => _viewModel.cropImagePath == ''
-                      ? Container(
-                          height: MediaQuery.of(context).size.height,
-                          color: Colors.white,
-                          child: Center(
-                            child: Text(
-                              "Select image from camera/gallery",
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ),
-                        )
-                      : Container(
-                          height: MediaQuery.of(context).size.height,
-                          color: Colors.grey,
-                          child: Image.file(
-                            File(
-                              _viewModel.cropImagePath,
-                            ),
-                            height: MediaQuery.of(context).size.height,
-                            fit: BoxFit.cover,
-                          )))
-
- */

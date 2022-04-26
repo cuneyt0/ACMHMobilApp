@@ -119,7 +119,6 @@ abstract class _HomeViewModelBase with Store {
     }
   }
 
-//-------------------ShowImage--------------------------
   //-------------------ShowImage--------------------------
   @action
   Future<dynamic> getImage(String fileName) async {

@@ -443,15 +443,6 @@ mixin _$AnnouncementUpdateViewModel on _AnnouncementUpdateViewModelBase, Store {
     return _$GetPhotoAsyncAction.run(() => super.GetPhoto());
   }
 
-  final _$getNetworkImageAsyncAction =
-      AsyncAction('_AnnouncementUpdateViewModelBase.getNetworkImage');
-
-  @override
-  Future<List<int>?> getNetworkImage(String fileName) {
-    return _$getNetworkImageAsyncAction
-        .run(() => super.getNetworkImage(fileName));
-  }
-
   final _$getAllDepartmentAsyncAction =
       AsyncAction('_AnnouncementUpdateViewModelBase.getAllDepartment');
 
