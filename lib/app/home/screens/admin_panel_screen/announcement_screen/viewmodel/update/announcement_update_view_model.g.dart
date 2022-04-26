@@ -481,6 +481,18 @@ mixin _$AnnouncementUpdateViewModel on _AnnouncementUpdateViewModelBase, Store {
   }
 
   @override
+  String dateFormat(DateTime tm) {
+    final _$actionInfo = _$_AnnouncementUpdateViewModelBaseActionController
+        .startAction(name: '_AnnouncementUpdateViewModelBase.dateFormat');
+    try {
+      return super.dateFormat(tm);
+    } finally {
+      _$_AnnouncementUpdateViewModelBaseActionController
+          .endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 id: ${id},

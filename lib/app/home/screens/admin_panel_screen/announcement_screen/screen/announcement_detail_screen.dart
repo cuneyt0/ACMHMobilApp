@@ -84,134 +84,136 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
     });
     _viewModel.getByIdDepartment(widget.responseData?.departmentId);
     _viewModel.getByIdUser(widget.model?.user?.id);
-    print("asdasdasdasd");
-    print(widget.model?.user?.id);
   }
 
   @override
-  Widget build(BuildContext context) {
-    final createdAt = DateTime.parse('${widget.responseData?.createdAt}');
-    final updatedAt = DateTime.parse('${widget.responseData?.updatedAt}');
-
-    return Scaffold(
-      appBar: AppBar(title: Text("DUYURU DETAY SAYFASI")),
-      body: Observer(
-        builder: ((context) => Column(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Container(
-                        height: MediaQuery.of(context).size.height * 0.4,
-                        width: MediaQuery.of(context).size.width * 1,
-                        child: isLoading
-                            ? Center(child: CircularProgressIndicator())
-                            : _viewModel.photo != null
-                                ? Image.memory(_viewModel.photo)
-                                : Center(child: Image.asset(assetNeuLogo))),
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(title: Text(mAllAnnouncements)),
+        body: Observer(
+          builder: ((context) => Column(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Container(
+                          height: MediaQuery.of(context).size.height * 0.4,
+                          width: MediaQuery.of(context).size.width * 1,
+                          child: isLoading
+                              ? Center(child: CircularProgressIndicator())
+                              : _viewModel.photo != null
+                                  ? Image.memory(_viewModel.photo)
+                                  : Center(child: Image.asset(assetNeuLogo))),
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Center(child: Text('${widget.responseData?.title}')),
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Center(
-                            child: Text('${widget.responseData?.content}')),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0, left: 0.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(noticeCreatedAt),
-                            Text(createdAt.toString())
-                          ],
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Center(child: Text('${widget.responseData?.title}')),
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Center(
+                              child: Text('${widget.responseData?.content}')),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0, right: 13.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(noticeUpdateAt),
-                            Text(updatedAt.toString())
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10.0, left: 0.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(noticeCreatedAt),
+                              Text(
+                                _updateViewModel!.dateFormat(DateTime.parse(
+                                    '${widget.responseData?.createdAt}')),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0, right: 13.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text("Department Name"),
-                            Text(
-                                '${_viewModel.departmentGetByIdResponseModel?.data?.departmentName}'),
-                          ],
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(top: 10.0, right: 13.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(noticeUpdateAt),
+                              Text(
+                                _updateViewModel!.dateFormat(DateTime.parse(
+                                    '${widget.responseData?.updatedAt}')),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0, right: 13.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text("Olusturan kişi"),
-                            Text(
-                                '${_viewModel.userGetByIdModel?.data?.firstName} ${_viewModel.userGetByIdModel?.data?.lastName}'),
-                          ],
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(top: 10.0, right: 13.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(mDeparmentName),
+                              Text(
+                                  '${_viewModel.departmentGetByIdResponseModel?.data?.departmentName}'),
+                            ],
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 30.0),
-                        child: SizedBox(
-                          height: MediaQuery.of(context).size.width * 0.1,
-                          width: MediaQuery.of(context).size.width * 0.98,
-                          child: ElevatedButton(
-                              onPressed: () async {
-                                if (_viewModel.file?.path == null) {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          title: Center(child: Text('PDF YOK')),
-                                        );
-                                      });
-                                } else {
-                                  await OpenFile.open(_viewModel.file?.path ??
-                                      'file path null');
-                                }
-                              },
-                              child: isLoading
-                                  ? Center(child: CircularProgressIndicator())
-                                  : Text("Pdf göster")),
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(top: 10.0, right: 13.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(mCreatedUser),
+                              Text(
+                                  '${_viewModel.userGetByIdModel?.data?.firstName} ${_viewModel.userGetByIdModel?.data?.lastName}'),
+                            ],
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0),
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.98,
-                          child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) =>
-                                        AnnouncementUpdateScreen(
-                                          viewModel: _updateViewModel,
-                                          data: widget.responseData,
-                                          items: items,
-                                          model: widget.model,
-                                        )));
-                              },
-                              child: Text(updateButtonText)),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 30.0),
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.1,
+                            width: MediaQuery.of(context).size.width * 0.98,
+                            child: ElevatedButton(
+                                onPressed: () async {
+                                  if (_viewModel.file?.path == null) {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            title: Center(child: Text(mNoPDf)),
+                                          );
+                                        });
+                                  } else {
+                                    await OpenFile.open(_viewModel.file?.path ??
+                                        'file path null');
+                                  }
+                                },
+                                child: isLoading
+                                    ? Center(child: CircularProgressIndicator())
+                                    : Text(mShowPDf)),
+                          ),
                         ),
-                      )
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.98,
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          AnnouncementUpdateScreen(
+                                            viewModel: _updateViewModel,
+                                            data: widget.responseData,
+                                            items: items,
+                                            model: widget.model,
+                                          )));
+                                },
+                                child: Text(updateButtonText)),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            )),
-      ),
-    );
-  }
+                ],
+              )),
+        ),
+      );
 }
