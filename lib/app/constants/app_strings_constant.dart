@@ -28,3 +28,6 @@ const String noticeCreatedAt = 'Oluştulma Tarihi:';
 const String noticeDeleteText = 'Silme İşlemi';
 const String noticeDeleteBtnText = 'Sil';
 const String noticeDeletedMessage = 'Duyuru Başarılıyla silindi';
+const String mAnnouncements = 'DUYURULAR';
+const String mLoading = 'Yükleniyor...';
+const String btnCancel = 'Vazgeç';

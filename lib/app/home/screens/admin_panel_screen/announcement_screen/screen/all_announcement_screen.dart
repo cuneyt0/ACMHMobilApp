@@ -13,24 +13,20 @@ class _AllAnnouncementScreenState extends State<AllAnnouncementScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
     _viewModel.getAllNotice();
+    super.initState();
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("DUYURULAR")),
-      body: Observer(
-        builder: ((context) => _viewModel.responseData?.data == null
-            ? Center(child: CircularProgressIndicator())
-            : ListView.builder(
-                itemCount: _viewModel.responseData?.data?.length,
-                itemBuilder: (context, index) => ListTile(
-                  onTap: () {
-                    //  Navigator.of(context).pop();
-                    Navigator.of(context).push(
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(title: Text(mAnnouncements)),
+        body: Observer(
+          builder: ((context) => _viewModel.responseData?.data == null
+              ? Center(child: CircularProgressIndicator())
+              : ListView.builder(
+                  itemCount: _viewModel.responseData?.data?.length,
+                  itemBuilder: (context, index) => ListTile(
+                    onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: ((context) => AnnouncementDetail(
                               responseData:
@@ -38,36 +34,27 @@ class _AllAnnouncementScreenState extends State<AllAnnouncementScreen> {
                               model: widget.model,
                             )),
                       ),
-                    );
-                  },
-                  title: Text(_viewModel.responseData?.data?[index].title ??
-                      'Yükleniyor...'),
-                  trailing: IconButton(
-                      onPressed: () {
-                        print("delete");
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Center(
-                                child: Text(noticeDeleteText),
-                              ),
-                              content: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text("Vazgeç"),
-                                  ),
-                                  ElevatedButton(
-                                      onPressed: () async {
-                                        print(_viewModel
-                                            .responseData?.data?[index].id);
-                                        await _viewModel
+                    ),
+                    title: Text(_viewModel.responseData?.data?[index].title ??
+                        mLoading),
+                    trailing: IconButton(
+                        onPressed: () => showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: Center(
+                                  child: Text(noticeDeleteText),
+                                ),
+                                content: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: Text(btnCancel),
+                                    ),
+                                    ElevatedButton(
+                                        onPressed: () async => await _viewModel
                                             .delete(_viewModel
                                                 .responseData?.data?[index].id)
                                             .then(
@@ -87,24 +74,19 @@ class _AllAnnouncementScreenState extends State<AllAnnouncementScreen> {
                                                         Navigator.pop(context),
                                                   )
                                                   .then(
-                                                (value) async {
-                                                  await _viewModel
-                                                      .getAllNotice();
-                                                },
-                                              ),
-                                            );
-                                      },
-                                      child: Text(noticeDeleteBtnText)),
-                                ],
+                                                    (value) async =>
+                                                        await _viewModel
+                                                            .getAllNotice(),
+                                                  ),
+                                            ),
+                                        child: Text(noticeDeleteBtnText)),
+                                  ],
+                                ),
                               ),
-                            );
-                          },
-                        );
-                      },
-                      icon: Icon(Icons.delete)),
-                ),
-              )),
-      ),
-    );
-  }
+                            ),
+                        icon: Icon(Icons.delete)),
+                  ),
+                )),
+        ),
+      );
 }

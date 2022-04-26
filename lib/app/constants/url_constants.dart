@@ -10,3 +10,5 @@ const String noticePdfUrl = 'https://192.168.1.104:5001/api/Notice/pdf';
 const String departmentGetByIdUrl =
     'https://192.168.1.104:5001/api/department/getbyid';
 const String getByIdUserUrl = 'https://192.168.1.104:5001/api/User/getbyid';
+
+
