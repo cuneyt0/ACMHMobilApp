@@ -177,7 +177,9 @@ abstract class _AnnouncementUpdateViewModelBase extends BaseViewModelProtocol
       return client;
     };
     dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
-    dio.interceptors.add(PrettyDioLogger());
+    await GetToken.getToken();
+    dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
+    //dio.interceptors.add(PrettyDioLogger());
     try {
       final response = await dio.get(departmentgetAll);
       if (response.statusCode == HttpStatus.ok) {
