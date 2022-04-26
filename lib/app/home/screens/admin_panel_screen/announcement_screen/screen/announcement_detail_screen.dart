@@ -57,7 +57,6 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
             File file = File(temp.path + '/.jpg');
             file.writeAsBytes(value as Uint8List);
             _updateViewModel?.addedPhoto = file.path;
-            print(file.path);
           });
         });
       }
@@ -77,7 +76,6 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
             File file = File(dic.path + '/.pdf');
             file.writeAsBytes(value as Uint8List);
             _updateViewModel?.newFilePath = file.path;
-            print(file.path);
           });
         });
       }

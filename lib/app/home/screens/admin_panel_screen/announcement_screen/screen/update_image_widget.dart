@@ -17,6 +17,7 @@ class UpdateImageWidget extends StatelessWidget {
     print("--------------------------------------");
     print(_viewModel?.addedPhoto);
     print(widget.data?.imagePath);
+    
     return Padding(
       padding: const EdgeInsets.only(top: 20.0, left: 5, right: 5),
       child: ElevatedButton(
