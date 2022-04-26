@@ -23,8 +23,8 @@ const String mShowAnnouncement = "DUYURULARI GÖSTER";
 
 const String defaultImage = 'assets/logo/neu_logo.jpg';
 const String updateButtonText = 'Güncelle';
-const String noticeUpdateAt = 'Güncelleme Tarihi:';
-const String noticeCreatedAt = 'Oluştulma Tarihi:';
+const String noticeUpdateAt = 'Güncelleme Tarihi';
+const String noticeCreatedAt = 'Oluştulma Tarihi';
 const String noticeDeleteText = 'Silme İşlemi';
 const String noticeDeleteBtnText = 'Sil';
 const String noticeDeletedMessage = 'Duyuru Başarılıyla silindi';

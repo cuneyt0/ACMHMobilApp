@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'package:login_work/export_import.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:readmore/readmore.dart';
 
 import '../../../../../../core/download/download_helper.dart';
 
@@ -27,7 +28,6 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
 
   @override
   void initState() {
-    super.initState();
     _updateViewModel?.getAllDepartment().then(
       (value) {
         setState(() {
@@ -84,138 +84,178 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
     });
     _viewModel.getByIdDepartment(widget.responseData?.departmentId);
     _viewModel.getByIdUser(widget.model?.user?.id);
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: Text(mAllAnnouncements)),
+        appBar: AppBar(title: const Text(mAllAnnouncements)),
         body: Observer(
-          builder: ((context) => Column(
-                children: [
-                  Expanded(
-                    child: Padding(
+          builder: ((context) => SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
                       padding: const EdgeInsets.only(bottom: 10.0),
                       child: Container(
-                          height: MediaQuery.of(context).size.height * 0.4,
-                          width: MediaQuery.of(context).size.width * 1,
+                        height: MediaQuery.of(context).size.height * 0.57,
+                        width: MediaQuery.of(context).size.width * 1,
+                        child: isLoading
+                            ? const Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : _viewModel.photo != null
+                                ? Image.memory(
+                                    _viewModel.photo,
+                                    fit: BoxFit.cover,
+                                  )
+                                : Center(
+                                    child: Image.asset(assetNeuLogo),
+                                  ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Center(
+                        child: Text(
+                          '${widget.responseData?.title}',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 5.0, right: 5),
+                        child: Expanded(
+                          child: ReadMoreText(
+                            '${widget.responseData?.content}',
+                            trimLines: 2,
+                            colorClickableText: Colors.pink,
+                            trimMode: TrimMode.Line,
+                            trimCollapsedText: '...Daha fazla',
+                            trimExpandedText: ' ...Daha az',
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 5.0, left: 10.0, right: 10),
+                      child: Row(
+                        children: [
+                          const Expanded(
+                              child: Text(
+                            noticeCreatedAt,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          )),
+                          Text(
+                            _updateViewModel!.dateFormat(DateTime.parse(
+                                '${widget.responseData?.createdAt}')),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 5.0, left: 10.0, right: 10),
+                      child: Row(
+                        children: [
+                          const Expanded(
+                              child: Text(
+                            noticeUpdateAt,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          )),
+                          Text(
+                            _updateViewModel!.dateFormat(
+                              DateTime.parse(
+                                  '${widget.responseData?.updatedAt}'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 5.0, left: 10.0, right: 10),
+                      child: Row(
+                        children: [
+                          const Expanded(
+                            child: Text(
+                              mDeparmentName,
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Text(
+                              '${_viewModel.departmentGetByIdResponseModel?.data?.departmentName}'),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 5.0, left: 10.0, right: 10),
+                      child: Row(
+                        children: [
+                          const Expanded(
+                              child: Text(
+                            mCreatedUser,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          )),
+                          Text(
+                              '${_viewModel.userGetByIdModel?.data?.firstName} ${_viewModel.userGetByIdModel?.data?.lastName}'),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.width * 0.1,
+                        width: MediaQuery.of(context).size.width * 0.98,
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            if (_viewModel.file?.path == null) {
+                              showDialog(
+                                context: context,
+                                builder: (context) => const AlertDialog(
+                                  title: Center(child: Text(mNoPDf)),
+                                ),
+                              );
+                            } else {
+                              await OpenFile.open(
+                                  _viewModel.file?.path ?? 'file path null');
+                            }
+                          },
                           child: isLoading
-                              ? Center(child: CircularProgressIndicator())
-                              : _viewModel.photo != null
-                                  ? Image.memory(
-                                      _viewModel.photo,
-                                      fit: BoxFit.cover,
-                                    )
-                                  : Center(child: Image.asset(assetNeuLogo))),
+                              ? const Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : const Text(mShowPDf),
+                        ),
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Center(child: Text('${widget.responseData?.title}')),
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Center(
-                              child: Text('${widget.responseData?.content}')),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10.0, left: 0.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(noticeCreatedAt),
-                              Text(
-                                _updateViewModel!.dateFormat(DateTime.parse(
-                                    '${widget.responseData?.createdAt}')),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.98,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => AnnouncementUpdateScreen(
+                                  viewModel: _updateViewModel,
+                                  data: widget.responseData,
+                                  items: items,
+                                  model: widget.model,
+                                ),
                               ),
-                            ],
-                          ),
+                            );
+                          },
+                          child: const Text(updateButtonText),
                         ),
-                        Padding(
-                          padding:
-                              const EdgeInsets.only(top: 10.0, right: 13.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(noticeUpdateAt),
-                              Text(
-                                _updateViewModel!.dateFormat(DateTime.parse(
-                                    '${widget.responseData?.updatedAt}')),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding:
-                              const EdgeInsets.only(top: 10.0, right: 13.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(mDeparmentName),
-                              Text(
-                                  '${_viewModel.departmentGetByIdResponseModel?.data?.departmentName}'),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding:
-                              const EdgeInsets.only(top: 10.0, right: 13.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(mCreatedUser),
-                              Text(
-                                  '${_viewModel.userGetByIdModel?.data?.firstName} ${_viewModel.userGetByIdModel?.data?.lastName}'),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 30.0),
-                          child: SizedBox(
-                            height: MediaQuery.of(context).size.width * 0.1,
-                            width: MediaQuery.of(context).size.width * 0.98,
-                            child: ElevatedButton(
-                                onPressed: () async {
-                                  if (_viewModel.file?.path == null) {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return AlertDialog(
-                                            title: Center(child: Text(mNoPDf)),
-                                          );
-                                        });
-                                  } else {
-                                    await OpenFile.open(_viewModel.file?.path ??
-                                        'file path null');
-                                  }
-                                },
-                                child: isLoading
-                                    ? Center(child: CircularProgressIndicator())
-                                    : Text(mShowPDf)),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20.0),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.98,
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) =>
-                                          AnnouncementUpdateScreen(
-                                            viewModel: _updateViewModel,
-                                            data: widget.responseData,
-                                            items: items,
-                                            model: widget.model,
-                                          )));
-                                },
-                                child: Text(updateButtonText)),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
+                      ),
+                    )
+                  ],
+                ),
               )),
         ),
       );
