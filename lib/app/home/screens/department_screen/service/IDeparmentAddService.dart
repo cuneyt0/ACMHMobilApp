@@ -6,17 +6,21 @@ abstract class IDepartmentService {
   Dio dio;
   IDepartmentService({required this.dio});
   final String departmentAddPath = IDepartmentServicePath.POST.rawValue;
+  final String departmentGetAllPath = IDepartmentServicePath.GETALL.rawValue;
 
   Future<dynamic?> postDepartment(DepartmentAddRequestModel model);
+  Future<dynamic?> getAllDepartment();
 }
 
-enum IDepartmentServicePath { POST }
+enum IDepartmentServicePath { POST, GETALL }
 
 extension IDepartmentServicePathExtension on IDepartmentServicePath {
   String get rawValue {
     switch (this) {
       case IDepartmentServicePath.POST:
         return '/add';
+      case IDepartmentServicePath.GETALL:
+        return '/getall';
     }
   }
 }

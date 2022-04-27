@@ -38,4 +38,66 @@ class DepartmentService extends IDepartmentService {
       }
     }
   }
+
+  @override
+  Future<dynamic> getAllDepartment() async {
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
+
+    dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
+    await GetToken.getToken();
+    dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
+    dio.interceptors.add(PrettyDioLogger());
+    try {
+      final response = await dio.get(departmentGetAllPath);
+      if (response.statusCode == HttpStatus.ok) {
+        return DepartmentResponseModel.fromJson(response.data);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      if ((e as DioError).response != null) {
+        return e.response?.data;
+      } else {
+        "Hata Gerçekleşti";
+      }
+    }
+  }
 }
+/*
+
+  @action
+  Future<NoticeGetAllResponseModel?> getAllNotice() async {
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
+    dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
+    await GetToken.getToken();
+    dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
+    //dio.interceptors.add(PrettyDioLogger());
+    dio.interceptors.clear();
+    try {
+      final response = await dio.get(noticegetAll);
+      if (response.statusCode == HttpStatus.ok) {
+        responseData = NoticeGetAllResponseModel.fromJson(response.data);
+        return responseData;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      if ((e as DioError).response != null) {
+        return e.response?.data;
+      } else {
+        "Hata Gerçekleşti";
+      }
+    }
+  }
+
+ */

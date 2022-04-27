@@ -21,6 +21,7 @@ const String mAdminPanel = 'ADMİN PANELİ';
 const String mAddedAnnouncement = 'DUYURU EKLE';
 const String mShowAnnouncement = "DUYURULARI GÖSTER";
 const String mDeparmtent = 'BÖLÜM EKLE';
+const String mShowDeparmtent = 'BÖLÜMLERİ GÖSTER';
 
 const String defaultImage = 'assets/logo/neu_logo.jpg';
 const String updateButtonText = 'Güncelle';

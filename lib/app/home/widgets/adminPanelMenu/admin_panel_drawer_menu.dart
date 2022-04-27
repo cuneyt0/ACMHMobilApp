@@ -1,6 +1,7 @@
 import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/all_announcement_screen.dart';
 import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/announcement_screen.dart';
-import 'package:login_work/app/home/screens/department_screen/screen/deparment_add_screen.dart';
+import 'package:login_work/app/home/screens/department_screen/screen/departmentAddScreen/deparment_add_screen.dart';
+import 'package:login_work/app/home/screens/department_screen/screen/departmentGetAllScreen/department_all_screen.dart';
 import 'package:login_work/export_import.dart';
 
 class AdminPanelDrawerMenu extends StatelessWidget {
@@ -89,6 +90,14 @@ Widget _buildAdminMenuBody(
                 builder: (context) => DepartmentAddScreen(
                   model: model,
                 ),
+              ),
+            );
+          }
+          if (AdminPanelMenu[index] == mShowDeparmtent) {
+            Navigator.of(context).pop();
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => DepartmentGetAllScreen(),
               ),
             );
           }
