@@ -20,6 +20,7 @@ const String mActivity = 'ETKİNLİK VE TAKVİMİ';
 const String mAdminPanel = 'ADMİN PANELİ';
 const String mAddedAnnouncement = 'DUYURU EKLE';
 const String mShowAnnouncement = "DUYURULARI GÖSTER";
+const String mDeparmtent = 'BÖLÜM EKLE';
 
 const String defaultImage = 'assets/logo/neu_logo.jpg';
 const String updateButtonText = 'Güncelle';
@@ -36,3 +37,7 @@ const String mDeparmentName = 'Bölüm Adı';
 const String mCreatedUser = 'Olusturan kişi';
 const String mNoPDf = 'PDF YOK';
 const String mShowPDf = 'Pdf göster';
+
+//Departmentadd
+const String dValidationText = 'Bölüm ismi 3 karakterden kısa olamaz';
+const String dAddText = 'EKLE';

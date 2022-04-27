@@ -29,6 +29,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(title: Text(mAddedAnnouncement)),
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
