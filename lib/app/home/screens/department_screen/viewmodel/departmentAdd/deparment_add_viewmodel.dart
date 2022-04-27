@@ -14,7 +14,7 @@ abstract class _DepartmentAddViewModelBase extends BaseViewModelProtocol
     with Store {
   @observable
   IDepartmentService service =
-      DepartmentService(dio: Dio(BaseOptions(baseUrl: departmentAdd)));
+      DepartmentService(dio: Dio(BaseOptions(baseUrl: departmentAllUrl)));
 
   @observable
   TextEditingController departmentNameController = TextEditingController();

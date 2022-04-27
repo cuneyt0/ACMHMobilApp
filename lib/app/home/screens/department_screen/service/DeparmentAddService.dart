@@ -67,11 +67,9 @@ class DepartmentService extends IDepartmentService {
       }
     }
   }
-}
-/*
 
-  @action
-  Future<NoticeGetAllResponseModel?> getAllNotice() async {
+  @override
+  Future deleteDepartment(int id) async {
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =
@@ -81,13 +79,11 @@ class DepartmentService extends IDepartmentService {
     dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
     await GetToken.getToken();
     dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
-    //dio.interceptors.add(PrettyDioLogger());
     dio.interceptors.clear();
     try {
-      final response = await dio.get(noticegetAll);
+      final response = await dio.delete(departmentdeletePath, data: {'id': id});
       if (response.statusCode == HttpStatus.ok) {
-        responseData = NoticeGetAllResponseModel.fromJson(response.data);
-        return responseData;
+        return BaseResponseModel.fromJson(response.data);
       } else {
         return null;
       }
@@ -99,5 +95,4 @@ class DepartmentService extends IDepartmentService {
       }
     }
   }
-
- */
+}

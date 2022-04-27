@@ -41,6 +41,23 @@ mixin _$DepartmentGetAllViewModel on _DepartmentGetAllViewModelBase, Store {
     });
   }
 
+  final _$departmentDeleteResponseAtom =
+      Atom(name: '_DepartmentGetAllViewModelBase.departmentDeleteResponse');
+
+  @override
+  BaseResponseModel? get departmentDeleteResponse {
+    _$departmentDeleteResponseAtom.reportRead();
+    return super.departmentDeleteResponse;
+  }
+
+  @override
+  set departmentDeleteResponse(BaseResponseModel? value) {
+    _$departmentDeleteResponseAtom
+        .reportWrite(value, super.departmentDeleteResponse, () {
+      super.departmentDeleteResponse = value;
+    });
+  }
+
   final _$getAllDepartmentAsyncAction =
       AsyncAction('_DepartmentGetAllViewModelBase.getAllDepartment');
 
@@ -49,11 +66,20 @@ mixin _$DepartmentGetAllViewModel on _DepartmentGetAllViewModelBase, Store {
     return _$getAllDepartmentAsyncAction.run(() => super.getAllDepartment());
   }
 
+  final _$deleteDepartmentAsyncAction =
+      AsyncAction('_DepartmentGetAllViewModelBase.deleteDepartment');
+
+  @override
+  Future<BaseResponseModel?> deleteDepartment(int id) {
+    return _$deleteDepartmentAsyncAction.run(() => super.deleteDepartment(id));
+  }
+
   @override
   String toString() {
     return '''
 service: ${service},
-departmentGetAllResponse: ${departmentGetAllResponse}
+departmentGetAllResponse: ${departmentGetAllResponse},
+departmentDeleteResponse: ${departmentDeleteResponse}
     ''';
   }
 }

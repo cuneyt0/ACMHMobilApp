@@ -7,12 +7,14 @@ abstract class IDepartmentService {
   IDepartmentService({required this.dio});
   final String departmentAddPath = IDepartmentServicePath.POST.rawValue;
   final String departmentGetAllPath = IDepartmentServicePath.GETALL.rawValue;
+  final String departmentdeletePath = IDepartmentServicePath.DELETE.rawValue;
 
   Future<dynamic?> postDepartment(DepartmentAddRequestModel model);
   Future<dynamic?> getAllDepartment();
+  Future<dynamic?> deleteDepartment(int id);
 }
 
-enum IDepartmentServicePath { POST, GETALL }
+enum IDepartmentServicePath { POST, GETALL, DELETE }
 
 extension IDepartmentServicePathExtension on IDepartmentServicePath {
   String get rawValue {
@@ -21,6 +23,8 @@ extension IDepartmentServicePathExtension on IDepartmentServicePath {
         return '/add';
       case IDepartmentServicePath.GETALL:
         return '/getall';
+      case IDepartmentServicePath.DELETE:
+        return '/delete';
     }
   }
 }

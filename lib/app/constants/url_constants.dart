@@ -11,4 +11,4 @@ const String departmentGetByIdUrl =
     'https://192.168.1.104:5001/api/department/getbyid';
 const String getByIdUserUrl = 'https://192.168.1.104:5001/api/User/getbyid';
 //Department
-const String departmentAdd = 'https://192.168.1.104:5001/api/department';
+const String departmentAllUrl = 'https://192.168.1.104:5001/api/department';
