@@ -1,6 +1,7 @@
 import 'package:login_work/app/baseResponseModel/base_error_response_model.dart';
 import 'package:login_work/app/baseResponseModel/base_response_model.dart';
-import 'package:login_work/app/home/screens/department_screen/model/department_add_response_model.dart';
+import 'package:login_work/app/home/screens/department_screen/model/department_add_request_model.dart';
+import 'package:login_work/app/home/screens/department_screen/model/department_update_request_model.dart';
 import 'package:login_work/app/home/screens/department_screen/service/IDeparmentAddService.dart';
 
 import '../../../../../export_import.dart';
@@ -92,6 +93,38 @@ class DepartmentService extends IDepartmentService {
         return e.response?.data;
       } else {
         "Hata Gerçekleşti";
+      }
+    }
+  }
+
+  @override
+  Future updateDepartment(DepartmentUpdateRequestModel model) async {
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
+
+    dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
+    await GetToken.getToken();
+    dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
+    dio.interceptors.add(PrettyDioLogger());
+    try {
+      final response = await dio.patch(
+        departmentUpdatePath,
+        data: model,
+      );
+      if (response.statusCode == HttpStatus.ok) {
+        return BaseResponseModel.fromJson(response.data);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      if ((e as DioError).response != null) {
+        return BaseErrorResponseModel.fromJson(e.response?.data);
+      } else {
+        return "Hata Gerçekleşti";
       }
     }
   }

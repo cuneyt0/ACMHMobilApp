@@ -58,6 +58,69 @@ mixin _$DepartmentGetAllViewModel on _DepartmentGetAllViewModelBase, Store {
     });
   }
 
+  final _$idAtom = Atom(name: '_DepartmentGetAllViewModelBase.id');
+
+  @override
+  int? get id {
+    _$idAtom.reportRead();
+    return super.id;
+  }
+
+  @override
+  set id(int? value) {
+    _$idAtom.reportWrite(value, super.id, () {
+      super.id = value;
+    });
+  }
+
+  final _$departmentNameControllerAtom =
+      Atom(name: '_DepartmentGetAllViewModelBase.departmentNameController');
+
+  @override
+  TextEditingController get departmentNameController {
+    _$departmentNameControllerAtom.reportRead();
+    return super.departmentNameController;
+  }
+
+  @override
+  set departmentNameController(TextEditingController value) {
+    _$departmentNameControllerAtom
+        .reportWrite(value, super.departmentNameController, () {
+      super.departmentNameController = value;
+    });
+  }
+
+  final _$formKeyAtom = Atom(name: '_DepartmentGetAllViewModelBase.formKey');
+
+  @override
+  GlobalKey<FormState> get formKey {
+    _$formKeyAtom.reportRead();
+    return super.formKey;
+  }
+
+  @override
+  set formKey(GlobalKey<FormState> value) {
+    _$formKeyAtom.reportWrite(value, super.formKey, () {
+      super.formKey = value;
+    });
+  }
+
+  final _$isLoadingAtom =
+      Atom(name: '_DepartmentGetAllViewModelBase.isLoading');
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
   final _$getAllDepartmentAsyncAction =
       AsyncAction('_DepartmentGetAllViewModelBase.getAllDepartment');
 
@@ -74,12 +137,50 @@ mixin _$DepartmentGetAllViewModel on _DepartmentGetAllViewModelBase, Store {
     return _$deleteDepartmentAsyncAction.run(() => super.deleteDepartment(id));
   }
 
+  final _$updateDepartmentAsyncAction =
+      AsyncAction('_DepartmentGetAllViewModelBase.updateDepartment');
+
+  @override
+  Future<dynamic> updateDepartment() {
+    return _$updateDepartmentAsyncAction.run(() => super.updateDepartment());
+  }
+
+  final _$_DepartmentGetAllViewModelBaseActionController =
+      ActionController(name: '_DepartmentGetAllViewModelBase');
+
+  @override
+  String? noticeStringValidation(String? value) {
+    final _$actionInfo =
+        _$_DepartmentGetAllViewModelBaseActionController.startAction(
+            name: '_DepartmentGetAllViewModelBase.noticeStringValidation');
+    try {
+      return super.noticeStringValidation(value);
+    } finally {
+      _$_DepartmentGetAllViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changeLoadingView() {
+    final _$actionInfo = _$_DepartmentGetAllViewModelBaseActionController
+        .startAction(name: '_DepartmentGetAllViewModelBase.changeLoadingView');
+    try {
+      return super.changeLoadingView();
+    } finally {
+      _$_DepartmentGetAllViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 service: ${service},
 departmentGetAllResponse: ${departmentGetAllResponse},
-departmentDeleteResponse: ${departmentDeleteResponse}
+departmentDeleteResponse: ${departmentDeleteResponse},
+id: ${id},
+departmentNameController: ${departmentNameController},
+formKey: ${formKey},
+isLoading: ${isLoading}
     ''';
   }
 }

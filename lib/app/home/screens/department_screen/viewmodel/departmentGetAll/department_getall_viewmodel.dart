@@ -1,4 +1,6 @@
+import 'package:login_work/app/baseResponseModel/base_error_response_model.dart';
 import 'package:login_work/app/baseResponseModel/base_response_model.dart';
+import 'package:login_work/app/home/screens/department_screen/model/department_update_request_model.dart';
 import 'package:login_work/app/home/screens/department_screen/service/DeparmentAddService.dart';
 import 'package:login_work/app/home/screens/department_screen/service/IDeparmentAddService.dart';
 import 'package:login_work/export_import.dart';
@@ -17,12 +19,18 @@ abstract class _DepartmentGetAllViewModelBase extends BaseViewModelProtocol
   DepartmentResponseModel? departmentGetAllResponse = DepartmentResponseModel();
   @observable
   BaseResponseModel? departmentDeleteResponse = BaseResponseModel();
+  @observable
+  int? id;
 
   @action
   Future<DepartmentResponseModel?> getAllDepartment() async {
     departmentGetAllResponse = await service.getAllDepartment();
     return departmentGetAllResponse;
   }
+
+  @override
+  void setBuildContext(BuildContext buildContext) =>
+      this.buildContext = buildContext;
 
   @action
   Future<BaseResponseModel?> deleteDepartment(int id) async {
@@ -39,7 +47,50 @@ abstract class _DepartmentGetAllViewModelBase extends BaseViewModelProtocol
     return departmentDeleteResponse;
   }
 
-  @override
-  void setBuildContext(BuildContext buildContext) =>
-      this.buildContext = buildContext;
+  @observable
+  TextEditingController departmentNameController = TextEditingController();
+  @observable
+  GlobalKey<FormState> formKey = GlobalKey();
+  @observable
+  bool isLoading = false;
+  @action
+  String? noticeStringValidation(String? value) {
+    if ((value ?? '').length < 3) {
+      return dValidationText;
+    } else {
+      return null;
+    }
+  }
+
+  @action
+  void changeLoadingView() => isLoading = !isLoading;
+  @action
+  Future<dynamic?> updateDepartment() async {
+    if (formKey.currentState != null && formKey.currentState!.validate()) {
+      changeLoadingView();
+      final updateRequestData = await service.updateDepartment(
+          DepartmentUpdateRequestModel(
+              id: id, departmentName: departmentNameController.text));
+      changeLoadingView();
+      if (updateRequestData is BaseResponseModel) {
+        Flushbar(
+          message: '${updateRequestData.message}',
+          flushbarPosition: FlushbarPosition.TOP,
+          duration: Duration(seconds: 1),
+          borderRadius: BorderRadius.circular(2),
+          backgroundColor: Colors.black.withOpacity(0.5),
+        ).show(buildContext).then((value) => Navigation.ofPop());
+      } else if (updateRequestData is BaseErrorResponseModel) {
+        Flushbar(
+          message: '${updateRequestData.message}',
+          flushbarPosition: FlushbarPosition.TOP,
+          duration: Duration(seconds: 1),
+          borderRadius: BorderRadius.circular(2),
+          backgroundColor: Colors.black.withOpacity(0.5),
+        ).show(buildContext);
+      }
+    } else {
+      print(" DepartmentAdd post işleminde validasyonlar karşılanmadı");
+    }
+  }
 }

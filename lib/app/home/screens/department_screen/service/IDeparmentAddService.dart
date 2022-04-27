@@ -1,4 +1,5 @@
-import 'package:login_work/app/home/screens/department_screen/model/department_add_response_model.dart';
+import 'package:login_work/app/home/screens/department_screen/model/department_add_request_model.dart';
+import 'package:login_work/app/home/screens/department_screen/model/department_update_request_model.dart';
 
 import '../../../../../../export_import.dart';
 
@@ -8,13 +9,15 @@ abstract class IDepartmentService {
   final String departmentAddPath = IDepartmentServicePath.POST.rawValue;
   final String departmentGetAllPath = IDepartmentServicePath.GETALL.rawValue;
   final String departmentdeletePath = IDepartmentServicePath.DELETE.rawValue;
+  final String departmentUpdatePath = IDepartmentServicePath.UPDATE.rawValue;
 
   Future<dynamic?> postDepartment(DepartmentAddRequestModel model);
   Future<dynamic?> getAllDepartment();
   Future<dynamic?> deleteDepartment(int id);
+  Future<dynamic?> updateDepartment(DepartmentUpdateRequestModel model);
 }
 
-enum IDepartmentServicePath { POST, GETALL, DELETE }
+enum IDepartmentServicePath { POST, GETALL, DELETE, UPDATE }
 
 extension IDepartmentServicePathExtension on IDepartmentServicePath {
   String get rawValue {
@@ -25,6 +28,8 @@ extension IDepartmentServicePathExtension on IDepartmentServicePath {
         return '/getall';
       case IDepartmentServicePath.DELETE:
         return '/delete';
+      case IDepartmentServicePath.UPDATE:
+        return '/update';
     }
   }
 }
