@@ -1,6 +1,7 @@
 import 'package:login_work/app/baseResponseModel/base_error_response_model.dart';
 import 'package:login_work/app/baseResponseModel/base_response_model.dart';
 import 'package:login_work/app/home/screens/department_screen/model/department_update_request_model.dart';
+import 'package:login_work/app/home/screens/department_screen/screen/departmentGetAllScreen/department_all_screen.dart';
 import 'package:login_work/app/home/screens/department_screen/service/DeparmentAddService.dart';
 import 'package:login_work/app/home/screens/department_screen/service/IDeparmentAddService.dart';
 import 'package:login_work/export_import.dart';
@@ -79,7 +80,13 @@ abstract class _DepartmentGetAllViewModelBase extends BaseViewModelProtocol
           duration: Duration(seconds: 1),
           borderRadius: BorderRadius.circular(2),
           backgroundColor: Colors.black.withOpacity(0.5),
-        ).show(buildContext).then((value) => Navigation.ofPop());
+        ).show(buildContext).then((value) {
+          Navigator.of(buildContext).pop();
+          Navigator.of(buildContext).push(MaterialPageRoute(
+            builder: (context) =>
+                AdminPanelScreen(model: GetToken.loginResponseModel),
+          ));
+        });
       } else if (updateRequestData is BaseErrorResponseModel) {
         Flushbar(
           message: '${updateRequestData.message}',
@@ -90,7 +97,7 @@ abstract class _DepartmentGetAllViewModelBase extends BaseViewModelProtocol
         ).show(buildContext);
       }
     } else {
-      print(" DepartmentAdd post işleminde validasyonlar karşılanmadı");
+      print(" updateDepartment update işlemi başarısız");
     }
   }
 }

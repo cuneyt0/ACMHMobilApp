@@ -29,7 +29,7 @@ class _DepartmentUpdateScreenState extends State<DepartmentUpdateScreen> {
       appBar: AppBar(title: Text(widget.model!.departmentName.toString())),
       bottomNavigationBar: ElevatedButton(
           onPressed: () async => await _viewModel?.updateDepartment(),
-          child: Text(dAddText)),
+          child: Text(updateButtonText)),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

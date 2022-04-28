@@ -21,6 +21,14 @@ class _DepartmentGetAllScreenState extends State<DepartmentGetAllScreen> {
   }
 
   @override
+  void dispose() {
+    _viewModel?.getAllDepartment();
+    _viewModel?.setBuildContext(context);
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

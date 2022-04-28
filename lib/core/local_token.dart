@@ -3,11 +3,12 @@ import 'package:login_work/export_import.dart';
 
 class GetToken {
   static String? token;
+  static LoginResponseModel? loginResponseModel;
   static Future<String?> getToken() async {
     String loginResponseText = await CacheManager().getLoginResponse();
-    LoginResponseModel loginResponseModel =
+    loginResponseModel =
         LoginResponseModel.fromJson(jsonDecode(loginResponseText));
-    token = loginResponseModel.token ?? "";
+    token = loginResponseModel?.token ?? "";
     print("TOKENN: ${token}");
     return token;
   }
