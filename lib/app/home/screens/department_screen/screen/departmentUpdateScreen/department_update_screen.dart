@@ -1,7 +1,5 @@
 import 'package:login_work/export_import.dart';
 
-import '../../viewmodel/departmentGetAll/department_getall_viewmodel.dart';
-
 class DepartmentUpdateScreen extends StatefulWidget {
   Data? model;
   DepartmentUpdateScreen({Key? key, this.model}) : super(key: key);

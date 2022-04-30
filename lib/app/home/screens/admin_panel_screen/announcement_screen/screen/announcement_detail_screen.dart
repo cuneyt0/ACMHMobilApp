@@ -1,10 +1,4 @@
-import 'dart:typed_data';
 import 'package:login_work/export_import.dart';
-import 'package:open_file/open_file.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:readmore/readmore.dart';
-
-import '../../../../../../core/download/download_helper.dart';
 
 class AnnouncementDetail extends StatefulWidget {
   final NoticeData? responseData;

@@ -1,5 +1,3 @@
-import 'package:login_work/app/home/screens/department_screen/screen/departmentUpdateScreen/department_update_screen.dart';
-import 'package:login_work/app/home/screens/department_screen/viewmodel/departmentGetAll/department_getall_viewmodel.dart';
 import 'package:login_work/export_import.dart';
 
 class DepartmentGetAllScreen extends StatefulWidget {

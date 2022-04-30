@@ -1,6 +1,5 @@
-import 'package:login_work/app/constants/url_constants.dart';
-import 'package:login_work/app/home/screens/announcements/service/IPublicAnnoucementService.dart';
-import 'package:login_work/app/home/screens/announcements/service/PublicAnnoucementService.dart';
+
+
 import 'package:login_work/export_import.dart';
 import 'package:mobx/mobx.dart';
 part 'public_announcements_view_model.g.dart';

@@ -1,6 +1,5 @@
 import 'package:login_work/export_import.dart';
 import 'package:mobx/mobx.dart';
-
 part 'announcement_update_view_model.g.dart';
 
 class AnnouncementUpdateViewModel = _AnnouncementUpdateViewModelBase

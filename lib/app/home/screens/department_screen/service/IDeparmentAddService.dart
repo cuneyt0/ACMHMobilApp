@@ -1,5 +1,3 @@
-import 'package:login_work/app/home/screens/department_screen/model/department_add_request_model.dart';
-import 'package:login_work/app/home/screens/department_screen/model/department_update_request_model.dart';
 
 import '../../../../../../export_import.dart';
 

@@ -1,9 +1,3 @@
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_added/image_added_screen.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_added/notice_added_screen.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_added/notice_department_row.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_added/text_form_field_content.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_added/text_form_field_title.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_added/text_form_field_title.dart';
 import 'package:login_work/export_import.dart';
 
 class AnnouncementScreen extends StatefulWidget {

@@ -1,5 +1,3 @@
-import 'package:login_work/app/home/screens/announcements/screen/drawerMenu_Announcement_detail_screen.dart';
-import 'package:login_work/app/home/screens/announcements/viewmodel/public_announcements_view_model.dart';
 import 'package:login_work/export_import.dart';
 
 class DrawerAnnouncementScreen extends StatefulWidget {

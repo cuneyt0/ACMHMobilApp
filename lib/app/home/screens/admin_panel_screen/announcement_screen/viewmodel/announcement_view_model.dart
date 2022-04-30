@@ -1,10 +1,5 @@
-import 'package:file_picker/file_picker.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/service/announcementService.dart';
 import 'package:login_work/export_import.dart';
 import 'package:mobx/mobx.dart';
-import 'package:path_provider/path_provider.dart';
-
 part 'announcement_view_model.g.dart';
 
 class AnnouncementViewModel = _AnnouncementViewModelBase

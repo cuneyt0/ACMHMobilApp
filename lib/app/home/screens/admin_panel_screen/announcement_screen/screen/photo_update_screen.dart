@@ -1,6 +1,3 @@
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_getall_response_model.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/viewmodel/update/announcement_update_view_model.dart';
-
 import '../../../../../../export_import.dart';
 
 class UpdatePhotoScreen extends StatefulWidget {
