@@ -1,3 +1,4 @@
+import 'package:login_work/app/home/screens/announcements/screen/drawermenu_Announcement_screen.dart';
 import 'package:login_work/export_import.dart';
 
 class DrawerMenu extends StatelessWidget {
@@ -29,6 +30,7 @@ class DrawerMenu extends StatelessWidget {
   }
 }
 
+//DrawerAnnouncementScreen
 //exam information system
 Widget _buildNormalMenuBody(
         LoginResponseModel? model, CacheManager? cacheManager) =>
@@ -43,6 +45,13 @@ Widget _buildNormalMenuBody(
                       model: model,
                     ))));
           }
+          if (NormalMenu[index] == mAnnouncement) {
+            await Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: ((context) => DrawerAnnouncementScreen()),
+              ),
+            );
+          }
         },
       ),
     );
@@ -52,7 +61,7 @@ Widget _buildAdminMenuBody(
       itemCount: AdminMenu.length,
       itemBuilder: (context, index) => ListTile(
         title: Text(AdminMenu[index]),
-        onTap: () {
+        onTap: () async {
           if (AdminMenu[index] == mExam) {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: ((context) => ExamInformationSystemScreen(
@@ -64,6 +73,13 @@ Widget _buildAdminMenuBody(
                 builder: ((context) => AdminPanelScreen(
                       model: model,
                     ))));
+          }
+          if (AdminMenu[index] == mAnnouncement) {
+            await Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: ((context) => DrawerAnnouncementScreen()),
+              ),
+            );
           }
         },
       ),

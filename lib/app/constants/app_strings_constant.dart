@@ -14,7 +14,7 @@ const String aContent = "Içerik";
 // Drawer Menu Item
 const String mHome = 'ANASAYFA';
 const String mFood = 'YEMEK SAYFASI';
-const String mAnnouncement = 'DUYURU';
+const String mAnnouncement = 'DUYURULAR';
 const String mExam = 'SINAV BİLGİ SİSTEMİ';
 const String mActivity = 'ETKİNLİK VE TAKVİMİ';
 const String mAdminPanel = 'ADMİN PANELİ';
