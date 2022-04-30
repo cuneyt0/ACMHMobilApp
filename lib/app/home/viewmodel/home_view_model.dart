@@ -1,3 +1,5 @@
+import 'package:login_work/app/home/service/HomeService.dart';
+import 'package:login_work/app/home/service/IHomeService.dart';
 import 'package:login_work/export_import.dart';
 import 'package:mobx/mobx.dart';
 
@@ -18,11 +20,22 @@ abstract class _HomeViewModelBase with Store {
   @observable
   UserGetByIdModel? userGetByIdModel = UserGetByIdModel();
   @observable
+  IHomeService service = HomeService(dio: Dio(BaseOptions(baseUrl: noticeAdd)));
+  @observable
   var photo;
   @observable
   Uint8List? data;
   @observable
   File? file;
+  @observable
+  NoticeGetAllResponseModel? getbyidrecentlyresponse =
+      NoticeGetAllResponseModel();
+
+  @action
+  Future<NoticeGetAllResponseModel?> getbyidrecently() async {
+    return getbyidrecentlyresponse = await service.getbyidrecently();
+  }
+
   @action
   Future<NoticeGetAllResponseModel?> getAllNotice() async {
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =

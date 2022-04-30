@@ -6,8 +6,8 @@ class HomePage extends StatefulWidget {
   final LoginResponseModel? model;
   final CacheManager? cacheManager;
   final bool? isClear;
-
-  const HomePage({Key? key, this.model, this.cacheManager, this.isClear})
+  final HomeViewModel? viewModel;
+  const HomePage({Key? key, this.model, this.cacheManager, this.isClear,this.viewModel})
       : super(key: key);
 
   @override
@@ -15,10 +15,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // HomeViewModel _viewModel = HomeViewModel();
   @override
   void initState() {
-    // TODO: implement initState
+    // _viewModel?.getbyidrecently();
     super.initState();
   }
 
@@ -31,11 +30,30 @@ class _HomePageState extends State<HomePage> {
             cacheManager: widget.cacheManager,
             isClear: widget.isClear,
             model: widget.model),
-        body: ListView.builder(
+        body: Observer(
+            builder: (context) =>
+                widget.viewModel?.getbyidrecentlyresponse?.data == null
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : ListView.builder(
+                        itemCount:
+                           widget.viewModel?.getbyidrecentlyresponse?.data?.length,
+                        itemBuilder: (context, index) => ListTile(
+                          title: Text(widget.viewModel?.getbyidrecentlyresponse
+                                  ?.data?[index].title ??
+                              ""),
+                        ),
+                      )));
+  }
+}
+/*
+
+ListView.builder(
           itemCount: widget.model?.userClaims?.length,
           itemBuilder: (context, index) => ListTile(
             title: Text(widget.model?.userClaims?[index].name ?? ""),
           ),
-        ));
-  }
-}
+        )
+
+ */
