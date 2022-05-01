@@ -19,10 +19,11 @@ class HomeScreenAnnouncementWidget extends StatelessWidget {
                 child: CircularProgressIndicator(),
               )
             : GridView.builder(
+                physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                padding:
-                    const EdgeInsets.only(left: 5, right: 5, top: 20, bottom: 20),
+                padding: const EdgeInsets.only(
+                    left: 5, right: 5, top: 20, bottom: 20),
                 itemCount:
                     widget.viewModel?.getbyidrecentlyresponse?.data?.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -68,7 +69,8 @@ class HomeScreenAnnouncementWidget extends StatelessWidget {
                               widget.viewModel?.getbyidrecentlyresponse
                                       ?.data?[index].title ??
                                   "",
-                              style: const TextStyle(fontWeight: FontWeight.bold),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
