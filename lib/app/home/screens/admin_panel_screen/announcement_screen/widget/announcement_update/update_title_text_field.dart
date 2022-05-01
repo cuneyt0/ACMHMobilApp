@@ -19,10 +19,9 @@ class UpdateTitleTextField extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
         controller: _viewModel?.textEditingTitleController,
-       
         validator: (value) =>
             (value ?? '').length > 0 ? null : 'boş bırakılamaz',
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.black),
           ),

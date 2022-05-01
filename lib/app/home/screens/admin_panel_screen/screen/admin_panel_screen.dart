@@ -7,7 +7,7 @@ class AdminPanelScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("ADMİN PANELİ"),
+        title: const Text(mAdminPanel),
       ),
       drawer: AdminPanelDrawerMenu(model: model),
       body: Container(

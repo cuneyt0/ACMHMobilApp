@@ -52,7 +52,7 @@ abstract class _DepartmentAddViewModelBase extends BaseViewModelProtocol
         Flushbar(
           message: '${postRequestData.message}',
           flushbarPosition: FlushbarPosition.TOP,
-          duration: Duration(seconds: 1),
+          duration: const Duration(seconds: 1),
           borderRadius: BorderRadius.circular(2),
           backgroundColor: Colors.black.withOpacity(0.5),
         ).show(buildContext);

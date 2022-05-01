@@ -93,3 +93,8 @@ export 'package:login_work/app/home/screens/admin_panel_screen/announcement_scre
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_added/text_form_field_content.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_added/text_form_field_title.dart';
 export 'package:login_work/app/home/widgets/adminPanelMenu/admin_panel_drawer_menu.dart';
+export 'package:login_work/app/home/service/HomeService.dart';
+export 'package:login_work/app/home/service/IHomeService.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/announcement_screen.dart';
+export 'package:login_work/app/home/screens/department_screen/screen/departmentAddScreen/deparment_add_screen.dart';
+export 'package:login_work/app/home/screens/department_screen/screen/departmentGetAllScreen/department_all_screen.dart';

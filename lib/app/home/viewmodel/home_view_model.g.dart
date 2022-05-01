@@ -88,6 +88,21 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
     });
   }
 
+  final _$serviceAtom = Atom(name: '_HomeViewModelBase.service');
+
+  @override
+  IHomeService get service {
+    _$serviceAtom.reportRead();
+    return super.service;
+  }
+
+  @override
+  set service(IHomeService value) {
+    _$serviceAtom.reportWrite(value, super.service, () {
+      super.service = value;
+    });
+  }
+
   final _$photoAtom = Atom(name: '_HomeViewModelBase.photo');
 
   @override
@@ -131,6 +146,31 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
     _$fileAtom.reportWrite(value, super.file, () {
       super.file = value;
     });
+  }
+
+  final _$getbyidrecentlyresponseAtom =
+      Atom(name: '_HomeViewModelBase.getbyidrecentlyresponse');
+
+  @override
+  NoticeGetAllResponseModel? get getbyidrecentlyresponse {
+    _$getbyidrecentlyresponseAtom.reportRead();
+    return super.getbyidrecentlyresponse;
+  }
+
+  @override
+  set getbyidrecentlyresponse(NoticeGetAllResponseModel? value) {
+    _$getbyidrecentlyresponseAtom
+        .reportWrite(value, super.getbyidrecentlyresponse, () {
+      super.getbyidrecentlyresponse = value;
+    });
+  }
+
+  final _$getbyidrecentlyAsyncAction =
+      AsyncAction('_HomeViewModelBase.getbyidrecently');
+
+  @override
+  Future<NoticeGetAllResponseModel?> getbyidrecently() {
+    return _$getbyidrecentlyAsyncAction.run(() => super.getbyidrecently());
   }
 
   final _$getAllNoticeAsyncAction =
@@ -179,6 +219,20 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
     return _$deleteAsyncAction.run(() => super.delete(id));
   }
 
+  final _$_HomeViewModelBaseActionController =
+      ActionController(name: '_HomeViewModelBase');
+
+  @override
+  String dateFormat(DateTime tm) {
+    final _$actionInfo = _$_HomeViewModelBaseActionController.startAction(
+        name: '_HomeViewModelBase.dateFormat');
+    try {
+      return super.dateFormat(tm);
+    } finally {
+      _$_HomeViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
@@ -187,9 +241,11 @@ responseData: ${responseData},
 deleteResponseData: ${deleteResponseData},
 departmentGetByIdResponseModel: ${departmentGetByIdResponseModel},
 userGetByIdModel: ${userGetByIdModel},
+service: ${service},
 photo: ${photo},
 data: ${data},
-file: ${file}
+file: ${file},
+getbyidrecentlyresponse: ${getbyidrecentlyresponse}
     ''';
   }
 }

@@ -9,10 +9,5 @@ class BaseResponseModel {
     message = json['message'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
-    data['message'] = this.message;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {'success': success, 'message': message};
 }

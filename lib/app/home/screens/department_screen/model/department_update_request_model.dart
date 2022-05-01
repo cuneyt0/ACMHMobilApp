@@ -8,11 +8,5 @@ class DepartmentUpdateRequestModel {
     id = json['id'];
     departmentName = json['departmentName'];
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['departmentName'] = this.departmentName;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {'id': id, 'departmentName': departmentName};
 }

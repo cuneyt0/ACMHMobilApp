@@ -1,5 +1,6 @@
 import '../../export_import.dart';
 
+// ignore: constant_identifier_names
 const List<String> AdminMenu = [
   mHome,
   mFood,
@@ -8,6 +9,7 @@ const List<String> AdminMenu = [
   mActivity,
   mAdminPanel,
 ];
+// ignore: constant_identifier_names
 const List<String> NormalMenu = [
   mHome,
   mFood,
@@ -15,6 +17,7 @@ const List<String> NormalMenu = [
   mAnnouncement,
   mActivity,
 ];
+// ignore: constant_identifier_names
 const List<dynamic> AdminPanelMenu = [
   mHome,
   mAddedAnnouncement,

@@ -9,7 +9,7 @@ class AllAnnouncementScreen extends StatefulWidget {
 }
 
 class _AllAnnouncementScreenState extends State<AllAnnouncementScreen> {
-  HomeViewModel _viewModel = HomeViewModel();
+  final HomeViewModel _viewModel = HomeViewModel();
 
   @override
   void initState() {
@@ -19,10 +19,10 @@ class _AllAnnouncementScreenState extends State<AllAnnouncementScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: Text(mAnnouncements)),
+        appBar: AppBar(title: const Text(mAnnouncements)),
         body: Observer(
           builder: ((context) => _viewModel.responseData?.data == null
-              ? Center(child: CircularProgressIndicator())
+              ? const Center(child: CircularProgressIndicator())
               : ListView.builder(
                   itemCount: _viewModel.responseData?.data?.length,
                   itemBuilder: (context, index) => ListTile(
@@ -41,7 +41,7 @@ class _AllAnnouncementScreenState extends State<AllAnnouncementScreen> {
                         onPressed: () => showDialog(
                               context: context,
                               builder: (context) => AlertDialog(
-                                title: Center(
+                                title: const Center(
                                   child: Text(noticeDeleteText),
                                 ),
                                 content: Row(
@@ -51,7 +51,7 @@ class _AllAnnouncementScreenState extends State<AllAnnouncementScreen> {
                                   children: [
                                     ElevatedButton(
                                       onPressed: () => Navigator.pop(context),
-                                      child: Text(btnCancel),
+                                      child: const Text(btnCancel),
                                     ),
                                     ElevatedButton(
                                         onPressed: () async => await _viewModel
@@ -62,7 +62,7 @@ class _AllAnnouncementScreenState extends State<AllAnnouncementScreen> {
                                                 message: noticeDeletedMessage,
                                                 flushbarPosition:
                                                     FlushbarPosition.TOP,
-                                                duration: Duration(seconds: 1),
+                                                duration: const Duration(seconds: 1),
                                                 borderRadius:
                                                     BorderRadius.circular(2),
                                                 backgroundColor: Colors.black
@@ -79,12 +79,12 @@ class _AllAnnouncementScreenState extends State<AllAnnouncementScreen> {
                                                             .getAllNotice(),
                                                   ),
                                             ),
-                                        child: Text(noticeDeleteBtnText)),
+                                        child: const Text(noticeDeleteBtnText)),
                                   ],
                                 ),
                               ),
                             ),
-                        icon: Icon(Icons.delete)),
+                        icon: const Icon(Icons.delete)),
                   ),
                 )),
         ),

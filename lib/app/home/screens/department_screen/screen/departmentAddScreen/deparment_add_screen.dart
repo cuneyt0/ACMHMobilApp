@@ -9,7 +9,7 @@ class DepartmentAddScreen extends StatefulWidget {
 }
 
 class _DepartmentAddScreenState extends State<DepartmentAddScreen> {
-  DepartmentAddViewModel? _viewModel = DepartmentAddViewModel();
+  final DepartmentAddViewModel? _viewModel = DepartmentAddViewModel();
   @override
   void initState() {
     setState(() {
@@ -21,10 +21,10 @@ class _DepartmentAddScreenState extends State<DepartmentAddScreen> {
   @override
   Widget build(BuildContext context) => SafeArea(
         child: Scaffold(
-          appBar: AppBar(title: Text(mDeparmtent)),
+          appBar: AppBar(title: const Text(mDeparmtent)),
           bottomNavigationBar: ElevatedButton(
               onPressed: () async => await _viewModel?.postDepartment(),
-              child: Text(dAddText)),
+              child: const Text(dAddText)),
           body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(

@@ -7,7 +7,7 @@ Row UpdateDropdown(
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceAround,
     children: [
-      Text("Bölüm Seçiniz"),
+      const Text(mSelectDepartment),
       Observer(
         builder: (context) => Padding(
           padding: const EdgeInsets.only(top: 40.0, bottom: 40.0),
@@ -21,7 +21,7 @@ Row UpdateDropdown(
               child: DropdownButton<Data>(
                   value:
                       items?[((_viewModel?.dropdownvalue?.id) ?? 1) - 1].value,
-                  hint: Text("Seçiniz"),
+                  hint: const Text("Seçiniz"),
                   items: items,
                   onChanged: (Data? selected) {
                     if (selected?.id == null) {

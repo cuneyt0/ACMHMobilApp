@@ -11,15 +11,9 @@ class AnnouncementService extends IAnnouncementService {
           (X509Certificate cert, String host, int port) => true;
       return client;
     };
-    String loginResponseText = await CacheManager().getLoginResponse();
-    LoginResponseModel loginResponseModel =
-        LoginResponseModel.fromJson(jsonDecode(loginResponseText));
-    print(loginResponseText);
-    String token = loginResponseModel.token ?? "";
-    print(token);
+    await GetToken.getToken();
     dio.options.headers['Content-Type'] = 'multipart/form-data; charset=utf-8';
-    dio.options.headers['Authorization'] = 'Bearer ${token}';
-    print(token.toString());
+    dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
 
     Map<String, dynamic> jsonData = model.toJson();
     if (model.imagePath != null) {
@@ -35,8 +29,6 @@ class AnnouncementService extends IAnnouncementService {
       jsonData.remove("pdfFile");
     }
     print(jsonData);
-    //var formData = FormData.fromMap(});
-
     dio.interceptors.add(PrettyDioLogger());
     try {
       final response =

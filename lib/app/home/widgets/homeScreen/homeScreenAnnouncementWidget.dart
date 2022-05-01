@@ -22,7 +22,7 @@ class HomeScreenAnnouncementWidget extends StatelessWidget {
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 padding:
-                    EdgeInsets.only(left: 5, right: 5, top: 20, bottom: 20),
+                    const EdgeInsets.only(left: 5, right: 5, top: 20, bottom: 20),
                 itemCount:
                     widget.viewModel?.getbyidrecentlyresponse?.data?.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -61,14 +61,14 @@ class HomeScreenAnnouncementWidget extends StatelessWidget {
                           padding: widget.viewModel?.getbyidrecentlyresponse
                                       ?.data?[index].title?.length.isOdd !=
                                   false
-                              ? EdgeInsets.all(20)
-                              : EdgeInsets.all(0),
+                              ? const EdgeInsets.all(20)
+                              : const EdgeInsets.all(0),
                           child: Center(
                             child: Text(
                               widget.viewModel?.getbyidrecentlyresponse
                                       ?.data?[index].title ??
                                   "",
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: const TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),

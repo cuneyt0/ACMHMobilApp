@@ -21,24 +21,20 @@ class _AnnouncementUpdateScreenState extends State<AnnouncementUpdateScreen> {
   @override
   void initState() {
     _viewModel = widget.viewModel;
-    super.initState();
     _viewModel?.id = widget.data?.id;
     _viewModel?.setBuildContext(context);
-    print("login kullanıcı id");
-    print(widget.model?.user?.id);
     _viewModel?.userId = widget.model?.user?.id;
-    print("updateViewModel User id");
-    print(_viewModel?.userId);
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Duyuru Güncelle'),
+          title: const Text(mUpdateTitle),
         ),
         body: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Observer(
             builder: ((context) => Form(
                   key: _viewModel?.formKey,
@@ -50,11 +46,8 @@ class _AnnouncementUpdateScreenState extends State<AnnouncementUpdateScreen> {
                           widget: widget, viewModel: _viewModel),
                       UpdateDropdown(widget, widget.items, _viewModel),
                       ElevatedButton(
-                          onPressed: () {
-                            print("tıkla");
-                            _viewModel?.uploadPdf();
-                          },
-                          child: Text("Pdf yükle yükle")),
+                          onPressed: () => _viewModel?.uploadPdf(),
+                          child: const Text(mUploadPDf)),
                       UpdateImageWidget(viewModel: _viewModel, widget: widget),
                       UpdateSaveButtonWidget(
                         viewModel: _viewModel,

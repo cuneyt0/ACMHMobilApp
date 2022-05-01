@@ -12,4 +12,4 @@ const String departmentGetByIdUrl =
 const String getByIdUserUrl = 'https://192.168.1.103:5001/api/User/getbyid';
 //Department
 const String departmentAllUrl = 'https://192.168.1.103:5001/api/department';
-const String AllUserUrl = 'https://192.168.1.103:5001/api/User';
+const String allUserUrl = 'https://192.168.1.103:5001/api/User';

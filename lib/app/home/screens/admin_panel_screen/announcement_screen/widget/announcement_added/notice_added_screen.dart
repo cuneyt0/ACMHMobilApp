@@ -10,18 +10,17 @@ class NoticeAddedScreen extends StatelessWidget {
   final AnnouncementViewModel? _viewModel;
 
   @override
-  Widget build(BuildContext context) {
-    return Observer(
-      builder: ((context) => Padding(
-            padding: const EdgeInsets.only(
-                top: 40.0, bottom: 20.0, left: 5, right: 5),
-            child: ElevatedButton(
+  Widget build(BuildContext context) => Observer(
+        builder: ((context) => Padding(
+              padding: const EdgeInsets.only(
+                  top: 40.0, bottom: 20.0, left: 5, right: 5),
+              child: ElevatedButton(
                 onPressed: (() async {
                   if (_viewModel?.dropdownvalue?.id == null) {
                     Flushbar(
-                      message: 'Bölüm boş geçilemez',
+                      message: mDepartmentNotNullMessage,
                       flushbarPosition: FlushbarPosition.TOP,
-                      duration: Duration(seconds: 1),
+                      duration: const Duration(seconds: 1),
                       borderRadius: BorderRadius.circular(2),
                       backgroundColor: Colors.black.withOpacity(0.5),
                     ).show(context);
@@ -29,9 +28,9 @@ class NoticeAddedScreen extends StatelessWidget {
                       _viewModel?.formKey.currentState != null &&
                       _viewModel!.formKey.currentState!.validate()) {
                     await _viewModel?.postNotice().then((value) => Flushbar(
-                          message: 'Duyuru Eklendi',
+                          message: mAdddedAAnnouncement,
                           flushbarPosition: FlushbarPosition.TOP,
-                          duration: Duration(seconds: 1),
+                          duration: const Duration(seconds: 1),
                           borderRadius: BorderRadius.circular(2),
                           backgroundColor: Colors.black.withOpacity(0.5),
                         )
@@ -39,7 +38,7 @@ class NoticeAddedScreen extends StatelessWidget {
                             .then((value) => Navigator.of(context).pop()));
                   }
                 }),
-                child: Text("Kaydet"),
+                child: const Text(mSaveBttn),
                 style: ButtonStyle(
                   maximumSize: MaterialStateProperty.all<Size>(
                     Size(context.width * 1, context.highValue),
@@ -47,10 +46,8 @@ class NoticeAddedScreen extends StatelessWidget {
                   minimumSize: MaterialStateProperty.all<Size>(
                     Size(context.width * 1, context.mediumValue),
                   ),
-                )),
-          )),
-    );
-  }
+                ),
+              ),
+            )),
+      );
 }
-/*
- */

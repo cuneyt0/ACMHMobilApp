@@ -1,5 +1,3 @@
-
-
 import 'package:login_work/export_import.dart';
 import 'package:mobx/mobx.dart';
 part 'public_announcements_view_model.g.dart';
@@ -18,7 +16,7 @@ abstract class _PublicAnnouncementViewModelBase with Store {
       dio: Dio(BaseOptions(baseUrl: departmentAllUrl)));
   @observable
   IPublicAnnoucementService servicetree =
-      PublicAnnoucementService(dio: Dio(BaseOptions(baseUrl: AllUserUrl)));
+      PublicAnnoucementService(dio: Dio(BaseOptions(baseUrl: allUserUrl)));
   @observable
   NoticeGetAllResponseModel getByIdResponse = NoticeGetAllResponseModel();
   @observable
@@ -41,7 +39,7 @@ abstract class _PublicAnnouncementViewModelBase with Store {
   @observable
   File? file;
   @action
-  Future<void> Changed() async {
+  Future<void> changed() async {
     isChanged = !isChanged!;
     if (isChanged == true) {
       deparmentName = 'Genel';
@@ -141,13 +139,13 @@ abstract class _PublicAnnouncementViewModelBase with Store {
   @action
   String dateFormat(DateTime tm) {
     @observable
-    DateTime today = new DateTime.now();
+    DateTime today = DateTime.now();
     @observable
-    Duration oneDay = new Duration(days: 1);
+    Duration oneDay = Duration(days: 1);
     @observable
-    Duration twoDay = new Duration(days: 2);
+    Duration twoDay = Duration(days: 2);
     @observable
-    Duration oneWeek = new Duration(days: 7);
+    Duration oneWeek = Duration(days: 7);
     @observable
     String? month;
     switch (tm.month) {

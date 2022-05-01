@@ -9,7 +9,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   CacheManager cacheManager = CacheManager();
-  HomeViewModel _viewModel = HomeViewModel();
+  final HomeViewModel _viewModel = HomeViewModel();
   @override
   void initState() {
     super.initState();

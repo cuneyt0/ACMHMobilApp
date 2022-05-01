@@ -21,6 +21,7 @@ const String mAdminPanel = 'ADMİN PANELİ';
 const String mAddedAnnouncement = 'DUYURU EKLE';
 const String mShowAnnouncement = "DUYURULARI GÖSTER";
 const String mDeparmtent = 'BÖLÜM EKLE';
+const String mAllDeparmtents = 'BÖLÜMLER';
 const String mShowDeparmtent = 'BÖLÜMLERİ GÖSTER';
 
 const String defaultImage = 'assets/logo/neu_logo.jpg';
@@ -38,6 +39,18 @@ const String mDeparmentName = 'Bölüm Adı';
 const String mCreatedUser = 'Olusturan kişi';
 const String mNoPDf = 'PDF YOK';
 const String mShowPDf = 'Pdf göster';
+const String mUploadPDf = 'Pdf Yükle';
+const String mUploadImage = 'Resim Yükle';
+const String mUpdateTitle = 'Duyuru Güncelle';
+const String mUpdateImage = 'Resim Güncelle';
+const String mSelectImage = 'Resim Seçiniz';
+const String mDepartmentNotNullMessage = 'Bölüm boş geçilemez';
+const String mAdddedAAnnouncement = 'Duyuru Eklendi';
+const String mUpdatedAAnnouncement = 'Duyuru Güncellendi';
+const String mSaveBttn = 'Kaydet';
+const String mSelectDepartment = 'Bölüm Seçiniz';
+
+const String mSuccessfulImageMessage = 'Resim Başarıyla eklendi';
 
 //Departmentadd
 const String dValidationText = 'Bölüm ismi 3 karakterden kısa olamaz';

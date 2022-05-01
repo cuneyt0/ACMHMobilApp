@@ -22,7 +22,7 @@ class UpdateContentTextField extends StatelessWidget {
         maxLines: 8,
         validator: (value) =>
             (value ?? '').length > 0 ? null : 'boş bırakılamaz',
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.black),
           ),

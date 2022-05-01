@@ -7,9 +7,5 @@ class DepartmentAddRequestModel {
     departmentName = json['departmentName'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['departmentName'] = departmentName;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {'departmentName': departmentName};
 }

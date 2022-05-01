@@ -14,28 +14,26 @@ class UpdateImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _viewModel?.addedPhoto == widget.data?.imagePath;
-    print("--------------------------------------");
-    print(_viewModel?.addedPhoto);
-    print(widget.data?.imagePath);
-    
     return Padding(
       padding: const EdgeInsets.only(top: 20.0, left: 5, right: 5),
       child: ElevatedButton(
-          onPressed: () async {
+        onPressed: () async =>
             _viewModel?.addedPhoto = await Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: ((context) =>
-                        UpdatePhotoScreen(data: widget.data, widget: widget))));
-          },
-          child: Text("RESİM YÜKLE"),
-          style: ButtonStyle(
-            maximumSize: MaterialStateProperty.all<Size>(
-              Size(context.width * 1, context.highValue),
-            ),
-            minimumSize: MaterialStateProperty.all<Size>(
-              Size(context.width * 1, context.mediumValue),
-            ),
-          )),
+          MaterialPageRoute(
+            builder: ((context) =>
+                UpdatePhotoScreen(data: widget.data, widget: widget)),
+          ),
+        ),
+        child: const Text(mUploadImage),
+        style: ButtonStyle(
+          maximumSize: MaterialStateProperty.all<Size>(
+            Size(context.width * 1, context.highValue),
+          ),
+          minimumSize: MaterialStateProperty.all<Size>(
+            Size(context.width * 1, context.mediumValue),
+          ),
+        ),
+      ),
     );
   }
 }

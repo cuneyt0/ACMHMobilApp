@@ -1,11 +1,7 @@
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/all_announcement_screen.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/announcement_screen.dart';
-import 'package:login_work/app/home/screens/department_screen/screen/departmentAddScreen/deparment_add_screen.dart';
-import 'package:login_work/app/home/screens/department_screen/screen/departmentGetAllScreen/department_all_screen.dart';
 import 'package:login_work/export_import.dart';
 
 class AdminPanelDrawerMenu extends StatelessWidget {
-  AdminPanelDrawerMenu({required this.model});
+  AdminPanelDrawerMenu({Key? key, required this.model}) : super(key: key);
   LoginResponseModel? model;
 
   @override
@@ -33,7 +29,7 @@ Widget _buildMenuHeader(
     padding: const EdgeInsets.only(top: 90),
     child: Column(
       children: [
-        Expanded(child: Text(welcome)),
+        const Expanded(child: Text(welcome)),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,

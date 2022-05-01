@@ -8,7 +8,7 @@ class DepartmentGetAllScreen extends StatefulWidget {
 }
 
 class _DepartmentGetAllScreenState extends State<DepartmentGetAllScreen> {
-  DepartmentGetAllViewModel? _viewModel = DepartmentGetAllViewModel();
+  final DepartmentGetAllViewModel? _viewModel = DepartmentGetAllViewModel();
   @override
   void initState() {
     setState(() {
@@ -30,7 +30,7 @@ class _DepartmentGetAllScreenState extends State<DepartmentGetAllScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("BÖLÜMLER"),
+        title: const Text(mAllDeparmtents),
       ),
       body: Observer(
         builder: (context) {
@@ -46,13 +46,13 @@ class _DepartmentGetAllScreenState extends State<DepartmentGetAllScreen> {
                     ),
                   )),
               title: Text(
-                  '${_viewModel?.departmentGetAllResponse?.data?[index].departmentName ?? mLoading}'),
+                  _viewModel?.departmentGetAllResponse?.data?[index].departmentName ?? mLoading),
               trailing: IconButton(
                 onPressed: () {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: Center(
+                      title: const Center(
                         child: Text(noticeDeleteText),
                       ),
                       content: Row(
@@ -61,21 +61,21 @@ class _DepartmentGetAllScreenState extends State<DepartmentGetAllScreen> {
                         children: [
                           ElevatedButton(
                             onPressed: () => Navigator.pop(context),
-                            child: Text(btnCancel),
+                            child: const Text(btnCancel),
                           ),
                           ElevatedButton(
                             onPressed: () => _viewModel?.deleteDepartment(
                                 _viewModel?.departmentGetAllResponse
                                         ?.data?[index].id ??
                                     0),
-                            child: Text(noticeDeleteBtnText),
+                            child: const Text(noticeDeleteBtnText),
                           ),
                         ],
                       ),
                     ),
                   );
                 },
-                icon: Icon(Icons.delete),
+                icon: const Icon(Icons.delete),
               ),
             ),
           );

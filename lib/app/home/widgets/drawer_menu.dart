@@ -2,7 +2,7 @@ import 'package:login_work/app/home/screens/announcements/screen/drawermenu_Anno
 import 'package:login_work/export_import.dart';
 
 class DrawerMenu extends StatelessWidget {
-  DrawerMenu({this.context, this.cacheManager, this.isClear, this.model});
+  DrawerMenu({Key? key, this.context, this.cacheManager, this.isClear, this.model}) : super(key: key);
   BuildContext? context;
   LoginResponseModel? model;
   CacheManager? cacheManager;
@@ -48,7 +48,7 @@ Widget _buildNormalMenuBody(
           if (NormalMenu[index] == mAnnouncement) {
             await Navigator.of(context).push(
               MaterialPageRoute(
-                builder: ((context) => DrawerAnnouncementScreen()),
+                builder: ((context) => const DrawerAnnouncementScreen()),
               ),
             );
           }
@@ -77,7 +77,7 @@ Widget _buildAdminMenuBody(
           if (AdminMenu[index] == mAnnouncement) {
             await Navigator.of(context).push(
               MaterialPageRoute(
-                builder: ((context) => DrawerAnnouncementScreen()),
+                builder: ((context) => const DrawerAnnouncementScreen()),
               ),
             );
           }

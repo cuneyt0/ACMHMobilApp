@@ -9,7 +9,7 @@ class DepartmentUpdateScreen extends StatefulWidget {
 }
 
 class _DepartmentUpdateScreenState extends State<DepartmentUpdateScreen> {
-  DepartmentGetAllViewModel? _viewModel = DepartmentGetAllViewModel();
+  final DepartmentGetAllViewModel? _viewModel = DepartmentGetAllViewModel();
   @override
   void initState() {
     setState(() {
@@ -27,7 +27,7 @@ class _DepartmentUpdateScreenState extends State<DepartmentUpdateScreen> {
       appBar: AppBar(title: Text(widget.model!.departmentName.toString())),
       bottomNavigationBar: ElevatedButton(
           onPressed: () async => await _viewModel?.updateDepartment(),
-          child: Text(updateButtonText)),
+          child: const Text(updateButtonText)),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

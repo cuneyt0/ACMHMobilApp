@@ -1,5 +1,4 @@
 import 'package:login_work/export_import.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/all_announcement_screen.dart';
 
 class Routes {
   Routes._();

@@ -15,11 +15,8 @@ class _DrawerAnnouncementDetailScreenState
   bool isLoading = true;
   @override
   void initState() {
-    // TODO: implement initState
-
     _viewModel?.getByIdDepartment();
     _viewModel?.getByIdUser();
-
     _viewModel
         ?.getImage(widget.model?.imagePath ?? 'foto yok')
         .then((value) async {
@@ -30,7 +27,7 @@ class _DrawerAnnouncementDetailScreenState
           print('photo degeri: ${_viewModel?.photo.toString()}');
         });
       }
-      Future.delayed(Duration(milliseconds: 250)).then((value) {
+      Future.delayed(const Duration(milliseconds: 250)).then((value) {
         setState(() {
           isLoading = false;
         });

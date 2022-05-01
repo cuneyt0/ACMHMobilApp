@@ -15,8 +15,9 @@ class AnnouncementDetail extends StatefulWidget {
 }
 
 class _AnnouncementDetailState extends State<AnnouncementDetail> {
-  HomeViewModel _viewModel = HomeViewModel();
-  AnnouncementUpdateViewModel? _updateViewModel = AnnouncementUpdateViewModel();
+  final HomeViewModel _viewModel = HomeViewModel();
+  final AnnouncementUpdateViewModel? _updateViewModel =
+      AnnouncementUpdateViewModel();
   List<DropdownMenuItem<Data>>? items;
   bool isLoading = true;
 
@@ -54,7 +55,7 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
           });
         });
       }
-      Future.delayed(Duration(milliseconds: 250)).then((value) {
+      Future.delayed(const Duration(milliseconds: 250)).then((value) {
         setState(() {
           isLoading = false;
         });

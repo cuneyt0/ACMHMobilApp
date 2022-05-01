@@ -12,8 +12,7 @@ class _DrawerAnnouncementScreenState extends State<DrawerAnnouncementScreen> {
   final PublicAnnouncementViewModel? _viewModel = PublicAnnouncementViewModel();
   @override
   void initState() {
-    _viewModel?.Changed();
-    // TODO: implement initState
+    _viewModel?.changed();
     super.initState();
   }
 
@@ -30,7 +29,7 @@ class _DrawerAnnouncementScreenState extends State<DrawerAnnouncementScreen> {
                     PopupMenuItem(
                       child: Observer(builder: (context) {
                         return ListTile(
-                          onTap: () => _viewModel?.Changed(),
+                          onTap: () => _viewModel?.changed(),
                           title: Text('${_viewModel?.deparmentName}'),
                         );
                       }),

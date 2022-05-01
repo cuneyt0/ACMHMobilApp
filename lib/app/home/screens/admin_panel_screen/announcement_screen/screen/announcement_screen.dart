@@ -2,18 +2,18 @@ import 'package:login_work/export_import.dart';
 
 class AnnouncementScreen extends StatefulWidget {
   final LoginResponseModel? model;
-  AnnouncementScreen({this.model});
+  // ignore: use_key_in_widget_constructors
+  const AnnouncementScreen({this.model});
 
   @override
   State<AnnouncementScreen> createState() => _AnnouncementScreenState();
 }
 
 class _AnnouncementScreenState extends State<AnnouncementScreen> {
-  AnnouncementViewModel? _viewModel = AnnouncementViewModel();
+  final AnnouncementViewModel? _viewModel = AnnouncementViewModel();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _viewModel?.getAllDepartment();
     _viewModel?.userId = widget.model?.user?.id;
@@ -24,9 +24,9 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: AppBar(title: Text(mAddedAnnouncement)),
+        appBar: AppBar(title: const Text(mAddedAnnouncement)),
         body: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               Form(
@@ -40,7 +40,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                           onPressed: () {
                             _viewModel?.uploadPdf();
                           },
-                          child: Text("PDF YÜKLE")),
+                          child: const Text("PDF YÜKLE")),
                       ImageAddedScreen(viewModel: _viewModel),
                       NoticeAddedScreen(viewModel: _viewModel),
                     ],

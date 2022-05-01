@@ -1,5 +1,4 @@
 import 'package:login_work/export_import.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class ExamInformationSystemScreen extends StatefulWidget {
   ExamInformationSystemScreen({required this.model});

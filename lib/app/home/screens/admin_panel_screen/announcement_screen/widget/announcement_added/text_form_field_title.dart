@@ -8,7 +8,7 @@ Padding textFormFieldTitle(
     child: TextFormField(
       controller: _viewModel?.titleController,
       validator: (value) => _viewModel?.noticeStringValidation(value),
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.black),
         ),

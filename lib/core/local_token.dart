@@ -1,4 +1,3 @@
-import 'package:login_work/app/login/model/login_response.dart';
 import 'package:login_work/export_import.dart';
 
 class GetToken {

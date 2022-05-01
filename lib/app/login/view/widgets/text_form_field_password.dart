@@ -12,28 +12,25 @@ TextFormField buildTextFormFieldPassword(BuildContext context, LoginState state,
     validator: (value) => (value ?? '').length > 2 ? null : '2 ten küçük',
     decoration: InputDecoration(
       suffixIcon: IconButton(
-          onPressed: () {
-            context.read<LoginCubit>().showObsecureToggle();
-            print("tıklanıldı");
-          },
+          onPressed: () => context.read<LoginCubit>().showObsecureToggle(),
           icon: state is showObsecureToggleState
               ? (state.showObsecure
-                  ? Icon(Icons.visibility_off)
-                  : Icon(Icons.visibility))
-              : Icon(Icons.visibility)),
-      focusedBorder: OutlineInputBorder(
+                  ? const Icon(Icons.visibility_off)
+                  : const Icon(Icons.visibility))
+              : const Icon(Icons.visibility)),
+      focusedBorder: const OutlineInputBorder(
         borderSide: BorderSide(color: Colors.white),
       ),
-      enabledBorder: OutlineInputBorder(
+      enabledBorder: const OutlineInputBorder(
         borderSide: BorderSide(color: Colors.white),
       ),
-      border: OutlineInputBorder(
+      border: const OutlineInputBorder(
         borderSide: BorderSide(color: Colors.white),
       ),
       hintText: passwordlhinttext,
       labelText: passwordlabeltext,
-      labelStyle: TextStyle(color: Colors.white),
-      hintStyle: TextStyle(color: Colors.white),
+      labelStyle: const TextStyle(color: Colors.white),
+      hintStyle: const TextStyle(color: Colors.white),
     ),
   );
 }
