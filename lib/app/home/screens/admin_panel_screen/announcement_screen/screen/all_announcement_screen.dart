@@ -25,66 +25,77 @@ class _AllAnnouncementScreenState extends State<AllAnnouncementScreen> {
               ? const Center(child: CircularProgressIndicator())
               : ListView.builder(
                   itemCount: _viewModel.responseData?.data?.length,
-                  itemBuilder: (context, index) => ListTile(
-                    onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: ((context) => AnnouncementDetail(
-                              responseData:
-                                  _viewModel.responseData?.data?[index],
-                              model: widget.model,
-                            )),
+                  itemBuilder: (context, index) => Card(
+                    child: ListTile(
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: ((context) => AnnouncementDetail(
+                                responseData:
+                                    _viewModel.responseData?.data?[index],
+                                model: widget.model,
+                              )),
+                        ),
                       ),
-                    ),
-                    title: Text(_viewModel.responseData?.data?[index].title ??
-                        mLoading),
-                    trailing: IconButton(
-                        onPressed: () => showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                title: const Center(
-                                  child: Text(noticeDeleteText),
-                                ),
-                                content: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: () => Navigator.pop(context),
-                                      child: const Text(btnCancel),
-                                    ),
-                                    ElevatedButton(
-                                        onPressed: () async => await _viewModel
-                                            .delete(_viewModel
-                                                .responseData?.data?[index].id)
-                                            .then(
-                                              (value) => Flushbar(
-                                                message: noticeDeletedMessage,
-                                                flushbarPosition:
-                                                    FlushbarPosition.TOP,
-                                                duration: const Duration(seconds: 1),
-                                                borderRadius:
-                                                    BorderRadius.circular(2),
-                                                backgroundColor: Colors.black
-                                                    .withOpacity(0.5),
-                                              )
-                                                  .show(context)
+                      title: Text(_viewModel.responseData?.data?[index].title ??
+                          mLoading),
+                      trailing: IconButton(
+                          onPressed: () => showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: const Center(
+                                    child: Text(noticeDeleteText),
+                                  ),
+                                  content: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: () => Navigator.pop(context),
+                                        child: const Text(btnCancel),
+                                      ),
+                                      ElevatedButton(
+                                          onPressed: () async =>
+                                              await _viewModel
+                                                  .delete(_viewModel
+                                                      .responseData
+                                                      ?.data?[index]
+                                                      .id)
                                                   .then(
-                                                    (value) =>
-                                                        Navigator.pop(context),
-                                                  )
-                                                  .then(
-                                                    (value) async =>
-                                                        await _viewModel
-                                                            .getAllNotice(),
+                                                    (value) => Flushbar(
+                                                      message:
+                                                          noticeDeletedMessage,
+                                                      flushbarPosition:
+                                                          FlushbarPosition.TOP,
+                                                      duration: const Duration(
+                                                          seconds: 1),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              2),
+                                                      backgroundColor: Colors
+                                                          .black
+                                                          .withOpacity(0.5),
+                                                    )
+                                                        .show(context)
+                                                        .then(
+                                                          (value) =>
+                                                              Navigator.pop(
+                                                                  context),
+                                                        )
+                                                        .then(
+                                                          (value) async =>
+                                                              await _viewModel
+                                                                  .getAllNotice(),
+                                                        ),
                                                   ),
-                                            ),
-                                        child: const Text(noticeDeleteBtnText)),
-                                  ],
+                                          child:
+                                              const Text(noticeDeleteBtnText)),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                        icon: const Icon(Icons.delete)),
+                          icon: const Icon(Icons.delete)),
+                    ),
                   ),
                 )),
         ),

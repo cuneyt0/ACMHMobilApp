@@ -40,14 +40,16 @@ class _DrawerAnnouncementScreenState extends State<DrawerAnnouncementScreen> {
       body: Observer(builder: (context) {
         return ListView.builder(
           itemCount: _viewModel?.getByIdResponse.data?.length,
-          itemBuilder: (context, index) => ListTile(
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: ((context) => DrawerAnnouncementDetailScreen(
-                      model: _viewModel?.getByIdResponse.data?[index],
-                    )))),
-            title: Text(
-                _viewModel?.getByIdResponse.data?[index].title.toString() ??
-                    "yükleniyor"),
+          itemBuilder: (context, index) => Card(
+            child: ListTile(
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: ((context) => DrawerAnnouncementDetailScreen(
+                        model: _viewModel?.getByIdResponse.data?[index],
+                      )))),
+              title: Text(
+                  _viewModel?.getByIdResponse.data?[index].title.toString() ??
+                      "yükleniyor"),
+            ),
           ),
         );
       }),
