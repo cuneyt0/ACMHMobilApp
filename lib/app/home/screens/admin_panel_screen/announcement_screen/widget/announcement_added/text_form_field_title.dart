@@ -4,7 +4,7 @@ Padding textFormFieldTitle(
   AnnouncementViewModel? _viewModel,
 ) {
   return Padding(
-    padding: const EdgeInsets.only(top: 40.0, left: 10, right: 10),
+    padding: const EdgeInsets.only(top: 40.0, left: 10, right: 10, bottom: 40),
     child: TextFormField(
       controller: _viewModel?.titleController,
       validator: (value) => _viewModel?.noticeStringValidation(value),

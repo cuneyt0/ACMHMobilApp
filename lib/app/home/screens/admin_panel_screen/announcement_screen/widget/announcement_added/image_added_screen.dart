@@ -12,7 +12,7 @@ class ImageAddedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20.0, left: 5, right: 5),
+      padding: const EdgeInsets.only(top: 30.0, left: 10, right: 10),
       child: ElevatedButton(
         onPressed: () async =>
             _viewModel?.addedPhoto = await Navigator.of(context).push(

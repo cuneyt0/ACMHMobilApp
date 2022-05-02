@@ -4,12 +4,15 @@ Padding textFormFieldContent(
   AnnouncementViewModel? _viewModel,
 ) {
   return Padding(
-    padding: const EdgeInsets.only(top: 40.0, left: 10, right: 10),
+    padding: const EdgeInsets.only(
+      left: 10,
+      right: 10,
+    ),
     child: TextFormField(
       controller: _viewModel?.contentController,
       validator: (value) => _viewModel?.noticeStringValidation(value),
-      maxLines: 8,
-      decoration: InputDecoration(
+      maxLines: 10,
+      decoration: const InputDecoration(
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.black),
         ),

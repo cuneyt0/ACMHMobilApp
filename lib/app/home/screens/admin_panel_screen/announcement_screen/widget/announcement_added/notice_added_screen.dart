@@ -11,41 +11,37 @@ class NoticeAddedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Observer(
-        builder: ((context) => Padding(
-              padding: const EdgeInsets.only(
-                  top: 40.0, bottom: 20.0, left: 5, right: 5),
-              child: ElevatedButton(
-                onPressed: (() async {
-                  if (_viewModel?.dropdownvalue?.id == null) {
-                    Flushbar(
-                      message: mDepartmentNotNullMessage,
-                      flushbarPosition: FlushbarPosition.TOP,
-                      duration: const Duration(seconds: 1),
-                      borderRadius: BorderRadius.circular(2),
-                      backgroundColor: Colors.black.withOpacity(0.5),
-                    ).show(context);
-                  } else if (_viewModel?.dropdownvalue?.id != null &&
-                      _viewModel?.formKey.currentState != null &&
-                      _viewModel!.formKey.currentState!.validate()) {
-                    await _viewModel?.postNotice().then((value) => Flushbar(
-                          message: mAdddedAAnnouncement,
-                          flushbarPosition: FlushbarPosition.TOP,
-                          duration: const Duration(seconds: 1),
-                          borderRadius: BorderRadius.circular(2),
-                          backgroundColor: Colors.black.withOpacity(0.5),
-                        )
-                            .show(context)
-                            .then((value) => Navigator.of(context).pop()));
-                  }
-                }),
-                child: const Text(mSaveBttn),
-                style: ButtonStyle(
-                  maximumSize: MaterialStateProperty.all<Size>(
-                    Size(context.width * 1, context.highValue),
-                  ),
-                  minimumSize: MaterialStateProperty.all<Size>(
-                    Size(context.width * 1, context.mediumValue),
-                  ),
+        builder: ((context) => ElevatedButton(
+              onPressed: (() async {
+                if (_viewModel?.dropdownvalue?.id == null) {
+                  Flushbar(
+                    message: mDepartmentNotNullMessage,
+                    flushbarPosition: FlushbarPosition.TOP,
+                    duration: const Duration(seconds: 1),
+                    borderRadius: BorderRadius.circular(2),
+                    backgroundColor: Colors.black.withOpacity(0.5),
+                  ).show(context);
+                } else if (_viewModel?.dropdownvalue?.id != null &&
+                    _viewModel?.formKey.currentState != null &&
+                    _viewModel!.formKey.currentState!.validate()) {
+                  await _viewModel?.postNotice().then((value) => Flushbar(
+                        message: mAdddedAAnnouncement,
+                        flushbarPosition: FlushbarPosition.TOP,
+                        duration: const Duration(seconds: 1),
+                        borderRadius: BorderRadius.circular(2),
+                        backgroundColor: Colors.black.withOpacity(0.5),
+                      )
+                          .show(context)
+                          .then((value) => Navigator.of(context).pop()));
+                }
+              }),
+              child: const Text(mSaveBttn),
+              style: ButtonStyle(
+                maximumSize: MaterialStateProperty.all<Size>(
+                  Size(context.width * 1, context.highValue),
+                ),
+                minimumSize: MaterialStateProperty.all<Size>(
+                  Size(context.width * 1, context.mediumValue),
                 ),
               ),
             )),

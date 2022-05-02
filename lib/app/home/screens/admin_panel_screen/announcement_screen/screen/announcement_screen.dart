@@ -20,35 +20,54 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(title: const Text(mAddedAnnouncement)),
-        body: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              Form(
-                  key: _viewModel?.formKey,
-                  child: Column(
-                    children: [
-                      textFormFieldTitle(_viewModel),
-                      textFormFieldContent(_viewModel),
-                      noticeDepartmentRow(_viewModel),
-                      ElevatedButton(
-                          onPressed: () {
-                            _viewModel?.uploadPdf();
-                          },
-                          child: const Text("PDF YÜKLE")),
-                      ImageAddedScreen(viewModel: _viewModel),
-                      NoticeAddedScreen(viewModel: _viewModel),
-                    ],
-                  ))
-            ],
+  Widget build(BuildContext context) => SafeArea(
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          appBar: AppBar(title: const Text(mAddedAnnouncement)),
+          bottomNavigationBar: NoticeAddedScreen(viewModel: _viewModel),
+          body: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                Form(
+                    key: _viewModel?.formKey,
+                    child: Column(
+                      children: [
+                        textFormFieldTitle(_viewModel),
+                        textFormFieldContent(_viewModel),
+                        noticeDepartmentRow(_viewModel),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 50.0, left: 10, right: 10),
+                          child: ElevatedButton(
+                            onPressed: () => _viewModel
+                                ?.uploadPdf()
+                                .then((value) => Flushbar(
+                                      message:
+                                          '${_viewModel?.file?.name} Secildi',
+                                      flushbarPosition: FlushbarPosition.TOP,
+                                      duration: const Duration(seconds: 1),
+                                      borderRadius: BorderRadius.circular(2),
+                                      backgroundColor:
+                                          Colors.black.withOpacity(0.5),
+                                    ).show(context)),
+                            child: const Text(mUploadPDf),
+                            style: ButtonStyle(
+                              maximumSize: MaterialStateProperty.all<Size>(
+                                Size(context.width * 1, context.highValue),
+                              ),
+                              minimumSize: MaterialStateProperty.all<Size>(
+                                Size(context.width * 1, context.mediumValue),
+                              ),
+                            ),
+                          ),
+                        ),
+                        ImageAddedScreen(viewModel: _viewModel),
+                      ],
+                    ))
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }

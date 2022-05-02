@@ -6,10 +6,19 @@ Row noticeDepartmentRow(
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceAround,
     children: [
-      const Text(mSelectDepartment),
+      const Padding(
+        padding: EdgeInsets.only(
+          left: 10.0,
+          top: 50.0,
+        ),
+        child: Text(
+          mSelectDepartment,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
       Observer(
         builder: (context) => Padding(
-          padding: const EdgeInsets.only(top: 40.0, bottom: 40.0),
+          padding: const EdgeInsets.only(top: 50.0, left: 10, right: 10),
           child: Container(
             decoration: BoxDecoration(
                 border: Border.all(
