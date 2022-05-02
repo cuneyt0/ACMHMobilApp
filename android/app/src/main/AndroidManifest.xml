@@ -20,7 +20,8 @@
    <application
         android:label="ACMHMOBILAPP"
         android:name="${applicationName}"
-         android:requestLegacyExternalStorage="true"
+        android:requestLegacyExternalStorage="true"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <provider
                 android:name="androidx.core.content.FileProvider"

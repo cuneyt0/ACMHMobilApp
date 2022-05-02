@@ -1,4 +1,5 @@
 import 'package:login_work/export_import.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class ExamInformationSystemScreen extends StatefulWidget {
   ExamInformationSystemScreen({required this.model});
@@ -12,14 +13,21 @@ class ExamInformationSystemScreen extends StatefulWidget {
 class _ExamInformationSystemScreenState
     extends State<ExamInformationSystemScreen> {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  void initState() {
+    super.initState();
+    // Enable virtual display.
+    if (Platform.isAndroid) WebView.platform = AndroidWebView();
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(),
         drawer: DrawerMenu(
           model: widget.model,
         ),
-        body: Container(
-          child: Text(widget.model?.user?.firstName ?? ' boş'),
-        ));
-  }
+        body: const WebView(
+          javascriptMode: JavascriptMode.unrestricted,
+          initialUrl: 'http://sacmfsinav.tk',
+        ),
+      );
 }
