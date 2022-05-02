@@ -14,8 +14,7 @@ class UpdateSaveButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Observer(
         builder: ((context) => Padding(
-              padding: const EdgeInsets.only(
-                  top: 40.0, bottom: 20.0, left: 5, right: 5),
+              padding: const EdgeInsets.only(bottom: 0, left: 0, right: 0),
               child: ElevatedButton(
                 onPressed: (() async {
                   await _viewModel?.updateNotice().then(

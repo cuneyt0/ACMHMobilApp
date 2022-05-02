@@ -33,7 +33,65 @@ class _AnnouncementUpdateScreenState extends State<AnnouncementUpdateScreen> {
         appBar: AppBar(
           title: const Text(mUpdateTitle),
         ),
+        bottomNavigationBar: UpdateSaveButtonWidget(
+          viewModel: _viewModel,
+          widget: widget,
+        ),
         body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Observer(
+            builder: ((context) => Expanded(
+                  child: Form(
+                    key: _viewModel?.formKey,
+                    child: Column(
+                      children: [
+                        UpdateTitleTextField(
+                            widget: widget, viewModel: _viewModel),
+                        UpdateContentTextField(
+                            widget: widget, viewModel: _viewModel),
+                        UpdateDropdown(widget, widget.items, _viewModel),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 30.0, left: 10, right: 10),
+                          child: ElevatedButton(
+                            onPressed: () => _viewModel
+                                ?.uploadPdf()
+                                .then((value) => Flushbar(
+                                      message:
+                                          '${_viewModel?.file?.name} Secildi',
+                                      flushbarPosition: FlushbarPosition.TOP,
+                                      duration: const Duration(seconds: 1),
+                                      borderRadius: BorderRadius.circular(2),
+                                      backgroundColor:
+                                          Colors.black.withOpacity(0.5),
+                                    ).show(context)),
+                            child: const Text(mUploadPDf),
+                            style: ButtonStyle(
+                              maximumSize: MaterialStateProperty.all<Size>(
+                                Size(context.width * 1, context.highValue),
+                              ),
+                              minimumSize: MaterialStateProperty.all<Size>(
+                                Size(context.width * 1, context.mediumValue),
+                              ),
+                            ),
+                          ),
+                        ),
+                        UpdateImageWidget(
+                            viewModel: _viewModel, widget: widget),
+                      ],
+                    ),
+                  ),
+                )),
+          ),
+        ));
+  }
+}
+
+/*
+
+
+
+: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Observer(
             builder: ((context) => Form(
@@ -45,9 +103,31 @@ class _AnnouncementUpdateScreenState extends State<AnnouncementUpdateScreen> {
                       UpdateContentTextField(
                           widget: widget, viewModel: _viewModel),
                       UpdateDropdown(widget, widget.items, _viewModel),
-                      ElevatedButton(
-                          onPressed: () => _viewModel?.uploadPdf(),
-                          child: const Text(mUploadPDf)),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(top: 20.0, left: 5, right: 5),
+                        child: ElevatedButton(
+                          onPressed: () =>
+                              _viewModel?.uploadPdf().then((value) => Flushbar(
+                                    message:
+                                        '${_viewModel?.file?.name} Secildi',
+                                    flushbarPosition: FlushbarPosition.TOP,
+                                    duration: const Duration(seconds: 1),
+                                    borderRadius: BorderRadius.circular(2),
+                                    backgroundColor:
+                                        Colors.black.withOpacity(0.5),
+                                  ).show(context)),
+                          child: const Text(mUploadPDf),
+                          style: ButtonStyle(
+                            maximumSize: MaterialStateProperty.all<Size>(
+                              Size(context.width * 1, context.highValue),
+                            ),
+                            minimumSize: MaterialStateProperty.all<Size>(
+                              Size(context.width * 1, context.mediumValue),
+                            ),
+                          ),
+                        ),
+                      ),
                       UpdateImageWidget(viewModel: _viewModel, widget: widget),
                       UpdateSaveButtonWidget(
                         viewModel: _viewModel,
@@ -57,6 +137,20 @@ class _AnnouncementUpdateScreenState extends State<AnnouncementUpdateScreen> {
                   ),
                 )),
           ),
-        ));
-  }
-}
+        )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ */

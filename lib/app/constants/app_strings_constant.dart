@@ -40,6 +40,7 @@ const String mCreatedUser = 'Olusturan kişi';
 const String mNoPDf = 'PDF YOK';
 const String mShowPDf = 'Pdf göster';
 const String mUploadPDf = 'Pdf Yükle';
+
 const String mUploadImage = 'Resim Yükle';
 const String mUpdateTitle = 'Duyuru Güncelle';
 const String mUpdateImage = 'Resim Güncelle';

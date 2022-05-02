@@ -16,7 +16,8 @@ class UpdateTitleTextField extends StatelessWidget {
     _viewModel?.textEditingTitleController.text =
         widget.data?.title ?? ' Title boş';
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding:
+          const EdgeInsets.only(top: 40.0, left: 10, right: 10, bottom: 40),
       child: TextFormField(
         controller: _viewModel?.textEditingTitleController,
         validator: (value) =>

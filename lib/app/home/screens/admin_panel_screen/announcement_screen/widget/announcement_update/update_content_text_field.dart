@@ -16,10 +16,13 @@ class UpdateContentTextField extends StatelessWidget {
     _viewModel?.textEditingContentController.text =
         widget.data?.content ?? 'İçerik boş';
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(
+        left: 10,
+        right: 10,
+      ),
       child: TextFormField(
         controller: _viewModel?.textEditingContentController,
-        maxLines: 8,
+        maxLines: 10,
         validator: (value) =>
             (value ?? '').length > 0 ? null : 'boş bırakılamaz',
         decoration: const InputDecoration(
