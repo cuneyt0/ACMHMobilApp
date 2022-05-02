@@ -2,7 +2,9 @@ import 'package:login_work/app/home/screens/announcements/screen/drawermenu_Anno
 import 'package:login_work/export_import.dart';
 
 class DrawerMenu extends StatelessWidget {
-  DrawerMenu({Key? key, this.context, this.cacheManager, this.isClear, this.model}) : super(key: key);
+  DrawerMenu(
+      {Key? key, this.context, this.cacheManager, this.isClear, this.model})
+      : super(key: key);
   BuildContext? context;
   LoginResponseModel? model;
   CacheManager? cacheManager;
@@ -14,6 +16,7 @@ class DrawerMenu extends StatelessWidget {
     return Container(
       child: Drawer(
           child: Container(
+        color: Colors.blue,
         child: Column(
           children: [
             Expanded(child: _buildMenuHeader(model)),
@@ -36,58 +39,69 @@ Widget _buildNormalMenuBody(
         LoginResponseModel? model, CacheManager? cacheManager) =>
     ListView.builder(
       itemCount: NormalMenu.length,
-      itemBuilder: (context, index) => ListTile(
-        title: Text(NormalMenu[index]),
-        onTap: () async {
-          if (NormalMenu[index] == mExam) {
-            await Navigator.of(context).push(MaterialPageRoute(
-                builder: ((context) => ExamInformationSystemScreen(
-                      model: model,
-                    ))));
-          }
-          if (NormalMenu[index] == mAnnouncement) {
-            await Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: ((context) => const DrawerAnnouncementScreen()),
-              ),
-            );
-          }
-        },
+      itemBuilder: (context, index) => Card(
+        child: ListTile(
+          title: Text(NormalMenu[index]),
+          onTap: () async {
+            if (NormalMenu[index] == mExam) {
+              await Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: ((context) => ExamInformationSystemScreen(
+                        model: model,
+                      )),
+                ),
+              );
+            }
+            if (NormalMenu[index] == mAnnouncement) {
+              await Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: ((context) => const DrawerAnnouncementScreen()),
+                ),
+              );
+            }
+          },
+        ),
       ),
     );
 Widget _buildAdminMenuBody(
         LoginResponseModel? model, CacheManager? cacheManager) =>
     ListView.builder(
       itemCount: AdminMenu.length,
-      itemBuilder: (context, index) => ListTile(
-        title: Text(AdminMenu[index]),
-        onTap: () async {
-          if (AdminMenu[index] == mExam) {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: ((context) => ExamInformationSystemScreen(
-                      model: model,
-                    ))));
-          }
-          if (AdminMenu[index] == mAdminPanel) {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: ((context) => AdminPanelScreen(
-                      model: model,
-                    ))));
-          }
-          if (AdminMenu[index] == mAnnouncement) {
-            await Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: ((context) => const DrawerAnnouncementScreen()),
-              ),
-            );
-          }
-        },
+      itemBuilder: (context, index) => Card(
+        child: ListTile(
+          title: Text(AdminMenu[index]),
+          onTap: () async {
+            if (AdminMenu[index] == mExam) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: ((context) => ExamInformationSystemScreen(
+                        model: model,
+                      )),
+                ),
+              );
+            }
+            if (AdminMenu[index] == mAdminPanel) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: ((context) => AdminPanelScreen(
+                        model: model,
+                      )),
+                ),
+              );
+            }
+            if (AdminMenu[index] == mAnnouncement) {
+              await Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: ((context) => const DrawerAnnouncementScreen()),
+                ),
+              );
+            }
+          },
+        ),
       ),
     );
 
-Widget _buildMenuHeader(
-  LoginResponseModel? model,
-) {
+Widget _buildMenuHeader(LoginResponseModel? model) {
   return Padding(
     padding: const EdgeInsets.only(top: 90),
     child: Column(
@@ -96,15 +110,30 @@ Widget _buildMenuHeader(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("${model?.user?.firstName!}"),
-            Text(model?.user?.lastName ?? " "),
+            Text(
+              "${model?.user?.firstName!} ",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Text(
+              model?.user?.lastName ?? " ",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ],
         ),
-        const Divider(color: Colors.white),
+        const Divider(
+          color: Colors.blue,
+          height: 10,
+        ),
         Center(
           child: model?.user?.departmentId == 2
-              ? const Text(departmentComputerText)
-              : const Text(departmentMachineText),
+              ? const Text(
+                  departmentComputerText,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                )
+              : const Text(
+                  departmentMachineText,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
         ),
       ],
     ),
@@ -115,21 +144,30 @@ Widget _buildMenuExit(BuildContext context, LoginResponseModel? model,
     CacheManager? cacheManager, bool? isClear) {
   return Padding(
     padding: const EdgeInsets.all(20.0),
-    child: ElevatedButton(
-        onPressed: () async {
-          model?.user = null;
-          isClear != isClear;
-          model?.token = null;
-          model?.expiration = 0;
-          if (model?.user == null) {
-            await cacheManager?.removeAllData();
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => LoginView()),
-                (Route<dynamic> route) => false);
-          } else {
-            exit(0);
-          }
-        },
-        child: const Text(btSignOut)),
+    child: SizedBox(
+      width: MediaQuery.of(context).size.width * 1,
+      child: ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.white),
+          ),
+          onPressed: () async {
+            model?.user = null;
+            isClear != isClear;
+            model?.token = null;
+            model?.expiration = 0;
+            if (model?.user == null) {
+              await cacheManager?.removeAllData();
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => LoginView()),
+                  (Route<dynamic> route) => false);
+            } else {
+              exit(0);
+            }
+          },
+          child: const Text(
+            btSignOut,
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          )),
+    ),
   );
 }
