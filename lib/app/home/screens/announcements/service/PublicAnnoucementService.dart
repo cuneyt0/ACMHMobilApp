@@ -92,7 +92,7 @@ class PublicAnnoucementService extends IPublicAnnoucementService {
   }
 
   @override
-  Future getByIdUser() async {
+  Future getByIdUser(int id) async {
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =
@@ -105,7 +105,7 @@ class PublicAnnoucementService extends IPublicAnnoucementService {
     dio.interceptors.clear();
     try {
       final response = await dio.get(getByIdUserUrl,
-          queryParameters: {'id': GetToken.loginResponseModel?.user?.id});
+          queryParameters: {'id':id});
       if (response.statusCode == HttpStatus.ok) {
         return UserGetByIdModel.fromJson(response.data);
       } else {

@@ -16,7 +16,9 @@ class _DrawerAnnouncementDetailScreenState
   @override
   void initState() {
     _viewModel?.getByIdDepartment();
-    _viewModel?.getByIdUser();
+    _viewModel?.getByIdUser(widget.model!.userId!);
+    print("bla  bla bla");
+    print(widget.model?.userId);
     _viewModel
         ?.getImage(widget.model?.imagePath ?? 'foto yok')
         .then((value) async {

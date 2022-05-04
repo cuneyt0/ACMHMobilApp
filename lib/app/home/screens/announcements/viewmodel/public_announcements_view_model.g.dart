@@ -282,8 +282,8 @@ mixin _$PublicAnnouncementViewModel on _PublicAnnouncementViewModelBase, Store {
       AsyncAction('_PublicAnnouncementViewModelBase.getByIdUser');
 
   @override
-  Future<UserGetByIdModel?> getByIdUser() {
-    return _$getByIdUserAsyncAction.run(() => super.getByIdUser());
+  Future<UserGetByIdModel?> getByIdUser(int id) {
+    return _$getByIdUserAsyncAction.run(() => super.getByIdUser(id));
   }
 
   final _$_PublicAnnouncementViewModelBaseActionController =

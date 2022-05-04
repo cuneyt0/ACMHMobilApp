@@ -132,8 +132,8 @@ abstract class _PublicAnnouncementViewModelBase with Store {
   }
 
   @action
-  Future<UserGetByIdModel?> getByIdUser() async {
-    return userGetByIdModel = await servicetree.getByIdUser();
+  Future<UserGetByIdModel?> getByIdUser(int id) async {
+    return userGetByIdModel = await servicetree.getByIdUser(id);
   }
 
   @action

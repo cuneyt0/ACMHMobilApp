@@ -14,7 +14,7 @@ abstract class IPublicAnnoucementService {
   Future<dynamic?> getByIdDepartmentAnnoucement();
   Future<dynamic?> getPublicByIdDepartmentAnnoucement();
   Future<dynamic?> getByIdDepartment();
-  Future<dynamic?> getByIdUser();
+  Future<dynamic?> getByIdUser(int id);
 }
 
 enum IPublicAnnoucementServicePath {
