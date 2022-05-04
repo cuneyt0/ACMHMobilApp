@@ -24,6 +24,7 @@ const String mDeparmtent = 'BÖLÜM EKLE';
 const String mAllDeparmtents = 'BÖLÜMLER';
 const String mShowDeparmtent = 'BÖLÜMLERİ GÖSTER';
 const String mShowCourseInformation = 'DERS PROGRAMI';
+const String mActivityAdd = 'ETKİNLİK EKLE';
 
 const String defaultImage = 'assets/logo/neu_logo.jpg';
 const String updateButtonText = 'Güncelle';
@@ -57,5 +58,5 @@ const String mSuccessfulImageMessage = 'Resim Başarıyla eklendi';
 //Departmentadd
 const String dValidationText = 'Bölüm ismi 3 karakterden kısa olamaz';
 const String dAddText = 'EKLE';
-
+//etkinlik
 

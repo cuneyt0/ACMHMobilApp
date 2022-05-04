@@ -1,3 +1,4 @@
+import 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/screen/admin_activity_added_screen/admin_activity_added.dart';
 import 'package:login_work/export_import.dart';
 
 class AdminPanelDrawerMenu extends StatelessWidget {
@@ -109,6 +110,14 @@ Widget _buildAdminMenuBody(
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => DepartmentGetAllScreen(),
+                ),
+              );
+            }
+            if (AdminPanelMenu[index] == mActivityAdd) {
+              Navigator.of(context).pop();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => AdminActivityAddScreen(model: model),
                 ),
               );
             }

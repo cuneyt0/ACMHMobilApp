@@ -13,3 +13,5 @@ const String getByIdUserUrl = 'https://192.168.1.103:5001/api/User/getbyid';
 //Department
 const String departmentAllUrl = 'https://192.168.1.103:5001/api/department';
 const String allUserUrl = 'https://192.168.1.103:5001/api/User';
+//etkinlik
+const String activityAllUrl = 'https://192.168.1.103:5001/api/activity';
