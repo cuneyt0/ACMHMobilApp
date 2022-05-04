@@ -1,8 +1,12 @@
 import 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/screen/admin_activity_added_screen/admin_activity_added.dart';
+import 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/screen/admin_activity_all_screen/admin_activity_all_screen.dart';
 import 'package:login_work/export_import.dart';
 
 class AdminPanelDrawerMenu extends StatelessWidget {
-  AdminPanelDrawerMenu({Key? key, required this.model}) : super(key: key);
+  AdminPanelDrawerMenu({
+    Key? key,
+    required this.model,
+  }) : super(key: key);
   LoginResponseModel? model;
 
   @override
@@ -85,6 +89,15 @@ Widget _buildAdminMenuBody(
                 ),
               );
             }
+            if (AdminPanelMenu[index] == mShowActivity) {
+              Navigator.of(context).pop();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => AdminActivityAllScreen(model: model),
+                ),
+              );
+            }
+
             if (AdminPanelMenu[index] == mShowAnnouncement) {
               Navigator.of(context).pop();
               Navigator.of(context).push(

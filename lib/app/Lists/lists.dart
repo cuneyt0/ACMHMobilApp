@@ -27,5 +27,6 @@ const List<dynamic> AdminPanelMenu = [
   'DERS BİLGİLERİ EKLE',
   mDeparmtent,
   mShowDeparmtent,
-  mActivityAdd
+  mActivityAdd,
+  mShowActivity
 ];
