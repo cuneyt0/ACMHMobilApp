@@ -61,6 +61,7 @@ Widget _buildAdminMenuBody(
   LoginResponseModel? model,
 ) =>
     ListView.builder(
+      physics: const BouncingScrollPhysics(),
       itemCount: AdminPanelMenu.length,
       itemBuilder: (context, index) => Card(
         child: ListTile(

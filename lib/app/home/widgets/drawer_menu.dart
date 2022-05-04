@@ -1,4 +1,5 @@
 import 'package:login_work/app/home/screens/announcements/screen/drawermenu_Announcement_screen.dart';
+import 'package:login_work/app/home/screens/courseInformation/course_information.dart';
 import 'package:login_work/export_import.dart';
 
 class DrawerMenu extends StatelessWidget {
@@ -38,6 +39,7 @@ class DrawerMenu extends StatelessWidget {
 Widget _buildNormalMenuBody(
         LoginResponseModel? model, CacheManager? cacheManager) =>
     ListView.builder(
+      physics: const BouncingScrollPhysics(),
       itemCount: NormalMenu.length,
       itemBuilder: (context, index) => Card(
         child: ListTile(
@@ -59,13 +61,24 @@ Widget _buildNormalMenuBody(
                 ),
               );
             }
+            if (NormalMenu[index] == mShowCourseInformation) {
+              await Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: ((context) => CourseInformationScreen(
+                        model: model,
+                      )),
+                ),
+              );
+            }
           },
         ),
       ),
     );
+
 Widget _buildAdminMenuBody(
         LoginResponseModel? model, CacheManager? cacheManager) =>
     ListView.builder(
+      physics: const BouncingScrollPhysics(),
       itemCount: AdminMenu.length,
       itemBuilder: (context, index) => Card(
         child: ListTile(
@@ -84,6 +97,15 @@ Widget _buildAdminMenuBody(
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: ((context) => AdminPanelScreen(
+                        model: model,
+                      )),
+                ),
+              );
+            }
+            if (AdminMenu[index] == mShowCourseInformation) {
+              await Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: ((context) => CourseInformationScreen(
                         model: model,
                       )),
                 ),

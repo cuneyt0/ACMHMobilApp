@@ -98,3 +98,4 @@ export 'package:login_work/app/home/service/IHomeService.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/announcement_screen.dart';
 export 'package:login_work/app/home/screens/department_screen/screen/departmentAddScreen/deparment_add_screen.dart';
 export 'package:login_work/app/home/screens/department_screen/screen/departmentGetAllScreen/department_all_screen.dart';
+export 'package:webview_flutter/webview_flutter.dart';
