@@ -60,4 +60,5 @@ const String mSuccessfulImageMessage = 'Resim Başarıyla eklendi';
 const String dValidationText = 'Bölüm ismi 3 karakterden kısa olamaz';
 const String dAddText = 'EKLE';
 //etkinlik
+const String cAllActivity = 'ETKİNLİKLER';
 
