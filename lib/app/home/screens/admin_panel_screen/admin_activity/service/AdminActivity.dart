@@ -101,4 +101,64 @@ class AdminActivityService extends IAdminActivityService {
       }
     }
   }
+
+  @override
+  Future<DepartmentGetByIdModel?> getByIdDepartment(int? id) async {
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
+    dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
+    await GetToken.getToken();
+    dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
+    dio.interceptors.clear();
+
+    try {
+      final response = await dio
+          .get(activityGetByIdDepartmentPath, queryParameters: {'id': id});
+      if (response.statusCode == HttpStatus.ok) {
+        return DepartmentGetByIdModel.fromJson(response.data);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      if ((e as DioError).response != null) {
+        print(e.response?.data);
+        return e.response?.data;
+      } else {
+        "Hata Gerçekleşti";
+      }
+    }
+  }
+
+  @override
+  Future<UserGetByIdModel?> getByIdUser(int? id) async {
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
+    dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
+    await GetToken.getToken();
+    dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
+    dio.interceptors.clear();
+    try {
+      final response = await dio.get(activityGetByIdUserPath, queryParameters: {'id': id});
+      if (response.statusCode == HttpStatus.ok) {
+        return UserGetByIdModel.fromJson(response.data);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      if ((e as DioError).response != null) {
+        print(e.response?.data);
+        return e.response?.data;
+      } else {
+        "Hata Gerçekleşti";
+      }
+    }
+  }
 }

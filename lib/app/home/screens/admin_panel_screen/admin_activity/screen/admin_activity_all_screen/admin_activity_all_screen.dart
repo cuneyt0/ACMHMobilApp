@@ -1,5 +1,4 @@
-import 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/screen/admin_activity_all_screen/admin_activity_detail_screen.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/viewmodel/admin_activity_all/admin_activity_all_view_model.dart';
+
 import 'package:login_work/export_import.dart';
 
 class AdminActivityAllScreen extends StatefulWidget {
@@ -17,6 +16,7 @@ class _AdminActivityAllScreenState extends State<AdminActivityAllScreen> {
     setState(() {
       viewModel?.setBuildContext(context);
       viewModel?.getAllActivity();
+     
     });
     super.initState();
   }
