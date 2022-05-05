@@ -54,6 +54,14 @@ class _AdminActivityDetailScreenState extends State<AdminActivityDetailScreen> {
             .departmentName);
     addViewModel?.selectedDepartmentId = addViewModel?.dropdownvalue?.id;
 
+    viewModel
+        ?.getPdfShow(widget.responseData?.pdfPath ?? "Pdf yok")
+        .then((value) {
+      if (value != null) {
+        setState(() {});
+      }
+    });
+
     viewModel?.getByIdDepartment(widget.responseData?.departmentId);
     viewModel?.getByIdUser(widget.responseData?.userId);
 
