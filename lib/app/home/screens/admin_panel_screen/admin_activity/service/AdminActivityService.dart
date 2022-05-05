@@ -146,7 +146,8 @@ class AdminActivityService extends IAdminActivityService {
     dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
     dio.interceptors.clear();
     try {
-      final response = await dio.get(activityGetByIdUserPath, queryParameters: {'id': id});
+      final response =
+          await dio.get(activityGetByIdUserPath, queryParameters: {'id': id});
       if (response.statusCode == HttpStatus.ok) {
         return UserGetByIdModel.fromJson(response.data);
       } else {
@@ -158,6 +159,49 @@ class AdminActivityService extends IAdminActivityService {
         return e.response?.data;
       } else {
         "Hata Gerçekleşti";
+      }
+    }
+  }
+
+  @override
+  Future<dynamic?> updateActivity(NoticeRequestModel model) async {
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
+    await GetToken.getToken();
+    dio.options.headers['Content-Type'] = 'multipart/form-data; charset=utf-8';
+    dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
+    Map<String, dynamic> jsonData = model.toJson();
+    if (model.imagePath != null) {
+      jsonData['file'] = await MultipartFile.fromFile(model.imagePath!,
+          filename: model.imagePath);
+    } else {
+      jsonData.remove("file");
+    }
+    if (model.pdfPath != null) {
+      jsonData['pdfFile'] =
+          await MultipartFile.fromFile(model.pdfPath!, filename: model.pdfPath);
+    } else {
+      jsonData.remove("pdfFile");
+    }
+    print(jsonData);
+    dio.interceptors.add(PrettyDioLogger());
+    try {
+      final response =
+          await dio.patch(activityUpdatePath, data: FormData.fromMap(jsonData));
+      if (response.statusCode == HttpStatus.ok) {
+        return BaseResponseModel.fromJson(response.data);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      if ((e as DioError).response != null) {
+        return BaseErrorResponseModel.fromJson(e.response?.data);
+      } else {
+        return "Hata Gerçekleşti";
       }
     }
   }

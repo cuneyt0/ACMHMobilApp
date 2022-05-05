@@ -101,7 +101,7 @@ export 'package:login_work/app/home/screens/department_screen/screen/departmentG
 export 'package:webview_flutter/webview_flutter.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/viewmodel/admin_activity_added/admin_activity_add_viewmodel.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/service/IAdminActivityService.dart';
-export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/service/AdminActivity.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/service/AdminActivityService.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/screen/admin_activity_added_screen/admin_activity_photo_add_scren.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/widget/admin_activity_added_widget/build_activity_content_widget.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/widget/admin_activity_added_widget/build_activity_image_widget.dart';
@@ -112,3 +112,10 @@ export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/wi
 export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/widget/admin_activity_added_widget/build_post_activity_widget.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/screen/admin_activity_all_screen/admin_activity_detail_screen.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/viewmodel/admin_activity_all/admin_activity_all_view_model.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/screen/activity_update_screen/activity_update_screen.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/screen/activity_update_screen/admin_update_image_screen.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/widget/activity_update_widget/admin_activity_update_content.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/widget/activity_update_widget/admin_activity_update_image_button.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/widget/activity_update_widget/admin_activity_update_pdf.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/widget/activity_update_widget/admin_activity_update_title.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/widget/activity_update_widget/admin_update_bottom_navigation_bar.dart';

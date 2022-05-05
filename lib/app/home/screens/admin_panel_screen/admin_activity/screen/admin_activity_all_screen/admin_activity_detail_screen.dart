@@ -1,3 +1,4 @@
+import 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/screen/activity_update_screen/activity_update_screen.dart';
 import 'package:login_work/export_import.dart';
 
 class AdminActivityDetailScreen extends StatefulWidget {
@@ -13,6 +14,9 @@ class AdminActivityDetailScreen extends StatefulWidget {
 
 class _AdminActivityDetailScreenState extends State<AdminActivityDetailScreen> {
   final AdminActivityAllViewModel? viewModel = AdminActivityAllViewModel();
+  final ActivityAddViewModel? addViewModel = ActivityAddViewModel();
+  List<DropdownMenuItem<Data>>? items;
+
   bool isLoading = true;
   @override
   void initState() {
@@ -30,8 +34,29 @@ class _AdminActivityDetailScreenState extends State<AdminActivityDetailScreen> {
         });
       });
     });
+
+    addViewModel?.getAllDepartment().then(
+      (value) {
+        setState(() {
+          items = addViewModel?.departmentGetAllResponse?.data?.map((e) {
+            return DropdownMenuItem<Data>(
+                value: e, child: Text(e.departmentName ?? "Null"));
+          }).toList();
+        });
+      },
+    );
+
+    addViewModel?.dropdownvalue = Data(
+        id: widget.responseData?.departmentId,
+        departmentName: addViewModel?.departmentGetAllResponse?.data
+            ?.firstWhere(
+                (element) => element.id == widget.responseData?.departmentId)
+            .departmentName);
+    addViewModel?.selectedDepartmentId = addViewModel?.dropdownvalue?.id;
+
     viewModel?.getByIdDepartment(widget.responseData?.departmentId);
     viewModel?.getByIdUser(widget.responseData?.userId);
+
     super.initState();
   }
 
@@ -54,7 +79,7 @@ class _AdminActivityDetailScreenState extends State<AdminActivityDetailScreen> {
                             : viewModel?.photo != null
                                 ? Image.memory(
                                     viewModel?.photo,
-                                    fit: BoxFit.cover,
+                                    fit: BoxFit.fill,
                                   )
                                 : Center(
                                     child: Image.asset(assetNeuLogo),
@@ -188,17 +213,18 @@ class _AdminActivityDetailScreenState extends State<AdminActivityDetailScreen> {
                         width: MediaQuery.of(context).size.width * 0.98,
                         child: ElevatedButton(
                           onPressed: () {
-                            /*Navigator.of(context).pop();
+                            Navigator.of(context).pop();
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => AnnouncementUpdateScreen(
-                                  viewModel: _updateViewModel,
+                                builder: (context) => ActivityUpdateScreen(
+                                  viewModel: addViewModel,
                                   data: widget.responseData,
                                   items: items,
                                   model: widget.model,
+                                  getAllViewModel: viewModel,
                                 ),
                               ),
-                            );*/
+                            );
                           },
                           child: const Text(updateButtonText),
                         ),

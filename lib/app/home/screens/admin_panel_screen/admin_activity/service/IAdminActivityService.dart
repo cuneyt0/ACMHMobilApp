@@ -8,16 +8,16 @@ abstract class IAdminActivityService {
   final String activitydeletePath = IAdminActivityServicePath.DELETE.rawValue;
   final String activityGetByIdDepartmentPath =
       IAdminActivityServicePath.GETBYDEPARTMENTID.rawValue;
-        final String activityGetByIdUserPath =
+  final String activityGetByIdUserPath =
       IAdminActivityServicePath.GETBYDEPARTMENTID.rawValue;
-  /*
-  final String departmentUpdatePath = IDepartmentServicePath.UPDATE.rawValue;*/
+  final String activityUpdatePath = IAdminActivityServicePath.UPDATE.rawValue;
 
   Future<dynamic?> postActivity(NoticeRequestModel model);
   Future<NoticeGetAllResponseModel?> getAllActivity();
   Future<BaseResponseModel?> deleteActivity(int? id);
   Future<DepartmentGetByIdModel?> getByIdDepartment(int? id);
-   Future<UserGetByIdModel?> getByIdUser(int? id);
+  Future<UserGetByIdModel?> getByIdUser(int? id);
+  Future<dynamic?> updateActivity(NoticeRequestModel model);
 }
 
 enum IAdminActivityServicePath {

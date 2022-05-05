@@ -7,7 +7,7 @@ class DepartmentGetByIdModel {
 
   DepartmentGetByIdModel.fromJson(Map<String, dynamic> json) {
     data = json['data'] != null
-        ? new DepartmentGetByIdModelBody.fromJson(json['data'])
+        ? DepartmentGetByIdModelBody.fromJson(json['data'])
         : null;
     success = json['success'];
     message = json['message'];
@@ -18,8 +18,8 @@ class DepartmentGetByIdModel {
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
-    data['success'] = this.success;
-    data['message'] = this.message;
+    data['success'] = success;
+    data['message'] = message;
     return data;
   }
 }
@@ -37,8 +37,8 @@ class DepartmentGetByIdModelBody {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['departmentName'] = this.departmentName;
+    data['id'] = id;
+    data['departmentName'] = departmentName;
     return data;
   }
 }

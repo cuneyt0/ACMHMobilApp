@@ -1,4 +1,3 @@
-
 import 'package:login_work/export_import.dart';
 import 'package:mobx/mobx.dart';
 part 'admin_activity_add_viewmodel.g.dart';
@@ -58,6 +57,8 @@ abstract class _ActivityAddViewModelBase extends BaseViewModelProtocol
   bool isLoading = false;
   @observable
   int? userId;
+  @observable
+  int? id;
 
   @override
   void setBuildContext(BuildContext buildContext) =>
@@ -133,6 +134,56 @@ abstract class _ActivityAddViewModelBase extends BaseViewModelProtocol
   @action
   void deleteMemoryImage() {
     cropImagePath = '';
+  }
+
+  @action
+  Future<void> updateActivity() async {
+    if (formKey.currentState != null &&
+        formKey.currentState!.validate() &&
+        dropdownvalue?.id != null) {
+      changeLoadingView();
+      final postRequestData = await activityService.updateActivity(
+          NoticeRequestModel.ID(
+              id: id,
+              title: titleController.text,
+              content: contentController.text,
+              departmentId: selectedDepartmentId,
+              imagePath: addedPhoto,
+              pdfPath: newFilePath,
+              userId: userId));
+      changeLoadingView();
+      if (postRequestData is BaseResponseModel) {
+        Flushbar(
+          message: '${postRequestData.message}',
+          flushbarPosition: FlushbarPosition.TOP,
+          duration: const Duration(seconds: 1),
+          borderRadius: BorderRadius.circular(2),
+          backgroundColor: Colors.black.withOpacity(0.5),
+        ).show(buildContext).then((value) {
+          //Navigator.of(buildContext).pop();
+          Navigator.of(buildContext).push(MaterialPageRoute(
+            builder: (context) =>
+                AdminPanelScreen(model: GetToken.loginResponseModel),
+          ));
+        });
+      } else if (postRequestData is BaseErrorResponseModel) {
+        Flushbar(
+          message: '${postRequestData.message}',
+          flushbarPosition: FlushbarPosition.TOP,
+          duration: const Duration(seconds: 1),
+          borderRadius: BorderRadius.circular(2),
+          backgroundColor: Colors.black.withOpacity(0.5),
+        ).show(buildContext);
+      }
+    } else {
+      Flushbar(
+        message: 'Zorunlu alanlar boş geçilemez',
+        flushbarPosition: FlushbarPosition.TOP,
+        duration: const Duration(seconds: 1),
+        borderRadius: BorderRadius.circular(2),
+        backgroundColor: Colors.black.withOpacity(0.5),
+      ).show(buildContext);
+    }
   }
 
   @action
