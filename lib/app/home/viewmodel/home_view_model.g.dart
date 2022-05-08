@@ -103,6 +103,21 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
     });
   }
 
+  final _$servicetwoAtom = Atom(name: '_HomeViewModelBase.servicetwo');
+
+  @override
+  IHomeService get servicetwo {
+    _$servicetwoAtom.reportRead();
+    return super.servicetwo;
+  }
+
+  @override
+  set servicetwo(IHomeService value) {
+    _$servicetwoAtom.reportWrite(value, super.servicetwo, () {
+      super.servicetwo = value;
+    });
+  }
+
   final _$photoAtom = Atom(name: '_HomeViewModelBase.photo');
 
   @override
@@ -165,12 +180,38 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
     });
   }
 
+  final _$getbyidrecentlyActivitiyresponseAtom =
+      Atom(name: '_HomeViewModelBase.getbyidrecentlyActivitiyresponse');
+
+  @override
+  NoticeGetAllResponseModel? get getbyidrecentlyActivitiyresponse {
+    _$getbyidrecentlyActivitiyresponseAtom.reportRead();
+    return super.getbyidrecentlyActivitiyresponse;
+  }
+
+  @override
+  set getbyidrecentlyActivitiyresponse(NoticeGetAllResponseModel? value) {
+    _$getbyidrecentlyActivitiyresponseAtom
+        .reportWrite(value, super.getbyidrecentlyActivitiyresponse, () {
+      super.getbyidrecentlyActivitiyresponse = value;
+    });
+  }
+
   final _$getbyidrecentlyAsyncAction =
       AsyncAction('_HomeViewModelBase.getbyidrecently');
 
   @override
   Future<NoticeGetAllResponseModel?> getbyidrecently() {
     return _$getbyidrecentlyAsyncAction.run(() => super.getbyidrecently());
+  }
+
+  final _$getbyidrecentlyActivitiesAsyncAction =
+      AsyncAction('_HomeViewModelBase.getbyidrecentlyActivities');
+
+  @override
+  Future<NoticeGetAllResponseModel?> getbyidrecentlyActivities() {
+    return _$getbyidrecentlyActivitiesAsyncAction
+        .run(() => super.getbyidrecentlyActivities());
   }
 
   final _$getAllNoticeAsyncAction =
@@ -242,10 +283,12 @@ deleteResponseData: ${deleteResponseData},
 departmentGetByIdResponseModel: ${departmentGetByIdResponseModel},
 userGetByIdModel: ${userGetByIdModel},
 service: ${service},
+servicetwo: ${servicetwo},
 photo: ${photo},
 data: ${data},
 file: ${file},
-getbyidrecentlyresponse: ${getbyidrecentlyresponse}
+getbyidrecentlyresponse: ${getbyidrecentlyresponse},
+getbyidrecentlyActivitiyresponse: ${getbyidrecentlyActivitiyresponse}
     ''';
   }
 }
