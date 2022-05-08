@@ -1,5 +1,4 @@
-import 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/screen/admin_activity_added_screen/admin_activity_added.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/screen/admin_activity_all_screen/admin_activity_all_screen.dart';
+
 import 'package:login_work/export_import.dart';
 
 class AdminPanelDrawerMenu extends StatelessWidget {

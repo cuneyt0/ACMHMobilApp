@@ -50,7 +50,6 @@ export 'package:login_work/app/home/screens/admin_panel_screen/announcement_scre
 export 'package:login_work/app/home/viewmodel/home_view_model.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/announcement_update_screen.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/viewmodel/update/announcement_update_view_model.dart';
-
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/photo_update_screen.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/all_announcement_screen.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_getall_response_model.dart';
@@ -60,7 +59,6 @@ export 'package:login_work/app/home/screens/admin_panel_screen/announcement_scre
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_update/update_save_button_widget.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_update/update_title_text_field.dart';
 export 'dart:typed_data';
-
 export 'package:login_work/app/home/model/department_getbyid_response_model.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_delete_response_model.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/user_getbyid_response_model.dart';
@@ -80,13 +78,6 @@ export 'package:login_work/app/home/screens/announcements/service/IPublicAnnouce
 export 'package:login_work/app/home/screens/announcements/service/PublicAnnoucementService.dart';
 export 'package:login_work/app/baseResponseModel/base_error_response_model.dart';
 export 'package:login_work/app/baseResponseModel/base_response_model.dart';
-export 'package:login_work/app/home/screens/department_screen/model/department_add_request_model.dart';
-export 'package:login_work/app/home/screens/department_screen/model/department_update_request_model.dart';
-export 'package:login_work/app/home/screens/department_screen/service/IDeparmentAddService.dart';
-export 'package:login_work/app/home/screens/department_screen/service/DeparmentAddService.dart';
-export 'package:login_work/app/home/screens/department_screen/viewmodel/departmentAdd/deparment_add_viewmodel.dart';
-export 'package:login_work/app/home/screens/department_screen/screen/departmentUpdateScreen/department_update_screen.dart';
-export 'package:login_work/app/home/screens/department_screen/viewmodel/departmentGetAll/department_getall_viewmodel.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_added/image_added_screen.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_added/notice_added_screen.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/widget/announcement_added/notice_department_row.dart';
@@ -96,8 +87,6 @@ export 'package:login_work/app/home/widgets/adminPanelMenu/admin_panel_drawer_me
 export 'package:login_work/app/home/service/HomeService.dart';
 export 'package:login_work/app/home/service/IHomeService.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/screen/announcement_screen.dart';
-export 'package:login_work/app/home/screens/department_screen/screen/departmentAddScreen/deparment_add_screen.dart';
-export 'package:login_work/app/home/screens/department_screen/screen/departmentGetAllScreen/department_all_screen.dart';
 export 'package:webview_flutter/webview_flutter.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/viewmodel/admin_activity_added/admin_activity_add_viewmodel.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/service/IAdminActivityService.dart';
@@ -119,3 +108,14 @@ export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/wi
 export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/widget/activity_update_widget/admin_activity_update_pdf.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/widget/activity_update_widget/admin_activity_update_title.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/widget/activity_update_widget/admin_update_bottom_navigation_bar.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/screen/admin_activity_added_screen/admin_activity_added.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/admin_activity/screen/admin_activity_all_screen/admin_activity_all_screen.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/department_screen/screen/departmentAddScreen/deparment_add_screen.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/department_screen/screen/departmentGetAllScreen/department_all_screen.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/department_screen/viewmodel/departmentAdd/deparment_add_viewmodel.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/department_screen/screen/departmentUpdateScreen/department_update_screen.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/department_screen/viewmodel/departmentGetAll/department_getall_viewmodel.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/department_screen/model/department_add_request_model.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/department_screen/model/department_update_request_model.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/department_screen/service/IDeparmentAddService.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/department_screen/service/DeparmentAddService.dart';

@@ -1,4 +1,7 @@
-import '../../../../../export_import.dart';
+
+
+
+import 'package:login_work/export_import.dart';
 
 class DepartmentService extends IDepartmentService {
   DepartmentService({required Dio dio}) : super(dio: dio);

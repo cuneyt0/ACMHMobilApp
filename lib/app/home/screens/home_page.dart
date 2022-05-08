@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
           cacheManager: widget.cacheManager,
           isClear: widget.isClear,
           model: widget.model),
-      body: ListView(children: [
+      body: ListView(physics: const BouncingScrollPhysics(), children: [
         const Padding(
           padding: EdgeInsets.only(top: 15.0),
           child: Center(

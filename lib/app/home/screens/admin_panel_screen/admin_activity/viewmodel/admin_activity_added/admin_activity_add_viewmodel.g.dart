@@ -384,6 +384,21 @@ mixin _$ActivityAddViewModel on _ActivityAddViewModelBase, Store {
     });
   }
 
+  final _$idAtom = Atom(name: '_ActivityAddViewModelBase.id');
+
+  @override
+  int? get id {
+    _$idAtom.reportRead();
+    return super.id;
+  }
+
+  @override
+  set id(int? value) {
+    _$idAtom.reportWrite(value, super.id, () {
+      super.id = value;
+    });
+  }
+
   final _$uploadPdfAsyncAction =
       AsyncAction('_ActivityAddViewModelBase.uploadPdf');
 
@@ -415,6 +430,14 @@ mixin _$ActivityAddViewModel on _ActivityAddViewModelBase, Store {
   @override
   Future<String> getPhoto() {
     return _$getPhotoAsyncAction.run(() => super.getPhoto());
+  }
+
+  final _$updateActivityAsyncAction =
+      AsyncAction('_ActivityAddViewModelBase.updateActivity');
+
+  @override
+  Future<void> updateActivity() {
+    return _$updateActivityAsyncAction.run(() => super.updateActivity());
   }
 
   final _$getAllDepartmentAsyncAction =
@@ -495,7 +518,8 @@ addedPhoto: ${addedPhoto},
 compressImagePath: ${compressImagePath},
 compressImageSize: ${compressImageSize},
 isLoading: ${isLoading},
-userId: ${userId}
+userId: ${userId},
+id: ${id}
     ''';
   }
 }

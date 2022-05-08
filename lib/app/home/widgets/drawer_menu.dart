@@ -1,3 +1,4 @@
+import 'package:login_work/app/home/screens/activities/screen/drawer_activity_screen.dart';
 import 'package:login_work/app/home/screens/announcements/screen/drawermenu_Announcement_screen.dart';
 import 'package:login_work/app/home/screens/courseInformation/course_information.dart';
 import 'package:login_work/export_import.dart';
@@ -115,6 +116,13 @@ Widget _buildAdminMenuBody(
               await Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: ((context) => const DrawerAnnouncementScreen()),
+                ),
+              );
+            }
+            if (AdminMenu[index] == mActivity) {
+              await Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: ((context) => const DrawerActivityScreen()),
                 ),
               );
             }
