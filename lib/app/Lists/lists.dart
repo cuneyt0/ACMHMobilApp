@@ -8,6 +8,7 @@ const List<String> AdminMenu = [
   mExam,
   mAnnouncement,
   mActivity,
+  mStudentCommunity,
   mAdminPanel,
 ];
 // ignore: constant_identifier_names
@@ -17,6 +18,7 @@ const List<String> NormalMenu = [
   mShowCourseInformation,
   mExam,
   mAnnouncement,
+  mStudentCommunity,
   mActivity,
 ];
 // ignore: constant_identifier_names

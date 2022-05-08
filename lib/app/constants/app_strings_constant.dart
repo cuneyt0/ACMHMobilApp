@@ -26,6 +26,7 @@ const String mShowDeparmtent = 'BÖLÜMLERİ GÖSTER';
 const String mShowCourseInformation = 'DERS PROGRAMI';
 const String mActivityAdd = 'ETKİNLİK EKLE';
 const String mShowActivity = 'ETKİNLİKLERİ GÖSTER';
+const String mStudentCommunity = 'ÖGRENCİ TOPLULUKLARI';
 
 const String defaultImage = 'assets/logo/neu_logo.jpg';
 const String updateButtonText = 'Güncelle';

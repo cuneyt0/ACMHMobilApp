@@ -1,6 +1,7 @@
 import 'package:login_work/app/home/screens/activities/screen/drawer_activity_screen.dart';
 import 'package:login_work/app/home/screens/announcements/screen/drawermenu_Announcement_screen.dart';
 import 'package:login_work/app/home/screens/courseInformation/course_information.dart';
+import 'package:login_work/app/home/screens/studentCommunities/student_communities.dart';
 import 'package:login_work/export_import.dart';
 
 class DrawerMenu extends StatelessWidget {
@@ -12,6 +13,7 @@ class DrawerMenu extends StatelessWidget {
   CacheManager? cacheManager;
   bool? isClear;
   int? index;
+
   @override
   Widget build(BuildContext context) {
     var adminYetkisi = model?.userClaims?[0].name == 'admin';
@@ -62,12 +64,26 @@ Widget _buildNormalMenuBody(
                 ),
               );
             }
+            if (NormalMenu[index] == mActivity) {
+              await Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: ((context) => const DrawerActivityScreen()),
+                ),
+              );
+            }
             if (NormalMenu[index] == mShowCourseInformation) {
               await Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: ((context) => CourseInformationScreen(
                         model: model,
                       )),
+                ),
+              );
+            }
+            if (NormalMenu[index] == mStudentCommunity) {
+              await Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: ((context) => StudentCommunities(model: model)),
                 ),
               );
             }
@@ -85,6 +101,15 @@ Widget _buildAdminMenuBody(
         child: ListTile(
           title: Text(AdminMenu[index]),
           onTap: () async {
+            if (AdminMenu[index] == mExam) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: ((context) => ExamInformationSystemScreen(
+                        model: model,
+                      )),
+                ),
+              );
+            }
             if (AdminMenu[index] == mExam) {
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -126,11 +151,18 @@ Widget _buildAdminMenuBody(
                 ),
               );
             }
+            if (AdminMenu[index] == mStudentCommunity) {
+              await Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: ((context) => StudentCommunities(model: model)),
+                ),
+              );
+            }
           },
         ),
       ),
     );
-
+//StudentCommunities
 Widget _buildMenuHeader(LoginResponseModel? model) {
   return Padding(
     padding: const EdgeInsets.only(top: 90),
