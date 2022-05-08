@@ -18,6 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
         if (loginRes == null) {
           await Navigation.pushReplacementNamed(root: Routes.loginView);
         } else {
+          await _viewModel.getbyidrecentlyActivities();
           await _viewModel
               .getbyidrecently()
               .then((value) => Navigator.pushReplacement(

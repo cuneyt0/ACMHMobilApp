@@ -1,4 +1,3 @@
-
 import 'package:login_work/export_import.dart';
 import 'package:mobx/mobx.dart';
 
@@ -21,6 +20,9 @@ abstract class _HomeViewModelBase with Store {
   @observable
   IHomeService service = HomeService(dio: Dio(BaseOptions(baseUrl: noticeAdd)));
   @observable
+  IHomeService servicetwo =
+      HomeService(dio: Dio(BaseOptions(baseUrl: activityAllUrl)));
+  @observable
   var photo;
   @observable
   Uint8List? data;
@@ -29,10 +31,19 @@ abstract class _HomeViewModelBase with Store {
   @observable
   NoticeGetAllResponseModel? getbyidrecentlyresponse =
       NoticeGetAllResponseModel();
+  @observable
+  NoticeGetAllResponseModel? getbyidrecentlyActivitiyresponse =
+      NoticeGetAllResponseModel();
 
   @action
   Future<NoticeGetAllResponseModel?> getbyidrecently() async {
     return getbyidrecentlyresponse = await service.getbyidrecently();
+  }
+
+  @action
+  Future<NoticeGetAllResponseModel?> getbyidrecentlyActivities() async {
+    return getbyidrecentlyActivitiyresponse =
+        await servicetwo.getbyidrecently();
   }
 
   @action
@@ -147,6 +158,7 @@ abstract class _HomeViewModelBase with Store {
           queryParameters: {'fileName': fileName},
           options: Options(responseType: ResponseType.bytes));
       if (response.statusCode == HttpStatus.ok) {
+       // photo = response.data;
         return response.data;
       } else {
         print("getImage null");
