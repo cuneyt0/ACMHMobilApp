@@ -1,8 +1,12 @@
 import 'package:login_work/app/home/screens/admin_panel_screen/viewmodel/admin_panel_view_model.dart';
 import 'package:login_work/export_import.dart';
+import 'package:pie_chart/pie_chart.dart';
 
 class AdminPanelScreen extends StatefulWidget {
-  const AdminPanelScreen({this.model, this.viewModel});
+  const AdminPanelScreen({
+    this.model,
+    this.viewModel,
+  });
   final LoginResponseModel? model;
   final AdminPanelViewModel? viewModel;
 
@@ -18,73 +22,121 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, double> dataMap = {
+      'Genel Ögrenci Sayısı': widget.viewModel!.allStudentValue,
+      'Bilgisayar Mühendisligi': widget.viewModel!.computerStudentValue,
+      'Makine Mühendisligi': widget.viewModel!.machineStudentValue,
+    };
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(mAdminPanel),
+      appBar: AppBar(
+        title: const Text(mAdminPanel),
+      ),
+      drawer: AdminPanelDrawerMenu(model: widget.model),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0, top: 8, right: 10),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.amber,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                height: MediaQuery.of(context).size.height * 0.15,
+                width: MediaQuery.of(context).size.height * 1,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      "Genel Ögrenci Sayısı",
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      '${widget.viewModel?.userGetAllResponse?.data?.length}',
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0, top: 8, right: 10),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color(0xff3EE094),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                height: MediaQuery.of(context).size.height * 0.15,
+                width: MediaQuery.of(context).size.height * 1,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      "Bilgisayar Mühendisligi",
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      '${widget.viewModel?.userComputerResponse?.data?.length}',
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0, top: 8, right: 10),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                height: MediaQuery.of(context).size.height * 0.15,
+                width: MediaQuery.of(context).size.height * 1,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      "Makine Mühendisligi",
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      '${widget.viewModel?.userMachineResponse?.data?.length}',
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Observer(builder: (context) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 10, right: 24, left: 40.0),
+                child: PieChart(
+                  centerText: "Genel İstatistik",
+                  dataMap: dataMap,
+                  colorList: widget.viewModel!.colorList,
+                  chartRadius: MediaQuery.of(context).size.width * 0.63,
+                  chartType: ChartType.disc,
+                  chartLegendSpacing: 10,
+                  ringStrokeWidth: 14,
+                  animationDuration: Duration(seconds: 3),
+                  chartValuesOptions: const ChartValuesOptions(
+                      showChartValues: true,
+                      showChartValuesOutside: false,
+                      showChartValuesInPercentage: true),
+                  legendOptions: const LegendOptions(
+                      legendShape: BoxShape.circle,
+                      showLegends: true,
+                      showLegendsInRow: true,
+                      legendPosition: LegendPosition.bottom),
+                ),
+              );
+            }),
+          ],
         ),
-        drawer: AdminPanelDrawerMenu(model: widget.model),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0, top: 8, right: 10),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  height: MediaQuery.of(context).size.height * 0.15,
-                  width: MediaQuery.of(context).size.height * 1,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text("Genel Ögrenci Sayısı"),
-                      Text(
-                          '${widget.viewModel?.userGetAllResponse?.data?.length}'),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0, top: 8, right: 10),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  height: MediaQuery.of(context).size.height * 0.15,
-                  width: MediaQuery.of(context).size.height * 1,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text("Bilgisayar Mühendisligi"),
-                      Text(
-                          '${widget.viewModel?.userComputerResponse?.data?.length}'),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0, top: 8, right: 10),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  height: MediaQuery.of(context).size.height * 0.15,
-                  width: MediaQuery.of(context).size.height * 1,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text("Makine Mühendisligi"),
-                      Text(
-                          '${widget.viewModel?.userMachineResponse?.data?.length}'),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ));
+      ),
+    );
   }
 }

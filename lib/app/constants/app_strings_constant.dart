@@ -63,3 +63,6 @@ const String dAddText = 'EKLE';
 //etkinlik
 const String cAllActivity = 'ETKİNLİKLER';
 const String mUpdateActivityTitle = 'ETKİNLİK GÜNCELLE';
+const String tMechanicalEngineering = 'Makine Mühendisligi';
+const String tComputerEngineering = 'Makine Mühendisligi';
+const String tAllStudent= 'Genel Ögrenci Sayısı';

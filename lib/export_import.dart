@@ -17,7 +17,6 @@ export 'dart:convert';
 export 'package:login_work/app/constants/app_strings_constant.dart';
 export 'package:login_work/app/login/service/login_service.dart';
 export 'package:login_work/app/login/viewmodel/login_cubit.dart';
-export 'package:login_work/core/extension/context_extension.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:bloc/bloc.dart';
 export 'package:login_work/app/home/screens/home_page.dart';
@@ -119,3 +118,4 @@ export 'package:login_work/app/home/screens/admin_panel_screen/department_screen
 export 'package:login_work/app/home/screens/admin_panel_screen/department_screen/model/department_update_request_model.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/department_screen/service/IDeparmentAddService.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/department_screen/service/DeparmentAddService.dart';
+

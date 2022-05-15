@@ -34,6 +34,15 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         HomeScreenAnnouncementWidget(widget: widget),
+        Padding(
+          padding: EdgeInsets.only(top: 15.0),
+          child: Center(
+            child: Text(
+              "ETKİNLİKLER",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
         Container(
           height: MediaQuery.of(context).size.height * 0.48,
           child: Observer(
