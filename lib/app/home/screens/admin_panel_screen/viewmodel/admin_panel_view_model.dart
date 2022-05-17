@@ -33,6 +33,11 @@ abstract class _AdminPanelViewModelBase with Store {
     //userGetAllResponse?.data?.length.toDouble()??0.0
     userGetAllResponse = await service.getAllUser();
     allStudentValue = userGetAllResponse?.data?.length.toDouble() ?? 0.0;
+    int? b = userComputerResponse?.data
+        ?.where((element) => element.departmentId == 2)
+        .length;
+    print(
+        "b degerii ${userComputerResponse?.data?.where((element) => element.departmentId == 2).length} budur");
     return userGetAllResponse;
   }
 

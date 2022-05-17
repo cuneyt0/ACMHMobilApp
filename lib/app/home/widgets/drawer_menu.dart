@@ -122,18 +122,14 @@ Widget _buildAdminMenuBody(LoginResponseModel? model,
               );
             }
             if (AdminMenu[index] == mAdminPanel) {
-              await viewModel.getByIdComputerUser();
-              await viewModel.getByIdMachineUser();
-              await viewModel.getAllUser().then(
-                    (value) => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: ((context) => AdminPanelScreen(
-                              model: model,
-                              viewModel: viewModel,
-                            )),
-                      ),
-                    ),
-                  );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: ((context) => AdminPanelScreen(
+                        model: model,
+                        viewModel: viewModel,
+                      )),
+                ),
+              );
             }
             if (AdminMenu[index] == mShowCourseInformation) {
               await Navigator.of(context).push(

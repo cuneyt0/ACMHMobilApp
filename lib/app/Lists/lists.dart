@@ -26,7 +26,6 @@ const List<dynamic> AdminPanelMenu = [
   mHome,
   mAddedAnnouncement,
   mShowAnnouncement,
-  'DERS BİLGİLERİ EKLE',
   mDeparmtent,
   mShowDeparmtent,
   mActivityAdd,
