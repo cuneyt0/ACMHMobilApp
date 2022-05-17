@@ -2,9 +2,8 @@ import 'package:login_work/export_import.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ExamInformationSystemScreen extends StatefulWidget {
-  ExamInformationSystemScreen({required this.model});
+  const ExamInformationSystemScreen({Key? key}) : super(key: key);
 
-  final LoginResponseModel? model;
   @override
   State<ExamInformationSystemScreen> createState() =>
       _ExamInformationSystemScreenState();
@@ -22,9 +21,6 @@ class _ExamInformationSystemScreenState
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(),
-        drawer: DrawerMenu(
-          model: widget.model,
-        ),
         body: const WebView(
           javascriptMode: JavascriptMode.unrestricted,
           initialUrl: 'http://sacmfsinav.tk',

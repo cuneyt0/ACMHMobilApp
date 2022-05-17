@@ -15,6 +15,7 @@ class AdminPanelScreen extends StatefulWidget {
 }
 
 class _AdminPanelScreenState extends State<AdminPanelScreen> {
+  final HomeViewModel? _homeViewModel = HomeViewModel();
   @override
   void initState() {
     super.initState();
@@ -28,8 +29,6 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
   bool _isLoading = true;
   int index = 0;
   Future<void> getData() async {
-    await widget.viewModel?.getByIdComputerUser();
-    await widget.viewModel?.getByIdMachineUser();
     await widget.viewModel?.getAllUser();
   }
 
@@ -44,7 +43,8 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
       appBar: AppBar(
         title: const Text(mAdminPanel),
       ),
-      drawer: AdminPanelDrawerMenu(model: widget.model),
+      drawer:
+          AdminPanelDrawerMenu(model: widget.model, viewModel: _homeViewModel),
       body: _isLoading
           ? Center(
               child: CircularProgressIndicator(),
@@ -99,11 +99,13 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                     "Bilgisayar Mühendisligi",
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  Text(
-                    '${widget.viewModel?.userComputerResponse?.data?.length}',
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white),
-                  ),
+                  Observer(builder: (context) {
+                    return Text(
+                      '${widget.viewModel?.computerStudentValue.toInt()}',
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white),
+                    );
+                  }),
                 ],
               ),
             ),
@@ -125,7 +127,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    '${widget.viewModel?.userMachineResponse?.data?.length}',
+                    '${widget.viewModel?.machineStudentValue.toInt()}',
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.white),
                   ),

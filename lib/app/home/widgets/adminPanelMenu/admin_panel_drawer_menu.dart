@@ -1,12 +1,10 @@
-
 import 'package:login_work/export_import.dart';
 
 class AdminPanelDrawerMenu extends StatelessWidget {
-  AdminPanelDrawerMenu({
-    Key? key,
-    required this.model,
-  }) : super(key: key);
+  AdminPanelDrawerMenu({Key? key, required this.model, required this.viewModel})
+      : super(key: key);
   LoginResponseModel? model;
+  HomeViewModel? viewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +17,7 @@ class AdminPanelDrawerMenu extends StatelessWidget {
               Expanded(child: _buildMenuHeader(model)),
               Expanded(
                 flex: 4,
-                child: _buildAdminMenuBody(model),
+                child: _buildAdminMenuBody(model, viewModel),
               ),
             ],
           ),
@@ -63,6 +61,7 @@ Widget _buildMenuHeader(
 
 Widget _buildAdminMenuBody(
   LoginResponseModel? model,
+  HomeViewModel? viewModel,
 ) =>
     ListView.builder(
       physics: const BouncingScrollPhysics(),
@@ -72,13 +71,17 @@ Widget _buildAdminMenuBody(
           title: Text(AdminPanelMenu[index]),
           onTap: () async {
             if (AdminPanelMenu[index] == mHome) {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                    builder: (context) => HomePage(
-                      model: model,
-                    ),
-                  ),
-                  (Route<dynamic> route) => false);
+              await viewModel?.getbyidrecentlyActivities();
+              await viewModel
+                  ?.getbyidrecently()
+                  .then((value) => Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(
+                          model: model,
+                          viewModel: viewModel,
+                        ),
+                      ),
+                      (Route<dynamic> route) => false));
             }
             if (AdminPanelMenu[index] == mAddedAnnouncement) {
               Navigator.of(context).pop();

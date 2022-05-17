@@ -5,6 +5,7 @@ class HomePage extends StatefulWidget {
   final CacheManager? cacheManager;
   final bool? isClear;
   final HomeViewModel? viewModel;
+  final isLoading = false;
   const HomePage(
       {Key? key, this.model, this.cacheManager, this.isClear, this.viewModel})
       : super(key: key);
@@ -15,99 +16,126 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+    getAllData().then((value) {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+    super.initState();
+  }
+
+  Future<void> getAllData() async {
+    await widget.viewModel?.getbyidrecentlyActivities();
+    await widget.viewModel?.getbyidrecently();
+  }
+
+  bool _isLoading = true;
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       drawer: DrawerMenu(
-          context: context,
-          cacheManager: widget.cacheManager,
-          isClear: widget.isClear,
-          model: widget.model),
-      body: ListView(physics: const BouncingScrollPhysics(), children: [
-        const Padding(
-          padding: EdgeInsets.only(top: 15.0),
-          child: Center(
-            child: Text(
-              mAnnouncement,
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
-        HomeScreenAnnouncementWidget(widget: widget),
-        const Center(
-          child: Text(
-            "ETKİNLİKLER",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-        Observer(builder: (context) {
-          return Container(
-            height: MediaQuery.of(context).size.height * 0.4,
-            child: GridView.builder(
-                physics: const BouncingScrollPhysics(),
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: widget
-                    .viewModel?.getbyidrecentlyActivitiyresponse?.data?.length,
-                padding: const EdgeInsets.only(
-                    left: 5, right: 5, top: 20, bottom: 20),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 1,
-                  mainAxisSpacing: 5,
+        context: context,
+        cacheManager: widget.cacheManager,
+        isClear: widget.isClear,
+        model: widget.model,
+      ),
+      body: widget.isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : ListView(physics: const BouncingScrollPhysics(), children: [
+              const Padding(
+                padding: EdgeInsets.only(top: 15.0),
+                child: Center(
+                  child: Text(
+                    mAnnouncement,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
-                itemBuilder: (context, index) => Container(
-                      child: Stack(fit: StackFit.expand, children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 0, bottom: 30),
-                          child: InkWell(
-                            onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: ((context) =>
-                                    DrawerAnnouncementDetailScreen(
-                                      model: widget
-                                          .viewModel
-                                          ?.getbyidrecentlyActivitiyresponse
-                                          ?.data?[index],
-                                    )),
-                              ),
-                            ),
-                            child: CustomImage(
-                              viewModel: widget.viewModel!,
-                              index: index,
-                            ),
-                          ),
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            SizedBox(
-                              height: 30,
-                              width: MediaQuery.of(context).size.width * 1,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.blue.shade100,
-                                    borderRadius: BorderRadius.circular(0)),
-                                child: Center(
-                                  child: Text(
-                                    widget
-                                            .viewModel
-                                            ?.getbyidrecentlyActivitiyresponse
-                                            ?.data?[index]
-                                            .title ??
-                                        "",
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold),
+              ),
+              HomeScreenAnnouncementWidget(widget: widget),
+              const Center(
+                child: Text(
+                  "ETKİNLİKLER",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              Observer(builder: (context) {
+                return Container(
+                  height: MediaQuery.of(context).size.height * 0.35,
+                  child: GridView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: widget.viewModel
+                          ?.getbyidrecentlyActivitiyresponse?.data?.length,
+                      padding: const EdgeInsets.only(
+                          left: 5, right: 5, top: 20, bottom: 20),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 1,
+                        mainAxisSpacing: 5,
+                      ),
+                      itemBuilder: (context, index) => Container(
+                            child: Stack(fit: StackFit.expand, children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 0, bottom: 30),
+                                child: InkWell(
+                                  onTap: () => Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: ((context) =>
+                                          DrawerAnnouncementDetailScreen(
+                                            model: widget
+                                                .viewModel
+                                                ?.getbyidrecentlyActivitiyresponse
+                                                ?.data?[index],
+                                          )),
+                                    ),
                                   ),
+                                  child: Observer(builder: (context) {
+                                    return CustomImage(
+                                      viewModel: widget.viewModel,
+                                      index: index,
+                                    );
+                                  }),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ]),
-                    )),
-          );
-        })
-      ]),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  SizedBox(
+                                    height: 30,
+                                    width:
+                                        MediaQuery.of(context).size.width * 1,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.blue.shade100,
+                                          borderRadius:
+                                              BorderRadius.circular(0)),
+                                      child: Center(
+                                        child: Text(
+                                          widget
+                                                  .viewModel
+                                                  ?.getbyidrecentlyActivitiyresponse
+                                                  ?.data?[index]
+                                                  .title ??
+                                              "",
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ]),
+                          )),
+                );
+              })
+            ]),
     );
   }
 }
@@ -115,11 +143,11 @@ class _HomePageState extends State<HomePage> {
 class CustomImage extends StatefulWidget {
   const CustomImage({
     Key? key,
-    required this.viewModel,
-    required this.index,
+    this.viewModel,
+    this.index,
   }) : super(key: key);
-  final int index;
-  final HomeViewModel viewModel;
+  final int? index;
+  final HomeViewModel? viewModel;
 
   @override
   State<CustomImage> createState() => _CustomImageState();
@@ -130,8 +158,8 @@ class _CustomImageState extends State<CustomImage> {
   void initState() {
     super.initState();
     widget.viewModel
-        .getImage(widget.viewModel.getbyidrecentlyActivitiyresponse
-                ?.data?[widget.index].imagePath ??
+        ?.getImage(widget.viewModel?.getbyidrecentlyActivitiyresponse
+                ?.data?[widget.index!].imagePath ??
             "")
         .then((value) {
       //

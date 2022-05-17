@@ -18,7 +18,7 @@ class AdminPanelService extends IAdminPanelService {
     dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
     await GetToken.getToken();
     dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
-    dio.interceptors.add(PrettyDioLogger());
+    // dio.interceptors.add(PrettyDioLogger());
     try {
       final response = await dio.get(userGetAllPath);
       if (response.statusCode == HttpStatus.ok) {
@@ -47,7 +47,7 @@ class AdminPanelService extends IAdminPanelService {
     dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
     await GetToken.getToken();
     dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
-    dio.interceptors.add(PrettyDioLogger());
+    //dio.interceptors.add(PrettyDioLogger());
     try {
       final response =
           await dio.get(userGetByComputerIdPath, queryParameters: {'id': 2});
@@ -77,7 +77,7 @@ class AdminPanelService extends IAdminPanelService {
     dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
     await GetToken.getToken();
     dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
-    dio.interceptors.add(PrettyDioLogger());
+   // dio.interceptors.add(PrettyDioLogger());
     try {
       final response =
           await dio.get(userGetByMachineIdPath, queryParameters: {'id': 1});

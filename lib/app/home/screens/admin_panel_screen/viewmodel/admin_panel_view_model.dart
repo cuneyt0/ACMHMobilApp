@@ -23,6 +23,7 @@ abstract class _AdminPanelViewModelBase with Store {
   double computerStudentValue = 0.0;
   @observable
   double machineStudentValue = 0.0;
+
   @observable
   List<Color> colorList = [
     Colors.amber,
@@ -30,18 +31,24 @@ abstract class _AdminPanelViewModelBase with Store {
     const Color(0xff3398F6),
   ];
   Future<UserGetAllResponse?> getAllUser() async {
-    //userGetAllResponse?.data?.length.toDouble()??0.0
     userGetAllResponse = await service.getAllUser();
     allStudentValue = userGetAllResponse?.data?.length.toDouble() ?? 0.0;
-    int? b = userComputerResponse?.data
-        ?.where((element) => element.departmentId == 2)
-        .length;
-    print(
-        "b degerii ${userComputerResponse?.data?.where((element) => element.departmentId == 2).length} budur");
+    computerStudentValue = userGetAllResponse?.data
+            ?.where((element) => element.departmentId == 2)
+            .length
+            .toDouble() ??
+        0.0;
+    machineStudentValue = userGetAllResponse?.data
+            ?.where((element) => element.departmentId == 1)
+            .length
+            .toDouble() ??
+        0.0;
+    print(computerStudentValue);
+    print(machineStudentValue);
     return userGetAllResponse;
   }
 
-  Future<UserGetAllResponse?> getByIdComputerUser() async {
+  /* Future<UserGetAllResponse?> getByIdComputerUser() async {
     userComputerResponse = await service.getByIdComputerUser();
     computerStudentValue = userComputerResponse?.data?.length.toDouble() ?? 0.0;
     return userComputerResponse;
@@ -51,5 +58,5 @@ abstract class _AdminPanelViewModelBase with Store {
     userMachineResponse = await service.getByIdMachineUser();
     machineStudentValue = userMachineResponse?.data?.length.toDouble() ?? 0.0;
     return userMachineResponse;
-  }
+  }*/
 }

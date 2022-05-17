@@ -18,20 +18,16 @@ class _SplashScreenState extends State<SplashScreen> {
         if (loginRes == null) {
           await Navigation.pushReplacementNamed(root: Routes.loginView);
         } else {
-          await _viewModel.getbyidrecentlyActivities();
-          await _viewModel
-              .getbyidrecently()
-              .then((value) => Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomePage(
-                        model:
-                            LoginResponseModel.fromJson(jsonDecode(loginRes)),
-                        cacheManager: cacheManager,
-                        viewModel: _viewModel,
-                      ),
-                    ),
-                  ));
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => HomePage(
+                  model: LoginResponseModel.fromJson(jsonDecode(loginRes)),
+                  cacheManager: cacheManager,
+                  viewModel: _viewModel,
+                ),
+              ),
+              (Route<dynamic> route) => false);
+          
         }
       });
     });

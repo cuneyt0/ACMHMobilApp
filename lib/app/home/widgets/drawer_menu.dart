@@ -53,9 +53,7 @@ Widget _buildNormalMenuBody(
             if (NormalMenu[index] == mExam) {
               await Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: ((context) => ExamInformationSystemScreen(
-                        model: model,
-                      )),
+                  builder: ((context) => const ExamInformationSystemScreen()),
                 ),
               );
             }
@@ -85,7 +83,7 @@ Widget _buildNormalMenuBody(
             if (NormalMenu[index] == mStudentCommunity) {
               await Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: ((context) => StudentCommunities(model: model)),
+                  builder: ((context) => const StudentCommunities()),
                 ),
               );
             }
@@ -106,18 +104,14 @@ Widget _buildAdminMenuBody(LoginResponseModel? model,
             if (AdminMenu[index] == mExam) {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: ((context) => ExamInformationSystemScreen(
-                        model: model,
-                      )),
+                  builder: ((context) => const ExamInformationSystemScreen()),
                 ),
               );
             }
             if (AdminMenu[index] == mExam) {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: ((context) => ExamInformationSystemScreen(
-                        model: model,
-                      )),
+                  builder: ((context) => const ExamInformationSystemScreen()),
                 ),
               );
             }
@@ -157,7 +151,7 @@ Widget _buildAdminMenuBody(LoginResponseModel? model,
             if (AdminMenu[index] == mStudentCommunity) {
               await Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: ((context) => StudentCommunities(model: model)),
+                  builder: ((context) => const StudentCommunities()),
                 ),
               );
             }
