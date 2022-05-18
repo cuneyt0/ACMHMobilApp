@@ -27,6 +27,8 @@ const String mShowCourseInformation = 'DERS PROGRAMI';
 const String mActivityAdd = 'ETKİNLİK EKLE';
 const String mShowActivity = 'ETKİNLİKLERİ GÖSTER';
 const String mStudentCommunity = 'ÖGRENCİ TOPLULUKLARI';
+const String mCafeteriaAdded = 'YEMEKHANE BİLGİSİ EKLE';
+const String mCafeteriaGetall = 'YEMEKHANE BİLGİLERİNİ GÖSTER';
 
 const String defaultImage = 'assets/logo/neu_logo.jpg';
 const String updateButtonText = 'Güncelle';
@@ -65,4 +67,4 @@ const String cAllActivity = 'ETKİNLİKLER';
 const String mUpdateActivityTitle = 'ETKİNLİK GÜNCELLE';
 const String tMechanicalEngineering = 'Makine Mühendisligi';
 const String tComputerEngineering = 'Makine Mühendisligi';
-const String tAllStudent= 'Genel Ögrenci Sayısı';
+const String tAllStudent = 'Genel Ögrenci Sayısı';

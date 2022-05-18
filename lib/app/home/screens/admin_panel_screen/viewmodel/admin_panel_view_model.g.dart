@@ -73,13 +73,81 @@ mixin _$AdminPanelViewModel on _AdminPanelViewModelBase, Store {
     });
   }
 
+  final _$allStudentValueAtom =
+      Atom(name: '_AdminPanelViewModelBase.allStudentValue');
+
+  @override
+  double get allStudentValue {
+    _$allStudentValueAtom.reportRead();
+    return super.allStudentValue;
+  }
+
+  @override
+  set allStudentValue(double value) {
+    _$allStudentValueAtom.reportWrite(value, super.allStudentValue, () {
+      super.allStudentValue = value;
+    });
+  }
+
+  final _$computerStudentValueAtom =
+      Atom(name: '_AdminPanelViewModelBase.computerStudentValue');
+
+  @override
+  double get computerStudentValue {
+    _$computerStudentValueAtom.reportRead();
+    return super.computerStudentValue;
+  }
+
+  @override
+  set computerStudentValue(double value) {
+    _$computerStudentValueAtom.reportWrite(value, super.computerStudentValue,
+        () {
+      super.computerStudentValue = value;
+    });
+  }
+
+  final _$machineStudentValueAtom =
+      Atom(name: '_AdminPanelViewModelBase.machineStudentValue');
+
+  @override
+  double get machineStudentValue {
+    _$machineStudentValueAtom.reportRead();
+    return super.machineStudentValue;
+  }
+
+  @override
+  set machineStudentValue(double value) {
+    _$machineStudentValueAtom.reportWrite(value, super.machineStudentValue, () {
+      super.machineStudentValue = value;
+    });
+  }
+
+  final _$colorListAtom = Atom(name: '_AdminPanelViewModelBase.colorList');
+
+  @override
+  List<Color> get colorList {
+    _$colorListAtom.reportRead();
+    return super.colorList;
+  }
+
+  @override
+  set colorList(List<Color> value) {
+    _$colorListAtom.reportWrite(value, super.colorList, () {
+      super.colorList = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
 service: ${service},
 userGetAllResponse: ${userGetAllResponse},
 userComputerResponse: ${userComputerResponse},
-userMachineResponse: ${userMachineResponse}
+userMachineResponse: ${userMachineResponse},
+allStudentValue: ${allStudentValue},
+computerStudentValue: ${computerStudentValue},
+machineStudentValue: ${machineStudentValue},
+colorList: ${colorList}
     ''';
   }
 }

@@ -29,5 +29,7 @@ const List<dynamic> AdminPanelMenu = [
   mDeparmtent,
   mShowDeparmtent,
   mActivityAdd,
-  mShowActivity
+  mShowActivity,
+  mCafeteriaAdded,
+  mCafeteriaGetall
 ];

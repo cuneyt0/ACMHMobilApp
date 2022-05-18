@@ -1,3 +1,4 @@
+import 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/screen/cafeteriaAddedScreen.dart';
 import 'package:login_work/export_import.dart';
 
 class AdminPanelDrawerMenu extends StatelessWidget {
@@ -96,6 +97,22 @@ Widget _buildAdminMenuBody(
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => AdminActivityAllScreen(model: model),
+                ),
+              );
+            }
+            if (AdminPanelMenu[index] == mCafeteriaAdded) {
+              Navigator.of(context).pop();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => CafeteriaAddedScreen(model: model),
+                ),
+              );
+            }
+            if (AdminPanelMenu[index] == mCafeteriaGetall) {
+              Navigator.of(context).pop();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => CafeteriaAddedScreen(model: model),
                 ),
               );
             }
