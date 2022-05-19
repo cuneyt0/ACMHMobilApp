@@ -4,6 +4,7 @@ class LoginView extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final HomeViewModel? viewModel = HomeViewModel();
   final LoginService loginService = LoginService(
     Dio(
       BaseOptions(
@@ -22,7 +23,7 @@ class LoginView extends StatelessWidget {
             passwordController: passwordController,
             service: loginService),
         child: BlocConsumer<LoginCubit, LoginState>(
-          listener: (context, state) {
+          listener: (context, state) async {
             if (state is LoginComplete) {
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(
@@ -30,6 +31,7 @@ class LoginView extends StatelessWidget {
                       model: state.model,
                       cacheManager: state.cacheManager,
                       isClear: state.isClear,
+                      viewModel: viewModel,
                     ),
                   ),
                   (Route<dynamic> route) => false);
