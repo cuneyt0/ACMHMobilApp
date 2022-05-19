@@ -121,3 +121,5 @@ export 'package:login_work/app/home/screens/admin_panel_screen/department_screen
 export 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/service/AdminCafeteriaService.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/service/IAdminCafeteriaService.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/viewModel/all/admin_cafeteria_viewmodel.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/viewModel/update/admin_cafeteria_update_viewmodel.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/viewmodel/admin_panel_view_model.dart';

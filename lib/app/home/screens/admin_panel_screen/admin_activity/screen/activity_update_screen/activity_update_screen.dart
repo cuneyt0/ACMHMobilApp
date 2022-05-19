@@ -21,7 +21,6 @@ class ActivityUpdateScreen extends StatefulWidget {
 }
 
 class _ActivityUpdateScreenState extends State<ActivityUpdateScreen> {
-  bool isLoading = true;
   @override
   void initState() {
     widget.viewModel?.setBuildContext(context);
@@ -109,7 +108,6 @@ class _ActivityUpdateScreenState extends State<ActivityUpdateScreen> {
                     }
                     widget.viewModel?.dropdownvalue = selected;
                     widget.viewModel?.selectedDepartmentId = selected?.id;
-                  
                   },
                 ),
               ),

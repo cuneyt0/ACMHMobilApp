@@ -1,3 +1,4 @@
+import 'package:login_work/app/home/screens/admin_panel_screen/viewmodel/admin_panel_view_model.dart';
 import 'package:login_work/export_import.dart';
 import 'package:mobx/mobx.dart';
 part 'admin_activity_add_viewmodel.g.dart';
@@ -59,6 +60,8 @@ abstract class _ActivityAddViewModelBase extends BaseViewModelProtocol
   int? userId;
   @observable
   int? id;
+  @observable
+  AdminPanelViewModel? adminPanelViewModel = AdminPanelViewModel();
 
   @override
   void setBuildContext(BuildContext buildContext) =>
@@ -162,8 +165,9 @@ abstract class _ActivityAddViewModelBase extends BaseViewModelProtocol
         ).show(buildContext).then((value) {
           //Navigator.of(buildContext).pop();
           Navigator.of(buildContext).push(MaterialPageRoute(
-            builder: (context) =>
-                AdminPanelScreen(model: GetToken.loginResponseModel),
+            builder: (context) => AdminPanelScreen(
+                model: GetToken.loginResponseModel,
+                viewModel: adminPanelViewModel),
           ));
         });
       } else if (postRequestData is BaseErrorResponseModel) {

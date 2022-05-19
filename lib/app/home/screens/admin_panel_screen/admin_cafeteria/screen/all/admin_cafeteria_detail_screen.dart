@@ -1,3 +1,4 @@
+import 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/screen/update/admin_cafeteria_update_screen.dart';
 import 'package:login_work/export_import.dart';
 
 class AdminCafeteriaDetailScreen extends StatefulWidget {
@@ -43,18 +44,15 @@ class _AdminCafeteriaDetailScreenState
           child: ElevatedButton(
             onPressed: () {
               print("tıklanıldı");
-              /* Navigator.of(context).pop();
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => ActivityUpdateScreen(
-                                  viewModel: addViewModel,
-                                  data: widget.responseData,
-                                  items: items,
-                                  model: widget.model,
-                                  getAllViewModel: viewModel,
-                                ),
-                              ),
-                            );*/
+              Navigator.of(context).pop();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => CafeteriaUpdateScreen(
+                    data: widget.responseData,
+                    model: widget.model,
+                  ),
+                ),
+              );
             },
             child: const Text(updateButtonText),
           ),

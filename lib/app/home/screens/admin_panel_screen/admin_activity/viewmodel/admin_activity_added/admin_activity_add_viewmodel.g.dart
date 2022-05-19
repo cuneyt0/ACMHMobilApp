@@ -399,6 +399,22 @@ mixin _$ActivityAddViewModel on _ActivityAddViewModelBase, Store {
     });
   }
 
+  final _$adminPanelViewModelAtom =
+      Atom(name: '_ActivityAddViewModelBase.adminPanelViewModel');
+
+  @override
+  AdminPanelViewModel? get adminPanelViewModel {
+    _$adminPanelViewModelAtom.reportRead();
+    return super.adminPanelViewModel;
+  }
+
+  @override
+  set adminPanelViewModel(AdminPanelViewModel? value) {
+    _$adminPanelViewModelAtom.reportWrite(value, super.adminPanelViewModel, () {
+      super.adminPanelViewModel = value;
+    });
+  }
+
   final _$uploadPdfAsyncAction =
       AsyncAction('_ActivityAddViewModelBase.uploadPdf');
 
@@ -519,7 +535,8 @@ compressImagePath: ${compressImagePath},
 compressImageSize: ${compressImageSize},
 isLoading: ${isLoading},
 userId: ${userId},
-id: ${id}
+id: ${id},
+adminPanelViewModel: ${adminPanelViewModel}
     ''';
   }
 }

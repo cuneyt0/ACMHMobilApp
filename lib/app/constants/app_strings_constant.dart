@@ -68,3 +68,4 @@ const String mUpdateActivityTitle = 'ETKİNLİK GÜNCELLE';
 const String tMechanicalEngineering = 'Makine Mühendisligi';
 const String tComputerEngineering = 'Makine Mühendisligi';
 const String tAllStudent = 'Genel Ögrenci Sayısı';
+const String mUpdateCafeteriaTitle = 'YEMEKHANE BİLGİSİ GÜNCELLE';

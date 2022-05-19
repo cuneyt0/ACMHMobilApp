@@ -35,9 +35,9 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
   @override
   Widget build(BuildContext context) {
     Map<String, double> dataMap = {
-      'Genel Ögrenci Sayısı': widget.viewModel!.allStudentValue,
-      'Bilgisayar Mühendisligi': widget.viewModel!.computerStudentValue,
-      'Makine Mühendisligi': widget.viewModel!.machineStudentValue,
+      'Genel Ögrenci Sayısı': widget.viewModel?.allStudentValue??0,
+      'Bilgisayar Mühendisligi': widget.viewModel?.computerStudentValue??0,
+      'Makine Mühendisligi': widget.viewModel?.machineStudentValue??0,
     };
     return Scaffold(
       appBar: AppBar(
