@@ -11,15 +11,60 @@ class AdminCafeteriaService extends IAdminCafeteriaService {
   AdminCafeteriaService({required Dio dio}) : super(dio: dio);
 
   @override
-  Future<BaseResponseModel?> deleteCafeteria(int? id) {
-    // TODO: implement deleteCafeteria
-    throw UnimplementedError();
+  Future<BaseResponseModel?> deleteCafeteria(int? id) async {
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
+    dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
+    await GetToken.getToken();
+    dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
+    dio.interceptors.clear();
+    try {
+      final response = await dio.delete(cafeteriaDeletePath, data: {'id': id});
+      if (response.statusCode == HttpStatus.ok) {
+        return BaseResponseModel.fromJson(response.data);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      if ((e as DioError).response != null) {
+        return e.response?.data;
+      } else {
+        "Hata Gerçekleşti";
+      }
+    }
   }
 
   @override
-  Future<NoticeGetAllResponseModel?> getAllCafeteria() {
-    // TODO: implement getAllCafeteria
-    throw UnimplementedError();
+  Future<NoticeGetAllResponseModel?> getAllCafeteria() async {
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
+
+    dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
+    await GetToken.getToken();
+    dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
+    dio.interceptors.add(PrettyDioLogger());
+    try {
+      final response = await dio.get(cafeteriaAllPath);
+      if (response.statusCode == HttpStatus.ok) {
+        return NoticeGetAllResponseModel.fromJson(response.data);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      if ((e as DioError).response != null) {
+        return e.response?.data;
+      } else {
+        "Hata Gerçekleşti";
+      }
+    }
   }
 
   @override

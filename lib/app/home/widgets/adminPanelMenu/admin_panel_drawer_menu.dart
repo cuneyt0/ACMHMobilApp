@@ -1,4 +1,5 @@
-import 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/screen/cafeteriaAddedScreen.dart';
+import 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/screen/added/cafeteriaAddedScreen.dart';
+import 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/screen/all/admin_cafeteria_all_screen.dart';
 import 'package:login_work/export_import.dart';
 
 class AdminPanelDrawerMenu extends StatelessWidget {
@@ -112,7 +113,7 @@ Widget _buildAdminMenuBody(
               Navigator.of(context).pop();
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => CafeteriaAddedScreen(model: model),
+                  builder: (context) => AdminCafeteriaAllScreen(model: model),
                 ),
               );
             }

@@ -118,4 +118,6 @@ export 'package:login_work/app/home/screens/admin_panel_screen/department_screen
 export 'package:login_work/app/home/screens/admin_panel_screen/department_screen/model/department_update_request_model.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/department_screen/service/IDeparmentAddService.dart';
 export 'package:login_work/app/home/screens/admin_panel_screen/department_screen/service/DeparmentAddService.dart';
-
+export 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/service/AdminCafeteriaService.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/service/IAdminCafeteriaService.dart';
+export 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/viewModel/all/admin_cafeteria_viewmodel.dart';

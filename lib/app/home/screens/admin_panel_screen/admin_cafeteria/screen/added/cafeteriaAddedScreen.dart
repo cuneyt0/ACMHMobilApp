@@ -1,4 +1,4 @@
-import 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/viewModel/admin_cafeteria_viewmodel.dart';
+import 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/viewModel/added/admin_cafeteria_viewmodel.dart';
 import 'package:login_work/core/extension/context_extension.dart';
 import 'package:login_work/export_import.dart';
 
