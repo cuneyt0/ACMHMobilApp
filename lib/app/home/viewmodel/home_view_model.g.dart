@@ -197,6 +197,45 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
     });
   }
 
+  final _$aAtom = Atom(name: '_HomeViewModelBase.a');
+
+  @override
+  CafeteriaViewModel? get a {
+    _$aAtom.reportRead();
+    return super.a;
+  }
+
+  @override
+  set a(CafeteriaViewModel? value) {
+    _$aAtom.reportWrite(value, super.a, () {
+      super.a = value;
+    });
+  }
+
+  final _$responseModelAtom = Atom(name: '_HomeViewModelBase.responseModel');
+
+  @override
+  NoticeGetAllResponseModel? get responseModel {
+    _$responseModelAtom.reportRead();
+    return super.responseModel;
+  }
+
+  @override
+  set responseModel(NoticeGetAllResponseModel? value) {
+    _$responseModelAtom.reportWrite(value, super.responseModel, () {
+      super.responseModel = value;
+    });
+  }
+
+  final _$getCafeteriRecentlyAsyncAction =
+      AsyncAction('_HomeViewModelBase.getCafeteriRecently');
+
+  @override
+  Future<NoticeGetAllResponseModel?> getCafeteriRecently() {
+    return _$getCafeteriRecentlyAsyncAction
+        .run(() => super.getCafeteriRecently());
+  }
+
   final _$getbyidrecentlyAsyncAction =
       AsyncAction('_HomeViewModelBase.getbyidrecently');
 
@@ -288,7 +327,9 @@ photo: ${photo},
 data: ${data},
 file: ${file},
 getbyidrecentlyresponse: ${getbyidrecentlyresponse},
-getbyidrecentlyActivitiyresponse: ${getbyidrecentlyActivitiyresponse}
+getbyidrecentlyActivitiyresponse: ${getbyidrecentlyActivitiyresponse},
+a: ${a},
+responseModel: ${responseModel}
     ''';
   }
 }

@@ -1,6 +1,7 @@
 import 'package:login_work/app/home/screens/activities/screen/drawer_activity_screen.dart';
 import 'package:login_work/app/home/screens/admin_panel_screen/viewmodel/admin_panel_view_model.dart';
 import 'package:login_work/app/home/screens/announcements/screen/drawermenu_Announcement_screen.dart';
+import 'package:login_work/app/home/screens/cafeteria/screen/cafeteria_screen.dart';
 import 'package:login_work/app/home/screens/courseInformation/course_information.dart';
 import 'package:login_work/app/home/screens/studentCommunities/student_communities.dart';
 import 'package:login_work/export_import.dart';
@@ -80,6 +81,13 @@ Widget _buildNormalMenuBody(
                 ),
               );
             }
+            if (NormalMenu[index] == mFood) {
+              await Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: ((context) => const CafeteriaScreen()),
+                ),
+              );
+            }
             if (NormalMenu[index] == mStudentCommunity) {
               await Navigator.of(context).push(
                 MaterialPageRoute(
@@ -108,10 +116,10 @@ Widget _buildAdminMenuBody(LoginResponseModel? model,
                 ),
               );
             }
-            if (AdminMenu[index] == mExam) {
-              Navigator.of(context).push(
+            if (AdminMenu[index] == mFood) {
+              await Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: ((context) => const ExamInformationSystemScreen()),
+                  builder: ((context) => const CafeteriaScreen()),
                 ),
               );
             }

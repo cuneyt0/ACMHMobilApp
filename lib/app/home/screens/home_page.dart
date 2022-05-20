@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> getAllData() async {
     await widget.viewModel?.getbyidrecentlyActivities();
     await widget.viewModel?.getbyidrecently();
+    await widget.viewModel?.getCafeteriRecently();
   }
 
   bool _isLoading = true;
@@ -62,77 +63,94 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
-              Observer(builder: (context) {
-                return Container(
-                  height: MediaQuery.of(context).size.height * 0.35,
-                  child: GridView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: widget.viewModel
-                          ?.getbyidrecentlyActivitiyresponse?.data?.length,
-                      padding: const EdgeInsets.only(
-                          left: 5, right: 5, top: 20, bottom: 20),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1,
-                        mainAxisSpacing: 5,
-                      ),
-                      itemBuilder: (context, index) => Container(
-                            child: Stack(fit: StackFit.expand, children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 0, bottom: 30),
-                                child: InkWell(
-                                  onTap: () => Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: ((context) =>
-                                          DrawerAnnouncementDetailScreen(
-                                            model: widget
-                                                .viewModel
-                                                ?.getbyidrecentlyActivitiyresponse
-                                                ?.data?[index],
-                                          )),
+              HomeScreenActivityWidget(widget: widget),
+              const Center(
+                child: Text(
+                  "YEMEKHANE",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.32,
+                child: Observer(
+                  builder: (context) => widget.viewModel?.responseModel?.data ==
+                          null
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : GridView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          padding: const EdgeInsets.only(
+                              left: 5, right: 5, top: 20, bottom: 20),
+                          itemCount:
+                              widget.viewModel?.responseModel?.data?.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 1,
+                                  mainAxisSpacing: 5,
+                                  crossAxisSpacing: 5),
+                          itemBuilder: (context, index) => Column(
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 1,
+                                height: 30,
+                                child: Card(
+                                  child: Center(
+                                    child: Text(
+                                      widget.viewModel!.dateFormat(DateTime.parse(
+                                          '${widget.viewModel?.responseModel?.data?[index].updatedAt}')),
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                  ),
-                                  child: CustomImage(
-                                    viewModel: widget.viewModel,
-                                    index: index,
                                   ),
                                 ),
                               ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  SizedBox(
-                                    height: 30,
-                                    width:
-                                        MediaQuery.of(context).size.width * 1,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.blue.shade100,
-                                          borderRadius:
-                                              BorderRadius.circular(0)),
-                                      child: Center(
-                                        child: Text(
-                                          widget
-                                                  .viewModel
-                                                  ?.getbyidrecentlyActivitiyresponse
-                                                  ?.data?[index]
-                                                  .title ??
-                                              "",
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
+                              InkWell(
+                                onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: ((context) =>
+                                        DrawerAnnouncementDetailScreen(
+                                          model: widget.viewModel?.responseModel
+                                              ?.data?[index],
+                                        )),
+                                  ),
+                                ),
+                                child: Container(
+                                  height: 100,
+                                  width: MediaQuery.of(context).size.width * 1,
+                                  decoration: BoxDecoration(
+                                      color: Colors.blue,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Padding(
+                                    padding: widget
+                                                .viewModel
+                                                ?.responseModel
+                                                ?.data?[index]
+                                                .title
+                                                ?.length
+                                                .isOdd !=
+                                            false
+                                        ? const EdgeInsets.all(20)
+                                        : const EdgeInsets.all(0),
+                                    child: Center(
+                                      child: Text(
+                                        widget.viewModel?.responseModel
+                                                ?.data?[index].title ??
+                                            "",
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                   ),
-                                ],
+                                ),
                               ),
-                            ]),
-                          )),
-                );
-              })
+                            ],
+                          ),
+                        ),
+                ),
+              ),
             ]),
     );
   }

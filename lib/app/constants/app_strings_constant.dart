@@ -13,7 +13,7 @@ const String aTitle = "Başlık Ekle";
 const String aContent = "Içerik";
 // Drawer Menu Item
 const String mHome = 'ANASAYFA';
-const String mFood = 'YEMEK SAYFASI';
+const String mFood = 'YEMEKHANE BİLGİLERİ';
 const String mAnnouncement = 'DUYURULAR';
 const String mExam = 'SINAV BİLGİ SİSTEMİ';
 const String mActivity = 'ETKİNLİKLER';

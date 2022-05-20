@@ -3,7 +3,7 @@ import '../../export_import.dart';
 // ignore: constant_identifier_names
 const List<String> AdminMenu = [
   mHome,
-  // mFood,
+  mFood,
   mShowCourseInformation,
   mExam,
   mAnnouncement,
@@ -14,7 +14,7 @@ const List<String> AdminMenu = [
 // ignore: constant_identifier_names
 const List<String> NormalMenu = [
   mHome,
-//  mFood,
+  mFood,
   mShowCourseInformation,
   mExam,
   mAnnouncement,

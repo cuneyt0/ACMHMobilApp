@@ -87,7 +87,7 @@ class _DrawerAnnouncementDetailScreenState
                       padding: const EdgeInsets.only(left: 5.0, right: 5),
                       child: Expanded(
                         child: ReadMoreText(
-                          '${widget.model?.content}',
+                          '${widget.model?.content ?? ' '}',
                           trimLines: 4,
                           colorClickableText: Colors.pink,
                           trimMode: TrimMode.Line,

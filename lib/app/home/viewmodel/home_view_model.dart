@@ -34,6 +34,16 @@ abstract class _HomeViewModelBase with Store {
   @observable
   NoticeGetAllResponseModel? getbyidrecentlyActivitiyresponse =
       NoticeGetAllResponseModel();
+  @observable
+  CafeteriaViewModel? a = CafeteriaViewModel();
+  @observable
+  NoticeGetAllResponseModel? responseModel = NoticeGetAllResponseModel();
+
+  @action
+  Future<NoticeGetAllResponseModel?> getCafeteriRecently() async {
+  
+    return responseModel = await a?.service.getCafeteriRecently();
+  }
 
   @action
   Future<NoticeGetAllResponseModel?> getbyidrecently() async {
@@ -158,7 +168,7 @@ abstract class _HomeViewModelBase with Store {
           queryParameters: {'fileName': fileName},
           options: Options(responseType: ResponseType.bytes));
       if (response.statusCode == HttpStatus.ok) {
-       // photo = response.data;
+        // photo = response.data;
         return response.data;
       } else {
         print("getImage null");
