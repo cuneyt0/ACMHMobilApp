@@ -103,6 +103,22 @@ mixin _$AdminCafeteriaGetAllViewModel
     });
   }
 
+  final _$userGetByIdModelAtom =
+      Atom(name: '_AdminCafeteriaGetAllViewModelBase.userGetByIdModel');
+
+  @override
+  UserGetByIdModel? get userGetByIdModel {
+    _$userGetByIdModelAtom.reportRead();
+    return super.userGetByIdModel;
+  }
+
+  @override
+  set userGetByIdModel(UserGetByIdModel? value) {
+    _$userGetByIdModelAtom.reportWrite(value, super.userGetByIdModel, () {
+      super.userGetByIdModel = value;
+    });
+  }
+
   final _$getAllCafeteriaAsyncAction =
       AsyncAction('_AdminCafeteriaGetAllViewModelBase.getAllCafeteria');
 
@@ -117,6 +133,14 @@ mixin _$AdminCafeteriaGetAllViewModel
   @override
   Future<dynamic> getPdfShow(String fileName) {
     return _$getPdfShowAsyncAction.run(() => super.getPdfShow(fileName));
+  }
+
+  final _$getByIdUserAsyncAction =
+      AsyncAction('_AdminCafeteriaGetAllViewModelBase.getByIdUser');
+
+  @override
+  Future<UserGetByIdModel?> getByIdUser(int? id) {
+    return _$getByIdUserAsyncAction.run(() => super.getByIdUser(id));
   }
 
   final _$deleteCafeteriaAsyncAction =
@@ -150,7 +174,8 @@ file: ${file},
 dio: ${dio},
 cafeteriaService: ${cafeteriaService},
 getAllResponse: ${getAllResponse},
-deleteResponse: ${deleteResponse}
+deleteResponse: ${deleteResponse},
+userGetByIdModel: ${userGetByIdModel}
     ''';
   }
 }

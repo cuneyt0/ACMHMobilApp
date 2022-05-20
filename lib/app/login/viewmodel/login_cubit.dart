@@ -10,7 +10,7 @@ class LoginCubit extends Cubit<LoginState> with CacheManager {
   bool isLoading = false;
   bool isClear = false;
   final ILoginService service;
-  bool showObsecure = true;
+  bool showObsecure = false;
 
   LoginCubit(
       {required this.formKey,

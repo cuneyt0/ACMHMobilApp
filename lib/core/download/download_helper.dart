@@ -66,10 +66,7 @@ class SaveFileManager {
 
         }
       }
-    } on Exception  {
-
-
-    }
+    } on Exception  {}
   }
 
   static Future<bool> storagePermission(Permission permission) async {

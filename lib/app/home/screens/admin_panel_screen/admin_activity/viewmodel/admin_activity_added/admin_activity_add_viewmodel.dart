@@ -114,7 +114,7 @@ abstract class _ActivityAddViewModelBase extends BaseViewModelProtocol
             CropAspectRatioPreset.ratio16x9,
           ],
           compressFormat: ImageCompressFormat.jpg);
-      cropImagePath = cropImageFile!.path;
+      cropImagePath = cropImageFile?.path ?? ' ';
 
       cropImageSize = ((File(cropImagePath ?? '-')).lengthSync() / 1024 / 1024)
               .toStringAsFixed(2) +

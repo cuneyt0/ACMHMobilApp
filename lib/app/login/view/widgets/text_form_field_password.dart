@@ -5,8 +5,8 @@ TextFormField buildTextFormFieldPassword(BuildContext context, LoginState state,
   return TextFormField(
     controller: passwordController,
     obscureText: state is showObsecureToggleState
-        ? (state.showObsecure ? true : false)
-        : false,
+        ? (state.showObsecure ? false : true)
+        : true,
     keyboardType: TextInputType.number,
     style: const TextStyle(color: Colors.white),
     validator: (value) => (value ?? '').length > 2 ? null : '2 ten küçük',
@@ -15,9 +15,9 @@ TextFormField buildTextFormFieldPassword(BuildContext context, LoginState state,
           onPressed: () => context.read<LoginCubit>().showObsecureToggle(),
           icon: state is showObsecureToggleState
               ? (state.showObsecure
-                  ? const Icon(Icons.visibility_off)
-                  : const Icon(Icons.visibility))
-              : const Icon(Icons.visibility)),
+                  ? const Icon(Icons.visibility)
+                  : const Icon(Icons.visibility_off))
+              : const Icon(Icons.visibility_off)),
       focusedBorder: const OutlineInputBorder(
         borderSide: BorderSide(color: Colors.white),
       ),

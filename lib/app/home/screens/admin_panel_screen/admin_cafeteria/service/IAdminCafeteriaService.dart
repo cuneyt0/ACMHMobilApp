@@ -6,8 +6,7 @@ abstract class IAdminCafeteriaService {
   final String cafeteriaAddPath = IAdminCafeteriaServicePath.POST.rawValue;
   final String cafeteriaAllPath = IAdminCafeteriaServicePath.GETALL.rawValue;
   final String cafeteriaDeletePath = IAdminCafeteriaServicePath.DELETE.rawValue;
-  final String cafeteriaGetByIdDepartmentPath =
-      IAdminCafeteriaServicePath.GETBYDEPARTMENTID.rawValue;
+
   final String cafeteriaGetByIdUserPath =
       IAdminCafeteriaServicePath.GETBYDEPARTMENTID.rawValue;
   final String cafeteriaUpdatePath = IAdminCafeteriaServicePath.UPDATE.rawValue;
@@ -15,7 +14,6 @@ abstract class IAdminCafeteriaService {
   Future<dynamic?> postCafeteria(NoticeRequestModel model);
   Future<NoticeGetAllResponseModel?> getAllCafeteria();
   Future<BaseResponseModel?> deleteCafeteria(int? id);
-  Future<DepartmentGetByIdModel?> getByIdDepartment(int? id);
   Future<UserGetByIdModel?> getByIdUser(int? id);
   Future<dynamic?> updateCafeteria(NoticeRequestModel model);
 }

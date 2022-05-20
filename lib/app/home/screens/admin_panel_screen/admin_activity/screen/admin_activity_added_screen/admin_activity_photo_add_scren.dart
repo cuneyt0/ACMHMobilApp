@@ -4,8 +4,8 @@ class AdminActivityPhotoScreen extends StatelessWidget {
   const AdminActivityPhotoScreen({Key? key}) : super(key: key);
 
   @override
- Widget build(BuildContext context) {
-final ActivityAddViewModel? viewModel = ActivityAddViewModel();
+  Widget build(BuildContext context) {
+    final ActivityAddViewModel? viewModel = ActivityAddViewModel();
     return SafeArea(
       child: Observer(
         builder: (context) => Scaffold(
@@ -72,10 +72,10 @@ final ActivityAddViewModel? viewModel = ActivityAddViewModel();
                     color: Colors.grey,
                     child: Image.file(
                       File(
-                        viewModel?.cropImagePath??'',
+                        viewModel?.cropImagePath ?? '',
                       ),
                       height: MediaQuery.of(context).size.height,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                     ),
                   ),
           ),

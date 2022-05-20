@@ -95,12 +95,10 @@ class _HomePageState extends State<HomePage> {
                                           )),
                                     ),
                                   ),
-                                  child: Observer(builder: (context) {
-                                    return CustomImage(
-                                      viewModel: widget.viewModel,
-                                      index: index,
-                                    );
-                                  }),
+                                  child: CustomImage(
+                                    viewModel: widget.viewModel,
+                                    index: index,
+                                  ),
                                 ),
                               ),
                               Column(

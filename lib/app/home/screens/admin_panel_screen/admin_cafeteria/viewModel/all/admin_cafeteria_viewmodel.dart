@@ -20,6 +20,10 @@ abstract class _AdminCafeteriaGetAllViewModelBase extends BaseViewModelProtocol
   NoticeGetAllResponseModel? getAllResponse = NoticeGetAllResponseModel();
   @observable
   BaseResponseModel? deleteResponse = BaseResponseModel();
+  @observable
+  UserGetByIdModel? userGetByIdModel = UserGetByIdModel();
+  IAdminCafeteriaService cafeteriaServiceTwo =
+      AdminCafeteriaService(dio: Dio(BaseOptions(baseUrl: allUserUrl)));
   @action
   Future<NoticeGetAllResponseModel?> getAllCafeteria() async {
     return getAllResponse = await cafeteriaService.getAllCafeteria();
@@ -54,6 +58,11 @@ abstract class _AdminCafeteriaGetAllViewModelBase extends BaseViewModelProtocol
         "Hata Gerçekleşti";
       }
     }
+  }
+
+  @action
+  Future<UserGetByIdModel?> getByIdUser(int? id) async {
+    return userGetByIdModel = await cafeteriaServiceTwo.getByIdUser(id);
   }
 
   @action

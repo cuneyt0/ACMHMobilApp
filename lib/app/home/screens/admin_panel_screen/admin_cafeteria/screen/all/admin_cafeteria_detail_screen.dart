@@ -26,6 +26,7 @@ class _AdminCafeteriaDetailScreenState
         setState(() {});
       }
     });
+    viewModel?.getByIdUser(widget.responseData?.userId);
     super.initState();
   }
 
@@ -60,32 +61,95 @@ class _AdminCafeteriaDetailScreenState
       ),
       body: Observer(
         builder: (context) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
-            child: Center(
-              child: SizedBox(
-                height: MediaQuery.of(context).size.width * 0.5,
-                width: MediaQuery.of(context).size.width * 0.98,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    if (viewModel?.file?.path == null) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => const AlertDialog(
-                          title: Center(
-                            child: Text(mNoPDf),
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.6,
+                  width: MediaQuery.of(context).size.width * 0.98,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: CircleBorder(),
+                      padding: EdgeInsets.all(20),
+                    ),
+                    onPressed: () async {
+                      if (viewModel?.file?.path == null) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => const AlertDialog(
+                            title: Center(
+                              child: Text(mNoPDf),
+                            ),
                           ),
-                        ),
-                      );
-                    } else {
-                      await OpenFile.open(
-                          viewModel?.file?.path ?? 'file path null');
-                    }
-                  },
-                  child: const Text(mShowPDf),
+                        );
+                      } else {
+                        await OpenFile.open(
+                            viewModel?.file?.path ?? 'file path null');
+                      }
+                    },
+                    child: const Text(mShowPDf),
+                  ),
                 ),
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.only(top: 5.0, left: 10.0, right: 10),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        const Expanded(
+                            child: Text(
+                          noticeCreatedAt,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )),
+                        Text(
+                          viewModel?.dateFormat(DateTime.parse(
+                                  '${widget.responseData?.createdAt}')) ??
+                              '',
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 5.0,
+                      ),
+                      child: Row(
+                        children: [
+                          const Expanded(
+                              child: Text(
+                            noticeUpdateAt,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          )),
+                          Text(
+                            viewModel?.dateFormat(
+                                  DateTime.parse(
+                                      '${widget.responseData?.updatedAt}'),
+                                ) ??
+                                '',
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5.0),
+                      child: Row(
+                        children: [
+                          const Expanded(
+                              child: Text(
+                            mCreatedUser,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          )),
+                          Text(
+                              '${viewModel?.userGetByIdModel?.data?.firstName} ${viewModel?.userGetByIdModel?.data?.lastName}'),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           );
         },
       ),

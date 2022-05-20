@@ -149,6 +149,7 @@ class AdminActivityService extends IAdminActivityService {
       final response =
           await dio.get(activityGetByIdUserPath, queryParameters: {'id': id});
       if (response.statusCode == HttpStatus.ok) {
+        print(response.data);
         return UserGetByIdModel.fromJson(response.data);
       } else {
         return null;
