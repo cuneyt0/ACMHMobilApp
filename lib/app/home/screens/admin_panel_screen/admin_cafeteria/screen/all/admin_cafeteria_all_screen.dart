@@ -1,4 +1,5 @@
 import 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/screen/all/admin_cafeteria_detail_screen.dart';
+import 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/widget/all/adminCafeteriaAllScreenBodyWidget.dart';
 import 'package:login_work/export_import.dart';
 
 class AdminCafeteriaAllScreen extends StatefulWidget {
@@ -25,58 +26,12 @@ class _AdminCafeteriaAllScreenState extends State<AdminCafeteriaAllScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text("YEMEKHANE BİLGİLERİ"),
+          title: const Text(mFood),
         ),
         body: Observer(
           builder: (context) {
-            return ListView.builder(
-              itemCount: viewModel?.getAllResponse?.data?.length,
-              itemBuilder: (context, index) => Card(
-                child: ListTile(
-                  onTap: (() => Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: ((context) => AdminCafeteriaDetailScreen(
-                                model: widget.model,
-                                responseData:
-                                    viewModel?.getAllResponse?.data?[index],
-                              )),
-                        ),
-                      )),
-                  title: Text(viewModel?.getAllResponse?.data?[index].title ??
-                      mLoading),
-                  trailing: IconButton(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Center(
-                            child: Text(noticeDeleteText),
-                          ),
-                          content: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              ElevatedButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: const Text(btnCancel),
-                              ),
-                              ElevatedButton(
-                                onPressed: () => viewModel?.deleteCafeteria(
-                                    viewModel
-                                            ?.getAllResponse?.data?[index].id ??
-                                        0),
-                                child: const Text(noticeDeleteBtnText),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.delete),
-                  ),
-                ),
-              ),
-            );
+            return AdminCafeteriaAllScreenBodyWidget(
+                viewModel: viewModel, widget: widget);
           },
         ),
       );

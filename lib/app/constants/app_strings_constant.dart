@@ -69,3 +69,5 @@ const String tMechanicalEngineering = 'Makine Mühendisligi';
 const String tComputerEngineering = 'Makine Mühendisligi';
 const String tAllStudent = 'Genel Ögrenci Sayısı';
 const String mUpdateCafeteriaTitle = 'YEMEKHANE BİLGİSİ GÜNCELLE';
+const String mCafeteriaTitle = 'YEMEK BİLGİSİ';
+const String mCafeteriaAddedTitle = 'YEMEKHANE BİLGİSİ EKLE';

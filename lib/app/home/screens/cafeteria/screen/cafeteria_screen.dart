@@ -19,7 +19,7 @@ class _CafeteriaScreenState extends State<CafeteriaScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("YEMEK BİLGİSİ"),
+        title: const Text(mCafeteriaTitle),
       ),
       body: Observer(
         builder: (context) => ListView.builder(
@@ -33,8 +33,7 @@ class _CafeteriaScreenState extends State<CafeteriaScreen> {
                       )),
                 ),
               ),
-              title: Text(
-                  '${_viewModel?.responseModel?.data?[index].title ?? ""}'),
+              title: Text('${_viewModel?.responseModel?.data?[index].title}'),
             ),
           ),
         ),

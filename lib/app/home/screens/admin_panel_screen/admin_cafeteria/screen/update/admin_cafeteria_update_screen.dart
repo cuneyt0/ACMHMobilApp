@@ -32,8 +32,9 @@ class _CafeteriaUpdateScreenState extends State<CafeteriaUpdateScreen> {
       bottomNavigationBar: ElevatedButton(
           onPressed: () async => await _viewModel?.updateActivity(),
           child: Text("Kaydet")),
-      body: Observer(builder: (context) {
-        return Form(
+      body: Observer(
+        builder: (context) {
+          return Form(
             key: _viewModel?.formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -84,8 +85,10 @@ class _CafeteriaUpdateScreenState extends State<CafeteriaUpdateScreen> {
                   ),
                 )
               ],
-            ));
-      }),
+            ),
+          );
+        },
+      ),
     );
   }
 }
