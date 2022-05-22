@@ -58,7 +58,8 @@ dependencies:
   readmore: ^2.1.0
   custom_clippers: ^1.0.0
   pie_chart: ^5.3.0
-  
+  firebase_messaging: ^11.4.0
+  firebase_core: ^1.17.0
 
 dev_dependencies:
   flutter_test:

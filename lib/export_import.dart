@@ -127,3 +127,5 @@ export 'package:login_work/app/home/screens/cafeteria/service/IPublicCafeteriaSe
 export 'package:login_work/app/home/screens/cafeteria/service/PublicCafeteriaService.dart';
 export 'package:login_work/app/home/screens/cafeteria/viewmodel/cafeteria_view_model.dart';
 export 'package:login_work/app/home/widgets/homeScreen/home_screen_activity.dart';
+export 'package:login_work/app/home/widgets/homeScreen/home_screen_cafeteria_widget.dart';
+export 'package:login_work/app/home/widgets/homeScreen/custom_image.dart';
