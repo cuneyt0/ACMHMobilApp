@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "475388904305",
+    "project_id": "acmf-b70c2",
+    "storage_bucket": "acmf-b70c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:475388904305:android:b72007b0265e86ccef6cd0",
+        "android_client_info": {
+          "package_name": "com.example.login_work"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "475388904305-m878orb4t94eukr94affkbj2u2brdge4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJdF9XskouRosWNywudww4uZppsa2S5zg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "475388904305-m878orb4t94eukr94affkbj2u2brdge4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

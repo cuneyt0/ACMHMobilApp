@@ -1,4 +1,3 @@
-
 import '../../../export_import.dart';
 
 class HomePage extends StatefulWidget {
@@ -71,11 +70,10 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
-              HomeScreenCafeteriaWidget(widget: widget, ),
+              HomeScreenCafeteriaWidget(
+                widget: widget,
+              ),
             ]),
     );
   }
 }
-
-
-

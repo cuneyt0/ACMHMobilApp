@@ -16,10 +16,18 @@ class DrawerMenu extends StatelessWidget {
   bool? isClear;
   int? index;
   AdminPanelViewModel viewModel = AdminPanelViewModel();
+  String? yetki;
 
   @override
   Widget build(BuildContext context) {
-    var adminYetkisi = model?.userClaims?[0].name == 'admin';
+    model?.userClaims?.forEach(
+      (element) {
+        if (element.name == 'admin') {
+          yetki = element.name;
+        }
+      },
+    );
+
     return Container(
       child: Drawer(
           child: Container(
@@ -29,7 +37,7 @@ class DrawerMenu extends StatelessWidget {
             Expanded(child: _buildMenuHeader(model)),
             Expanded(
                 flex: 4,
-                child: adminYetkisi
+                child: yetki == 'admin'
                     ? _buildAdminMenuBody(model, cacheManager, viewModel)
                     : _buildNormalMenuBody(model, cacheManager)),
             _buildMenuExit(context, model, cacheManager, isClear),
