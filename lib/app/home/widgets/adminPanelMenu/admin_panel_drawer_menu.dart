@@ -1,5 +1,6 @@
 import 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/screen/added/cafeteriaAddedScreen.dart';
 import 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/screen/all/admin_cafeteria_all_screen.dart';
+import 'package:login_work/app/home/screens/admin_panel_screen/admin_user_update_file_screen/screen/admin_user_update_screen.dart';
 import 'package:login_work/export_import.dart';
 
 class AdminPanelDrawerMenu extends StatelessWidget {
@@ -90,6 +91,15 @@ Widget _buildAdminMenuBody(
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => AnnouncementScreen(model: model),
+                ),
+              );
+            }
+            ////
+            if (AdminPanelMenu[index] == mUserUpdate) {
+              Navigator.of(context).pop();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => AdminUserUpdateScreen(model: model),
                 ),
               );
             }

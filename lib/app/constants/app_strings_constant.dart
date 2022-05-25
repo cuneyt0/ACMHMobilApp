@@ -29,6 +29,7 @@ const String mShowActivity = 'ETKİNLİKLERİ GÖSTER';
 const String mStudentCommunity = 'ÖGRENCİ TOPLULUKLARI';
 const String mCafeteriaAdded = 'YEMEKHANE BİLGİSİ EKLE';
 const String mCafeteriaGetall = 'YEMEKHANE BİLGİLERİNİ GÖSTER';
+const String mUserUpdate = 'KULLANICILARI GÜNCELLE';
 
 const String defaultImage = 'assets/logo/neu_logo.jpg';
 const String updateButtonText = 'Güncelle';

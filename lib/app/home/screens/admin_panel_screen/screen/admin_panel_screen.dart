@@ -35,9 +35,9 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
   @override
   Widget build(BuildContext context) {
     Map<String, double> dataMap = {
-      'Genel Ögrenci Sayısı': widget.viewModel?.allStudentValue??0,
-      'Bilgisayar Mühendisligi': widget.viewModel?.computerStudentValue??0,
-      'Makine Mühendisligi': widget.viewModel?.machineStudentValue??0,
+      'Genel Ögrenci Sayısı': widget.viewModel?.allStudentValue ?? 0,
+      'Bilgisayar Mühendisligi': widget.viewModel?.computerStudentValue ?? 0,
+      'Makine Mühendisligi': widget.viewModel?.machineStudentValue ?? 0,
     };
     return Scaffold(
       appBar: AppBar(
@@ -70,9 +70,9 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(
+                  const Text(
                     "Genel Ögrenci Sayısı",
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Text(
                     '${widget.viewModel?.userGetAllResponse?.data?.length}',
@@ -87,7 +87,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
             padding: const EdgeInsets.only(left: 10.0, top: 8, right: 10),
             child: Container(
               decoration: BoxDecoration(
-                color: Color(0xff3EE094),
+                color: const Color(0xff3EE094),
                 borderRadius: BorderRadius.circular(10),
               ),
               height: MediaQuery.of(context).size.height * 0.15,
@@ -95,9 +95,9 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(
+                  const Text(
                     "Bilgisayar Mühendisligi",
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Observer(builder: (context) {
                     return Text(
@@ -137,7 +137,8 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
           ),
           Observer(builder: (context) {
             return Padding(
-              padding: const EdgeInsets.only(top: 10, right: 24, left: 40.0),
+              padding: const EdgeInsets.only(
+                  top: 10, right: 24, left: 40.0, bottom: 30),
               child: PieChart(
                 centerText: "Genel İstatistik",
                 dataMap: dataMap,
@@ -159,6 +160,79 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
               ),
             );
           }),
+          Observer(builder: (context) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  height: 80,
+                  width: 120,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        'DUYURU',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        '${widget.viewModel?.noticeViewModel.responseData?.data?.length}',
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.lightBlue,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                Container(
+                  height: 80,
+                  width: 120,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        'ETKİNLİK',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        '${widget.viewModel?.activityViewModel.getAllActivityResponse?.data?.length}',
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.lightBlue,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                Container(
+                  height: 80,
+                  width: 120,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        'YEMEKHANE',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        '${widget.viewModel?.cafeteriaViewModel.getAllResponse?.data?.length}',
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.lightBlue,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                )
+              ],
+            );
+          })
         ],
       ),
     );

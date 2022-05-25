@@ -25,6 +25,14 @@ abstract class _AdminPanelViewModelBase with Store {
   double machineStudentValue = 0.0;
 
   @observable
+  AdminCafeteriaGetAllViewModel cafeteriaViewModel =
+      AdminCafeteriaGetAllViewModel();
+  @observable
+  AdminActivityAllViewModel activityViewModel = AdminActivityAllViewModel();
+  @observable
+  HomeViewModel noticeViewModel = HomeViewModel();
+
+  @observable
   List<Color> colorList = [
     Colors.amber,
     const Color(0xff3EE094),
@@ -45,6 +53,9 @@ abstract class _AdminPanelViewModelBase with Store {
         0.0;
     print(computerStudentValue);
     print(machineStudentValue);
+    await cafeteriaViewModel.getAllCafeteria();
+    await activityViewModel.getAllActivity();
+    await noticeViewModel.getAllNotice();
     return userGetAllResponse;
   }
 

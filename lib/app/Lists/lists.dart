@@ -31,5 +31,6 @@ const List<dynamic> AdminPanelMenu = [
   mActivityAdd,
   mShowActivity,
   mCafeteriaAdded,
-  mCafeteriaGetall
+  mCafeteriaGetall,
+ mUserUpdate
 ];

@@ -122,6 +122,54 @@ mixin _$AdminPanelViewModel on _AdminPanelViewModelBase, Store {
     });
   }
 
+  final _$cafeteriaViewModelAtom =
+      Atom(name: '_AdminPanelViewModelBase.cafeteriaViewModel');
+
+  @override
+  AdminCafeteriaGetAllViewModel get cafeteriaViewModel {
+    _$cafeteriaViewModelAtom.reportRead();
+    return super.cafeteriaViewModel;
+  }
+
+  @override
+  set cafeteriaViewModel(AdminCafeteriaGetAllViewModel value) {
+    _$cafeteriaViewModelAtom.reportWrite(value, super.cafeteriaViewModel, () {
+      super.cafeteriaViewModel = value;
+    });
+  }
+
+  final _$activityViewModelAtom =
+      Atom(name: '_AdminPanelViewModelBase.activityViewModel');
+
+  @override
+  AdminActivityAllViewModel get activityViewModel {
+    _$activityViewModelAtom.reportRead();
+    return super.activityViewModel;
+  }
+
+  @override
+  set activityViewModel(AdminActivityAllViewModel value) {
+    _$activityViewModelAtom.reportWrite(value, super.activityViewModel, () {
+      super.activityViewModel = value;
+    });
+  }
+
+  final _$noticeViewModelAtom =
+      Atom(name: '_AdminPanelViewModelBase.noticeViewModel');
+
+  @override
+  HomeViewModel get noticeViewModel {
+    _$noticeViewModelAtom.reportRead();
+    return super.noticeViewModel;
+  }
+
+  @override
+  set noticeViewModel(HomeViewModel value) {
+    _$noticeViewModelAtom.reportWrite(value, super.noticeViewModel, () {
+      super.noticeViewModel = value;
+    });
+  }
+
   final _$colorListAtom = Atom(name: '_AdminPanelViewModelBase.colorList');
 
   @override
@@ -147,6 +195,9 @@ userMachineResponse: ${userMachineResponse},
 allStudentValue: ${allStudentValue},
 computerStudentValue: ${computerStudentValue},
 machineStudentValue: ${machineStudentValue},
+cafeteriaViewModel: ${cafeteriaViewModel},
+activityViewModel: ${activityViewModel},
+noticeViewModel: ${noticeViewModel},
 colorList: ${colorList}
     ''';
   }
