@@ -1,3 +1,5 @@
+import 'package:login_work/app/FCMMODEL/firebase_message_model.dart';
+import 'package:login_work/app/FCMMODEL/firebase_message_notification_model.dart';
 import 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/service/AdminCafeteriaService.dart';
 import 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/service/IAdminCafeteriaService.dart';
 import 'package:login_work/export_import.dart';
@@ -13,6 +15,9 @@ abstract class _AdminCafeteriaAddViewModelBase extends BaseViewModelProtocol
   IAdminCafeteriaService cafeteriaService =
       AdminCafeteriaService(dio: Dio(BaseOptions(baseUrl: cafeteriaAllUrl)));
   @observable
+  IAdminCafeteriaService cafeteriaServiceTwo = AdminCafeteriaService(
+      dio: Dio(BaseOptions(baseUrl: 'https://fcm.googleapis.com')));
+  @observable
   TextEditingController titleController = TextEditingController();
   @observable
   bool isLoading = false;
@@ -20,7 +25,7 @@ abstract class _AdminCafeteriaAddViewModelBase extends BaseViewModelProtocol
   String? newFilePath;
   @observable
   int? userId;
-   @observable
+  @observable
   FilePickerResult? result;
   @observable
   PlatformFile? file;
@@ -28,6 +33,9 @@ abstract class _AdminCafeteriaAddViewModelBase extends BaseViewModelProtocol
   File? newFile;
   @observable
   Directory? appStorage;
+  @observable
+  FirebaseMessageNotificationModel? notification =
+      FirebaseMessageNotificationModel();
 
   @observable
   GlobalKey<FormState> formKey = GlobalKey();
@@ -42,7 +50,8 @@ abstract class _AdminCafeteriaAddViewModelBase extends BaseViewModelProtocol
     }
     return "Boş Bırakılamaz";
   }
-    @action
+
+  @action
   Future<void> uploadPdf() async {
     result = await FilePicker.platform.pickFiles();
     if (result == null) return;
@@ -60,6 +69,7 @@ abstract class _AdminCafeteriaAddViewModelBase extends BaseViewModelProtocol
 
   @action
   void changeLoadingView() => isLoading = !isLoading;
+
   @action
   Future<void> postActivity() async {
     if (formKey.currentState != null && formKey.currentState!.validate()) {
@@ -78,6 +88,7 @@ abstract class _AdminCafeteriaAddViewModelBase extends BaseViewModelProtocol
           borderRadius: BorderRadius.circular(2),
           backgroundColor: Colors.black.withOpacity(0.5),
         ).show(buildContext).then((value) => Navigation.ofPop());
+        await sendNotificationMessage();
       } else if (postRequestData is BaseErrorResponseModel) {
         Flushbar(
           message: '${postRequestData.message}',
@@ -96,5 +107,14 @@ abstract class _AdminCafeteriaAddViewModelBase extends BaseViewModelProtocol
         backgroundColor: Colors.black.withOpacity(0.5),
       ).show(buildContext);
     }
+  }
+
+  @action
+  Future<void> sendNotificationMessage() async {
+    await GetToken.getToken();
+    notification?.title = titleController.text;
+    print('notification?.title ${notification?.title}');
+    await cafeteriaServiceTwo.sendNotificationMessage(FirebaseMessageModel(
+        to: GetToken.messageToken, notification: notification));
   }
 }

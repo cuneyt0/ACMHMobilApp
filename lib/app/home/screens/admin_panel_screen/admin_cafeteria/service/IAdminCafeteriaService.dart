@@ -1,3 +1,6 @@
+import 'package:login_work/app/FCMMODEL/firebase_message_model.dart';
+import 'package:login_work/app/FCMMODEL/firebase_message_succes_response_model.dart';
+
 import '../../../../../../export_import.dart';
 
 abstract class IAdminCafeteriaService {
@@ -10,12 +13,14 @@ abstract class IAdminCafeteriaService {
   final String cafeteriaGetByIdUserPath =
       IAdminCafeteriaServicePath.GETBYDEPARTMENTID.rawValue;
   final String cafeteriaUpdatePath = IAdminCafeteriaServicePath.UPDATE.rawValue;
+  final String fmcPath = IAdminCafeteriaServicePath.FCM.rawValue;
 
   Future<dynamic?> postCafeteria(NoticeRequestModel model);
   Future<NoticeGetAllResponseModel?> getAllCafeteria();
   Future<BaseResponseModel?> deleteCafeteria(int? id);
   Future<UserGetByIdModel?> getByIdUser(int? id);
   Future<dynamic?> updateCafeteria(NoticeRequestModel model);
+  Future<dynamic?> sendNotificationMessage(FirebaseMessageModel? message);
 }
 
 enum IAdminCafeteriaServicePath {
@@ -23,7 +28,8 @@ enum IAdminCafeteriaServicePath {
   GETALL,
   DELETE,
   UPDATE,
-  GETBYDEPARTMENTID
+  GETBYDEPARTMENTID,
+  FCM
 }
 
 extension IAdminCafeteriaServicePathExtension on IAdminCafeteriaServicePath {
@@ -39,6 +45,8 @@ extension IAdminCafeteriaServicePathExtension on IAdminCafeteriaServicePath {
         return '/update';
       case IAdminCafeteriaServicePath.GETBYDEPARTMENTID:
         return '/getbyid';
+      case IAdminCafeteriaServicePath.FCM:
+        return '/fcm/send';
     }
   }
 }

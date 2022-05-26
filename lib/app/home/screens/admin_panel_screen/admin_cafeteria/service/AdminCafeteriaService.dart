@@ -1,4 +1,6 @@
 import 'package:dio/src/dio.dart';
+import 'package:login_work/app/FCMMODEL/firebase_message_succes_response_model.dart';
+import 'package:login_work/app/FCMMODEL/firebase_message_model.dart';
 import 'package:login_work/app/home/model/department_getbyid_response_model.dart';
 import 'package:login_work/app/baseResponseModel/base_response_model.dart';
 import 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/service/IAdminCafeteriaService.dart';
@@ -67,17 +69,16 @@ class AdminCafeteriaService extends IAdminCafeteriaService {
     }
   }
 
-
-
   @override
-  Future<UserGetByIdModel?> getByIdUser(int? id) async{
- (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+  Future<UserGetByIdModel?> getByIdUser(int? id) async {
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
       return client;
     };
     dio.options.headers['Content-Type'] = 'application/json; charset=utf-8';
+
     await GetToken.getToken();
     dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
     dio.interceptors.clear();
@@ -168,6 +169,33 @@ class AdminCafeteriaService extends IAdminCafeteriaService {
     } catch (e) {
       if ((e as DioError).response != null) {
         return BaseErrorResponseModel.fromJson(e.response?.data);
+      } else {
+        return "Hata Gerçekleşti";
+      }
+    }
+  }
+
+  @override
+  Future<dynamic?> sendNotificationMessage(
+      FirebaseMessageModel? message) async {
+    dio.interceptors.add(PrettyDioLogger());
+    await GetToken.getToken();
+    dio.options.headers['Content-Type'] = 'application/json';
+    dio.options.headers['Authorization'] =
+        'key=AAAAbq9jA3E:APA91bHpfxUmj4Z1uFXW02Fye-hqwMwi19sZ_rGb-9EZ7u7RfVwVqq_GxVp9tgmausfCjHFN9-Zu8UhuPO8OQopevuGVBGHDJKGTQZrqfeVLFX1-eYcTrVcKhwKv1iE6AktZ-mnMkuYn';
+    try {
+      final response = await dio.post(
+        fmcPath,
+        data: message,
+      );
+      if (response.statusCode == HttpStatus.ok) {
+        return FirebaseMessageSuccesResponseModel.fromJson(response.data);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      if ((e as DioError).response != null) {
+        return e.response!.data;
       } else {
         return "Hata Gerçekleşti";
       }
