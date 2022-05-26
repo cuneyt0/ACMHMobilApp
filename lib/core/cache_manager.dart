@@ -1,3 +1,4 @@
+import 'package:login_work/core/firebase/cloud_message/cloud_message.dart';
 import 'package:login_work/export_import.dart';
 
 class CacheManager {
@@ -7,6 +8,7 @@ class CacheManager {
     final SharedPreferences prefs = await _prefs;
     await prefs.setString(CacheManagerKey.LOGINRESPONSE.toString(),
         jsonEncode(responseModel.toJson()));
+    await CloudMessages.instance.getNotificationToken();
     return true;
   }
 //encode json -> string
@@ -24,4 +26,4 @@ class CacheManager {
   }
 }
 
-enum CacheManagerKey {  LOGINRESPONSE }
+enum CacheManagerKey { LOGINRESPONSE }

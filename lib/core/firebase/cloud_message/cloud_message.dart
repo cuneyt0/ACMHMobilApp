@@ -17,11 +17,11 @@ class CloudMessages {
           showBadge: false);
 
   Future<String?> getNotificationToken() async {
-    final token = await messaging.getToken();
+    final messageToken = await messaging.getToken();
     // ignore: avoid_print
-    print(token);
+    print('messageToken: $messageToken');
 
-    return token;
+    return messageToken;
   }
 
   Future<void> initializeLocalNotification() async =>
