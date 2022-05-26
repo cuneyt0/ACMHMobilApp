@@ -10,9 +10,8 @@ class AdminUserUpdateViewModel = _AdminUserUpdateViewModelBase
 abstract class _AdminUserUpdateViewModelBase extends BaseViewModelProtocol
     with Store {
   @observable
-  IAdminUserService cafeteriaService = AdminUserService(
-      dio: Dio(BaseOptions(
-          baseUrl: 'https://192.168.189.87:5001/api/ExcelToDBTransfer')));
+  IAdminUserService cafeteriaService =
+      AdminUserService(dio: Dio(BaseOptions(baseUrl: userexcelUrl)));
   @observable
   bool isLoading = false;
   @observable
