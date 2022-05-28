@@ -32,5 +32,15 @@ const List<dynamic> AdminPanelMenu = [
   mShowActivity,
   mCafeteriaAdded,
   mCafeteriaGetall,
- mUserUpdate
+  mUserUpdate
+];
+const List<Icon> IconList = [
+  Icon(Icons.home),
+  Icon(Icons.account_balance_rounded),
+  Icon(Icons.play_lesson),
+  Icon(Icons.adobe_sharp),
+  Icon(Icons.assignment_outlined),
+  Icon(Icons.local_activity_rounded),
+  Icon(Icons.school),
+  Icon(Icons.admin_panel_settings),
 ];

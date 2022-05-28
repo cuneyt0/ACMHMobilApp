@@ -116,6 +116,7 @@ Widget _buildAdminMenuBody(LoginResponseModel? model,
       itemBuilder: (context, index) => Card(
         child: ListTile(
           title: Text(AdminMenu[index]),
+          leading: Icon(IconList[index].icon),
           onTap: () async {
             if (AdminMenu[index] == mExam) {
               Navigator.of(context).push(
@@ -178,7 +179,7 @@ Widget _buildAdminMenuBody(LoginResponseModel? model,
 //StudentCommunities
 Widget _buildMenuHeader(LoginResponseModel? model) {
   return Padding(
-    padding: const EdgeInsets.only(top: 90),
+    padding: const EdgeInsets.only(top: 90, left: 20, right: 20),
     child: Column(
       children: [
         Row(
@@ -218,31 +219,32 @@ Widget _buildMenuHeader(LoginResponseModel? model) {
 Widget _buildMenuExit(BuildContext context, LoginResponseModel? model,
     CacheManager? cacheManager, bool? isClear) {
   return Padding(
-    padding: const EdgeInsets.all(20.0),
-    child: SizedBox(
-      width: MediaQuery.of(context).size.width * 1,
-      child: ElevatedButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.white),
-          ),
-          onPressed: () async {
-            model?.user = null;
-            isClear != isClear;
-            model?.token = null;
-            model?.expiration = 0;
-            if (model?.user == null) {
-              await cacheManager?.removeAllData();
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => LoginView()),
-                  (Route<dynamic> route) => false);
-            } else {
-              exit(0);
-            }
-          },
-          child: const Text(
+    padding: const EdgeInsets.only(top: 20, bottom: 20, left: 40, right: 40),
+    child: Card(
+      child: ListTile(
+        leading: Icon(Icons.exit_to_app),
+        onTap: () async {
+          model?.user = null;
+          isClear != isClear;
+          model?.token = null;
+          model?.expiration = 0;
+          if (model?.user == null) {
+            await cacheManager?.removeAllData();
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => LoginView()),
+                (Route<dynamic> route) => false);
+          } else {
+            exit(0);
+          }
+        },
+        title: Padding(
+          padding: const EdgeInsets.only(left: 15),
+          child: Text(
             btSignOut,
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-          )),
+          ),
+        ),
+      ),
     ),
   );
 }
