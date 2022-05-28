@@ -1,7 +1,3 @@
-import 'package:login_work/app/FCMMODEL/firebase_message_model.dart';
-import 'package:login_work/app/FCMMODEL/firebase_message_notification_model.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/service/AdminCafeteriaService.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/admin_cafeteria/service/IAdminCafeteriaService.dart';
 import 'package:login_work/export_import.dart';
 import 'package:mobx/mobx.dart';
 part 'admin_cafeteria_viewmodel.g.dart';
@@ -15,8 +11,8 @@ abstract class _AdminCafeteriaAddViewModelBase extends BaseViewModelProtocol
   IAdminCafeteriaService cafeteriaService =
       AdminCafeteriaService(dio: Dio(BaseOptions(baseUrl: cafeteriaAllUrl)));
   @observable
-  IAdminCafeteriaService cafeteriaServiceTwo = AdminCafeteriaService(
-      dio: Dio(BaseOptions(baseUrl: 'https://fcm.googleapis.com')));
+  IFCMService fmcService =
+      FCMService(dio: Dio(BaseOptions(baseUrl: 'https://fcm.googleapis.com')));
   @observable
   TextEditingController titleController = TextEditingController();
   @observable
@@ -113,8 +109,7 @@ abstract class _AdminCafeteriaAddViewModelBase extends BaseViewModelProtocol
   Future<void> sendNotificationMessage() async {
     await GetToken.getToken();
     notification?.title = titleController.text;
-    print('notification?.title ${notification?.title}');
-    await cafeteriaServiceTwo.sendNotificationMessage(FirebaseMessageModel(
+    await fmcService.sendNotificationMessage(FirebaseMessageModel(
         to: GetToken.messageToken, notification: notification));
   }
 }

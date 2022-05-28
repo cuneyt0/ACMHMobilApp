@@ -1,4 +1,4 @@
-import 'package:login_work/app/FCMMODEL/firebase_message_notification_model.dart';
+import 'package:login_work/app/FCM/model/firebase_message_notification_model.dart';
 
 class FirebaseMessageModel {
   String? to;
@@ -9,19 +9,16 @@ class FirebaseMessageModel {
   FirebaseMessageModel.fromJson(Map<String, dynamic> json) {
     to = json['to'];
     notification = json['notification'] != null
-        ? new FirebaseMessageNotificationModel.fromJson(json['notification'])
+        ? FirebaseMessageNotificationModel.fromJson(json['notification'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['to'] = this.to;
-    if (this.notification != null) {
-      data['notification'] = this.notification!.toJson();
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['to'] = to;
+    if (notification != null) {
+      data['notification'] = notification!.toJson();
     }
     return data;
-  }  
+  }
 }
-
-
-
