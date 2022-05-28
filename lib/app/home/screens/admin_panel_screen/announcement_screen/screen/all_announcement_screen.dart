@@ -39,6 +39,7 @@ class _AllAnnouncementScreenState extends State<AllAnnouncementScreen> {
                       title: Text(_viewModel.responseData?.data?[index].title ??
                           mLoading),
                       trailing: IconButton(
+                          color: Colors.red,
                           onPressed: () => showDialog(
                                 context: context,
                                 builder: (context) => AlertDialog(

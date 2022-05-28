@@ -1,4 +1,3 @@
-
 import 'package:login_work/export_import.dart';
 
 class AdminActivityAllScreen extends StatefulWidget {
@@ -16,7 +15,6 @@ class _AdminActivityAllScreenState extends State<AdminActivityAllScreen> {
     setState(() {
       viewModel?.setBuildContext(context);
       viewModel?.getAllActivity();
-     
     });
     super.initState();
   }
@@ -43,6 +41,7 @@ class _AdminActivityAllScreenState extends State<AdminActivityAllScreen> {
                       viewModel?.getAllActivityResponse?.data?[index].title ??
                           mLoading),
                   trailing: IconButton(
+                    color: Colors.red,
                     onPressed: () {
                       showDialog(
                         context: context,

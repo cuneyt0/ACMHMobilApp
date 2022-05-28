@@ -45,6 +45,7 @@ class _AdminCafeteriaAllScreenState extends State<AdminCafeteriaAllScreen> {
                   title: Text(viewModel?.getAllResponse?.data?[index].title ??
                       mLoading),
                   trailing: IconButton(
+                    color: Colors.red,
                     onPressed: () {
                       showDialog(
                         context: context,

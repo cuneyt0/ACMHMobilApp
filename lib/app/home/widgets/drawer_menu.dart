@@ -57,6 +57,7 @@ Widget _buildNormalMenuBody(
       itemCount: NormalMenu.length,
       itemBuilder: (context, index) => Card(
         child: ListTile(
+          leading: Icon(iconList[index].icon),
           title: Text(NormalMenu[index]),
           onTap: () async {
             if (NormalMenu[index] == mExam) {
@@ -116,7 +117,7 @@ Widget _buildAdminMenuBody(LoginResponseModel? model,
       itemBuilder: (context, index) => Card(
         child: ListTile(
           title: Text(AdminMenu[index]),
-          leading: Icon(IconList[index].icon),
+          leading: Icon(iconList[index].icon),
           onTap: () async {
             if (AdminMenu[index] == mExam) {
               Navigator.of(context).push(

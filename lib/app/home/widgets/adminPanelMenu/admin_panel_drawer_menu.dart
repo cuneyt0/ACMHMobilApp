@@ -71,6 +71,7 @@ Widget _buildAdminMenuBody(
       itemCount: AdminPanelMenu.length,
       itemBuilder: (context, index) => Card(
         child: ListTile(
+          leading: Icon(adminPanelIcon[index].icon),
           title: Text(AdminPanelMenu[index]),
           onTap: () async {
             if (AdminPanelMenu[index] == mHome) {
