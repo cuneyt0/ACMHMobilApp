@@ -11,6 +11,8 @@ abstract class _AdminPanelViewModelBase with Store {
   @observable
   IAdminPanelService service =
       AdminPanelService(dio: Dio(BaseOptions(baseUrl: allUserUrl)));
+
+      
   @observable
   UserGetAllResponse? userGetAllResponse = UserGetAllResponse();
   @observable

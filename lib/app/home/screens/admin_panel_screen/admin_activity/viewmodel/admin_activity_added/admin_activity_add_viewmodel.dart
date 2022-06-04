@@ -62,6 +62,12 @@ abstract class _ActivityAddViewModelBase extends BaseViewModelProtocol
   int? id;
   @observable
   AdminPanelViewModel? adminPanelViewModel = AdminPanelViewModel();
+  @observable
+  IFCMService fmcService =
+      FCMService(dio: Dio(BaseOptions(baseUrl: 'https://fcm.googleapis.com')));
+  @observable
+  FirebaseMessageNotificationModel? notification =
+      FirebaseMessageNotificationModel();
 
   @override
   void setBuildContext(BuildContext buildContext) =>
@@ -214,6 +220,19 @@ abstract class _ActivityAddViewModelBase extends BaseViewModelProtocol
               userId: userId));
       changeLoadingView();
       if (postRequestData is BaseResponseModel) {
+        print(selectedDepartmentId);
+        if (selectedDepartmentId == GetToken.deparmentId) {
+          await sendNotificationMessage();
+          Flushbar(
+            message: '${postRequestData.message}',
+            flushbarPosition: FlushbarPosition.TOP,
+            duration: const Duration(seconds: 1),
+            borderRadius: BorderRadius.circular(2),
+            backgroundColor: Colors.black.withOpacity(0.5),
+          ).show(buildContext).then((value) => Navigation.ofPop());
+        } else if (selectedDepartmentId == 5) {
+          await sendNotificationMessage();
+        }
         Flushbar(
           message: '${postRequestData.message}',
           flushbarPosition: FlushbarPosition.TOP,
@@ -239,5 +258,13 @@ abstract class _ActivityAddViewModelBase extends BaseViewModelProtocol
         backgroundColor: Colors.black.withOpacity(0.5),
       ).show(buildContext);
     }
+  }
+
+  @action
+  Future<void> sendNotificationMessage() async {
+    await GetToken.getToken();
+    notification?.title = titleController.text;
+    await fmcService.sendNotificationMessage(FirebaseMessageModel(
+        to: GetToken.messageToken, notification: notification));
   }
 }

@@ -45,6 +45,14 @@ abstract class _AnnouncementViewModelBase with Store {
   @observable
   bool isLoading = false;
 
+    @observable
+  IFCMService fmcService =
+      FCMService(dio: Dio(BaseOptions(baseUrl: 'https://fcm.googleapis.com')));
+  @observable
+  FirebaseMessageNotificationModel? notification =
+      FirebaseMessageNotificationModel();
+
+
   @observable
   TextEditingController titleController = TextEditingController();
   @observable
@@ -162,17 +170,27 @@ abstract class _AnnouncementViewModelBase with Store {
           imagePath: addedPhoto,
           pdfPath: newFilePath,
           userId: userId));
-      print(data);
-      changeLoadingView();
 
       if (data is NoticeResponseModel) {
         print(" Notice post işlemi Başarılı");
+        if (selectedDepartmentId == GetToken.deparmentId) {
+          await sendNotificationMessage();
+        } else if (selectedDepartmentId == 5) {
+          await sendNotificationMessage();
+        }
       } else {
         print(" Notice post işlemi Başarısız");
       }
     } else {
       print(" Notice post işleminde validasyonlar karşılanmadı");
     }
+  }
+    @action
+  Future<void> sendNotificationMessage() async {
+    await GetToken.getToken();
+    notification?.title = titleController.text;
+    await fmcService.sendNotificationMessage(FirebaseMessageModel(
+        to: GetToken.messageToken, notification: notification));
   }
 
   @action

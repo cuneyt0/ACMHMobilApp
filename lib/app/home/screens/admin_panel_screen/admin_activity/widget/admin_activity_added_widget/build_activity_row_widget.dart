@@ -43,6 +43,7 @@ class BuildActivityRowWidget extends StatelessWidget {
                   onChanged: (Data? selected) {
                     viewModel?.dropdownvalue = selected;
                     viewModel?.selectedDepartmentId = selected?.id;
+                   
                   },
                 ),
               ),

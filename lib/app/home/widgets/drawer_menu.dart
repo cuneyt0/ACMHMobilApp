@@ -202,16 +202,20 @@ Widget _buildMenuHeader(LoginResponseModel? model) {
           height: 10,
         ),
         Center(
-          child: model?.user?.departmentId == 2
-              ? const Text(
-                  departmentComputerText,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                )
-              : const Text(
-                  departmentMachineText,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-        ),
+            child: model?.user?.departmentId == 2
+                ? const Text(
+                    departmentComputerText,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  )
+                : (model?.user?.departmentId == 60
+                    ? const Text(
+                        "ÖĞRETMEN",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      )
+                    : const Text(
+                        departmentMachineText,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ))),
       ],
     ),
   );
