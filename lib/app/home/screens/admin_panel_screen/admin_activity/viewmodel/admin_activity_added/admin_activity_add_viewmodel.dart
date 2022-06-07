@@ -149,7 +149,7 @@ abstract class _ActivityAddViewModelBase extends BaseViewModelProtocol
   Future<void> updateActivity() async {
     if (formKey.currentState != null &&
         formKey.currentState!.validate() &&
-        dropdownvalue?.id != null) {
+        dropdownvalue?.id != null ) {
       changeLoadingView();
       final postRequestData = await activityService.updateActivity(
           NoticeRequestModel.ID(

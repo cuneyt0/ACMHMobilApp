@@ -11,18 +11,24 @@ class AdminActivityUpdateImageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("imagePath:${widget.data?.imagePath}");
     return ElevatedButton(
-      onPressed: () async =>
-          widget.viewModel?.addedPhoto = await Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => ActivityUpdateImageScreen(
-            viewModel: widget.viewModel,
-            data: widget.data,
-            model: widget.model,
-            getAllViewModel: widget.getAllViewModel,
-          ),
-        ),
-      ),
+      onPressed: () async => widget.data?.imagePath != null
+          ? widget.viewModel?.addedPhoto = await Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => ActivityUpdateImageScreen(
+                  viewModel: widget.viewModel,
+                  data: widget.data,
+                  model: widget.model,
+                  getAllViewModel: widget.getAllViewModel,
+                ),
+              ),
+            )
+          : widget.viewModel?.addedPhoto = await Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: ((context) => const AdminActivityPhotoScreen()),
+              ),
+            ),
       child: const Text(mUploadImage),
       style: ButtonStyle(
         maximumSize: MaterialStateProperty.all<Size>(
