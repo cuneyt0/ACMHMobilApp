@@ -181,42 +181,20 @@ Widget _buildAdminMenuBody(LoginResponseModel? model,
 Widget _buildMenuHeader(LoginResponseModel? model) {
   return Padding(
     padding: const EdgeInsets.only(top: 90, left: 20, right: 20),
-    child: Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              "${model?.user?.firstName!} ",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            Text(
-              model?.user?.lastName ?? " ",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-        const Divider(
-          color: Colors.blue,
-          height: 10,
-        ),
-        Center(
-            child: model?.user?.departmentId == 2
-                ? const Text(
-                    departmentComputerText,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  )
-                : (model?.user?.departmentId == 60
-                    ? const Text(
-                        "ÖĞRETMEN",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    : const Text(
-                        departmentMachineText,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ))),
-      ],
+    child: Card(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "${model?.user?.firstName!} ",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Text(
+            model?.user?.lastName ?? " ",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
     ),
   );
 }

@@ -34,30 +34,23 @@ Widget _buildMenuHeader(
   LoginResponseModel? model,
 ) {
   return Padding(
-    padding: const EdgeInsets.only(top: 90),
-    child: Column(
-      children: [
-        const Expanded(
-            child: Text(
-          welcome,
-          style: TextStyle(fontWeight: FontWeight.bold),
-        )),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Divider(color: Colors.white),
-            Text(
-              "${model?.user?.firstName!} ",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            Text(
-              model?.user?.lastName ?? " ",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-      ],
+    padding: const EdgeInsets.only(top: 120, left: 20, right: 20),
+    child: Card(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        // mainAxisSize: MainAxisSize.min,
+        children: [
+          const Divider(color: Colors.white),
+          Text(
+            "${model?.user?.firstName!} ",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Text(
+            model?.user?.lastName ?? " ",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
     ),
   );
 }
