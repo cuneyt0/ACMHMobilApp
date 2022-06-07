@@ -259,6 +259,37 @@ mixin _$AnnouncementViewModel on _AnnouncementViewModelBase, Store {
     });
   }
 
+  final _$fmcServiceAtom = Atom(name: '_AnnouncementViewModelBase.fmcService');
+
+  @override
+  IFCMService get fmcService {
+    _$fmcServiceAtom.reportRead();
+    return super.fmcService;
+  }
+
+  @override
+  set fmcService(IFCMService value) {
+    _$fmcServiceAtom.reportWrite(value, super.fmcService, () {
+      super.fmcService = value;
+    });
+  }
+
+  final _$notificationAtom =
+      Atom(name: '_AnnouncementViewModelBase.notification');
+
+  @override
+  FirebaseMessageNotificationModel? get notification {
+    _$notificationAtom.reportRead();
+    return super.notification;
+  }
+
+  @override
+  set notification(FirebaseMessageNotificationModel? value) {
+    _$notificationAtom.reportWrite(value, super.notification, () {
+      super.notification = value;
+    });
+  }
+
   final _$titleControllerAtom =
       Atom(name: '_AnnouncementViewModelBase.titleController');
 
@@ -423,6 +454,15 @@ mixin _$AnnouncementViewModel on _AnnouncementViewModelBase, Store {
     return _$postNoticeAsyncAction.run(() => super.postNotice());
   }
 
+  final _$sendNotificationMessageAsyncAction =
+      AsyncAction('_AnnouncementViewModelBase.sendNotificationMessage');
+
+  @override
+  Future<void> sendNotificationMessage() {
+    return _$sendNotificationMessageAsyncAction
+        .run(() => super.sendNotificationMessage());
+  }
+
   final _$getAllDepartmentAsyncAction =
       AsyncAction('_AnnouncementViewModelBase.getAllDepartment');
 
@@ -486,6 +526,8 @@ cropImageSize: ${cropImageSize},
 compressImagePath: ${compressImagePath},
 compressImageSize: ${compressImageSize},
 isLoading: ${isLoading},
+fmcService: ${fmcService},
+notification: ${notification},
 titleController: ${titleController},
 contentController: ${contentController},
 formKey: ${formKey},

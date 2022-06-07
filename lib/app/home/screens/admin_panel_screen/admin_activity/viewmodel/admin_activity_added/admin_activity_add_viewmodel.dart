@@ -72,6 +72,7 @@ abstract class _ActivityAddViewModelBase extends BaseViewModelProtocol
   @override
   void setBuildContext(BuildContext buildContext) =>
       this.buildContext = buildContext;
+
   @action
   Future<void> uploadPdf() async {
     result = await FilePicker.platform.pickFiles();
@@ -125,7 +126,6 @@ abstract class _ActivityAddViewModelBase extends BaseViewModelProtocol
       cropImageSize = ((File(cropImagePath ?? '-')).lengthSync() / 1024 / 1024)
               .toStringAsFixed(2) +
           " Mb";
-      print(selectedImagePath.toString());
     } else {}
   }
 
@@ -169,7 +169,6 @@ abstract class _ActivityAddViewModelBase extends BaseViewModelProtocol
           borderRadius: BorderRadius.circular(2),
           backgroundColor: Colors.black.withOpacity(0.5),
         ).show(buildContext).then((value) {
-          //Navigator.of(buildContext).pop();
           Navigator.of(buildContext).push(MaterialPageRoute(
             builder: (context) => AdminPanelScreen(
                 model: GetToken.loginResponseModel,

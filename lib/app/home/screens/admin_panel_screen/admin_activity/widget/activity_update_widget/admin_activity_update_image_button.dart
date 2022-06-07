@@ -1,6 +1,6 @@
-
 import 'package:login_work/export_import.dart';
 import 'package:login_work/core/extension/context_extension.dart';
+
 class AdminActivityUpdateImageButton extends StatelessWidget {
   const AdminActivityUpdateImageButton({
     Key? key,
@@ -12,7 +12,8 @@ class AdminActivityUpdateImageButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => Navigator.of(context).push(
+      onPressed: () async =>
+          widget.viewModel?.addedPhoto = await Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => ActivityUpdateImageScreen(
             viewModel: widget.viewModel,
@@ -34,3 +35,36 @@ class AdminActivityUpdateImageButton extends StatelessWidget {
     );
   }
 }
+
+
+
+
+ 
+
+
+/*
+
+_viewModel?.addedPhoto == widget.data?.imagePath;
+    return Padding(
+      padding: const EdgeInsets.only(top: 25.0, left: 10, right: 10),
+      child: ElevatedButton(
+        onPressed: () async =>
+            _viewModel?.addedPhoto = await Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: ((context) =>
+                UpdatePhotoScreen(data: widget.data, widget: widget)),
+          ),
+        ),
+        child: const Text(mUploadImage),
+        style: ButtonStyle(
+          maximumSize: MaterialStateProperty.all<Size>(
+            Size(context.width * 1, context.highValue),
+          ),
+          minimumSize: MaterialStateProperty.all<Size>(
+            Size(context.width * 1, context.mediumValue),
+          ),
+        ),
+      ),
+    );
+
+ */

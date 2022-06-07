@@ -415,6 +415,37 @@ mixin _$ActivityAddViewModel on _ActivityAddViewModelBase, Store {
     });
   }
 
+  final _$fmcServiceAtom = Atom(name: '_ActivityAddViewModelBase.fmcService');
+
+  @override
+  IFCMService get fmcService {
+    _$fmcServiceAtom.reportRead();
+    return super.fmcService;
+  }
+
+  @override
+  set fmcService(IFCMService value) {
+    _$fmcServiceAtom.reportWrite(value, super.fmcService, () {
+      super.fmcService = value;
+    });
+  }
+
+  final _$notificationAtom =
+      Atom(name: '_ActivityAddViewModelBase.notification');
+
+  @override
+  FirebaseMessageNotificationModel? get notification {
+    _$notificationAtom.reportRead();
+    return super.notification;
+  }
+
+  @override
+  set notification(FirebaseMessageNotificationModel? value) {
+    _$notificationAtom.reportWrite(value, super.notification, () {
+      super.notification = value;
+    });
+  }
+
   final _$uploadPdfAsyncAction =
       AsyncAction('_ActivityAddViewModelBase.uploadPdf');
 
@@ -470,6 +501,15 @@ mixin _$ActivityAddViewModel on _ActivityAddViewModelBase, Store {
   @override
   Future<void> postActivity() {
     return _$postActivityAsyncAction.run(() => super.postActivity());
+  }
+
+  final _$sendNotificationMessageAsyncAction =
+      AsyncAction('_ActivityAddViewModelBase.sendNotificationMessage');
+
+  @override
+  Future<void> sendNotificationMessage() {
+    return _$sendNotificationMessageAsyncAction
+        .run(() => super.sendNotificationMessage());
   }
 
   final _$_ActivityAddViewModelBaseActionController =
@@ -536,7 +576,9 @@ compressImageSize: ${compressImageSize},
 isLoading: ${isLoading},
 userId: ${userId},
 id: ${id},
-adminPanelViewModel: ${adminPanelViewModel}
+adminPanelViewModel: ${adminPanelViewModel},
+fmcService: ${fmcService},
+notification: ${notification}
     ''';
   }
 }

@@ -25,6 +25,22 @@ mixin _$AdminCafeteriaAddViewModel on _AdminCafeteriaAddViewModelBase, Store {
     });
   }
 
+  final _$fmcServiceAtom =
+      Atom(name: '_AdminCafeteriaAddViewModelBase.fmcService');
+
+  @override
+  IFCMService get fmcService {
+    _$fmcServiceAtom.reportRead();
+    return super.fmcService;
+  }
+
+  @override
+  set fmcService(IFCMService value) {
+    _$fmcServiceAtom.reportWrite(value, super.fmcService, () {
+      super.fmcService = value;
+    });
+  }
+
   final _$titleControllerAtom =
       Atom(name: '_AdminCafeteriaAddViewModelBase.titleController');
 
@@ -149,6 +165,22 @@ mixin _$AdminCafeteriaAddViewModel on _AdminCafeteriaAddViewModelBase, Store {
     });
   }
 
+  final _$notificationAtom =
+      Atom(name: '_AdminCafeteriaAddViewModelBase.notification');
+
+  @override
+  FirebaseMessageNotificationModel? get notification {
+    _$notificationAtom.reportRead();
+    return super.notification;
+  }
+
+  @override
+  set notification(FirebaseMessageNotificationModel? value) {
+    _$notificationAtom.reportWrite(value, super.notification, () {
+      super.notification = value;
+    });
+  }
+
   final _$formKeyAtom = Atom(name: '_AdminCafeteriaAddViewModelBase.formKey');
 
   @override
@@ -189,6 +221,15 @@ mixin _$AdminCafeteriaAddViewModel on _AdminCafeteriaAddViewModelBase, Store {
     return _$postActivityAsyncAction.run(() => super.postActivity());
   }
 
+  final _$sendNotificationMessageAsyncAction =
+      AsyncAction('_AdminCafeteriaAddViewModelBase.sendNotificationMessage');
+
+  @override
+  Future<void> sendNotificationMessage() {
+    return _$sendNotificationMessageAsyncAction
+        .run(() => super.sendNotificationMessage());
+  }
+
   final _$_AdminCafeteriaAddViewModelBaseActionController =
       ActionController(name: '_AdminCafeteriaAddViewModelBase');
 
@@ -219,6 +260,7 @@ mixin _$AdminCafeteriaAddViewModel on _AdminCafeteriaAddViewModelBase, Store {
   String toString() {
     return '''
 cafeteriaService: ${cafeteriaService},
+fmcService: ${fmcService},
 titleController: ${titleController},
 isLoading: ${isLoading},
 newFilePath: ${newFilePath},
@@ -227,6 +269,7 @@ result: ${result},
 file: ${file},
 newFile: ${newFile},
 appStorage: ${appStorage},
+notification: ${notification},
 formKey: ${formKey}
     ''';
   }
