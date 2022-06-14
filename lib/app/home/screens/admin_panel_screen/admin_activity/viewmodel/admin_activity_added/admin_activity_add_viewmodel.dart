@@ -149,7 +149,7 @@ abstract class _ActivityAddViewModelBase extends BaseViewModelProtocol
   Future<void> updateActivity() async {
     if (formKey.currentState != null &&
         formKey.currentState!.validate() &&
-        dropdownvalue?.id != null ) {
+        dropdownvalue?.id != null) {
       changeLoadingView();
       final postRequestData = await activityService.updateActivity(
           NoticeRequestModel.ID(
@@ -162,7 +162,7 @@ abstract class _ActivityAddViewModelBase extends BaseViewModelProtocol
               userId: userId));
       changeLoadingView();
       if (postRequestData is BaseResponseModel) {
-        Flushbar(
+        /*  await Flushbar(
           message: '${postRequestData.message}',
           flushbarPosition: FlushbarPosition.TOP,
           duration: const Duration(seconds: 1),
@@ -174,7 +174,7 @@ abstract class _ActivityAddViewModelBase extends BaseViewModelProtocol
                 model: GetToken.loginResponseModel,
                 viewModel: adminPanelViewModel),
           ));
-        });
+        });*/
       } else if (postRequestData is BaseErrorResponseModel) {
         Flushbar(
           message: '${postRequestData.message}',
