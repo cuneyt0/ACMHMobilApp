@@ -2,7 +2,7 @@ import '../../export_import.dart';
 
 // ignore: constant_identifier_names
 const List<String> AdminMenu = [
-  mHome,
+
   mFood,
   mShowCourseInformation,
   mExam,
@@ -13,7 +13,7 @@ const List<String> AdminMenu = [
 ];
 // ignore: constant_identifier_names
 const List<String> NormalMenu = [
-  mHome,
+ 
   mFood,
   mShowCourseInformation,
   mExam,
@@ -35,7 +35,7 @@ const List<dynamic> AdminPanelMenu = [
   mUserUpdate
 ];
 const List<Icon> iconList = [
-  Icon(Icons.home),
+
   Icon(Icons.account_balance_rounded),
   Icon(Icons.play_lesson),
   Icon(Icons.adobe_sharp),

@@ -46,34 +46,37 @@ class _HomePageState extends State<HomePage> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : ListView(physics: const BouncingScrollPhysics(), children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 15.0),
-                child: Center(
+          : ListView(
+              physics: const BouncingScrollPhysics(),
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(top: 15.0),
+                  child: Center(
+                    child: Text(
+                      mAnnouncement,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                HomeScreenAnnouncementWidget(widget: widget),
+                const Center(
                   child: Text(
-                    mAnnouncement,
+                    "ETKİNLİKLER",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
-              ),
-              HomeScreenAnnouncementWidget(widget: widget),
-              const Center(
-                child: Text(
-                  "ETKİNLİKLER",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                HomeScreenActivityWidget(widget: widget),
+                const Center(
+                  child: Text(
+                    "YEMEKHANE",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
-              ),
-              HomeScreenActivityWidget(widget: widget),
-              const Center(
-                child: Text(
-                  "YEMEKHANE",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                HomeScreenCafeteriaWidget(
+                  widget: widget,
                 ),
-              ),
-              HomeScreenCafeteriaWidget(
-                widget: widget,
-              ),
-            ]),
+              ],
+            ),
     );
   }
 }
