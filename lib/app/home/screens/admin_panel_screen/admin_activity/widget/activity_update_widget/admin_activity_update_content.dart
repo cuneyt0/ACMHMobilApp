@@ -29,7 +29,7 @@ class AdminActivityUpdateContent extends StatelessWidget {
           border: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.black),
           ),
-          labelText: aTitle,
+          labelText: aContent,
           labelStyle: TextStyle(color: Colors.black),
           hintStyle: TextStyle(color: Colors.black),
         ),

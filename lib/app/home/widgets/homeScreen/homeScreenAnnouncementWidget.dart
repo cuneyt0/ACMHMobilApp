@@ -11,7 +11,7 @@ class HomeScreenAnnouncementWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.32,
+      height: MediaQuery.of(context).size.height * 0.22,
       child: Observer(
         builder: (context) => widget.viewModel?.getbyidrecentlyresponse?.data ==
                 null
@@ -69,8 +69,9 @@ class HomeScreenAnnouncementWidget extends StatelessWidget {
                               widget.viewModel?.getbyidrecentlyresponse
                                       ?.data?[index].title ??
                                   "",
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold),
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  overflow: TextOverflow.ellipsis),
                             ),
                           ),
                         ),
