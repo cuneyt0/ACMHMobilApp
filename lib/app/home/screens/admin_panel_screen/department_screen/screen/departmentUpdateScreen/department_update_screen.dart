@@ -23,39 +23,44 @@ class _DepartmentUpdateScreenState extends State<DepartmentUpdateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.model!.departmentName.toString())),
-      bottomNavigationBar: ElevatedButton(
-          onPressed: () async => await _viewModel?.updateDepartment(),
-          child: const Text(updateButtonText)),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Form(
-              key: _viewModel?.formKey,
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
+    return Observer(builder: (context) {
+      return Scaffold(
+        appBar: AppBar(title: Text(widget.model!.departmentName.toString())),
+        bottomNavigationBar: ElevatedButton(
+            onPressed: () async {
+              await _viewModel?.updateDepartment();
+             
+            },
+            child: const Text(updateButtonText)),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Form(
+                key: _viewModel?.formKey,
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                    ),
+                    hintText: mDeparmentName,
+                    labelStyle: TextStyle(color: Colors.black),
+                    hintStyle: TextStyle(color: Colors.black),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  hintText: mDeparmentName,
-                  labelStyle: TextStyle(color: Colors.black),
-                  hintStyle: TextStyle(color: Colors.black),
+                  controller: _viewModel?.departmentNameController,
+                  validator: _viewModel?.noticeStringValidation,
                 ),
-                controller: _viewModel?.departmentNameController,
-                validator: _viewModel?.noticeStringValidation,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

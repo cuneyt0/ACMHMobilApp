@@ -41,7 +41,7 @@ class _ActivityUpdateImageScreenState extends State<ActivityUpdateImageScreen> {
               TabItem(icon: Icons.photo),
               TabItem(icon: Icons.camera),
               TabItem(icon: Icons.save),
-              TabItem(icon: Icons.delete),
+              //TabItem(icon: Icons.delete),
             ],
             onTap: (i) async {
               if (i == 0) {

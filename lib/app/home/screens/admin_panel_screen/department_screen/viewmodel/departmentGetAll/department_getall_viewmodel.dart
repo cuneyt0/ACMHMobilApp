@@ -16,6 +16,8 @@ abstract class _DepartmentGetAllViewModelBase extends BaseViewModelProtocol
   BaseResponseModel? departmentDeleteResponse = BaseResponseModel();
   @observable
   int? id;
+  @observable
+  AdminPanelViewModel? adminPanelViewModel = AdminPanelViewModel();
 
   @action
   Future<DepartmentResponseModel?> getAllDepartment() async {
@@ -77,8 +79,9 @@ abstract class _DepartmentGetAllViewModelBase extends BaseViewModelProtocol
         ).show(buildContext).then((value) {
           Navigator.of(buildContext).pop();
           Navigator.of(buildContext).push(MaterialPageRoute(
-            builder: (context) =>
-                AdminPanelScreen(model: GetToken.loginResponseModel),
+            builder: (context) => AdminPanelScreen(
+                model: GetToken.loginResponseModel,
+                viewModel: adminPanelViewModel),
           ));
         });
       } else if (updateRequestData is BaseErrorResponseModel) {

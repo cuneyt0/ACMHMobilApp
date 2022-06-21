@@ -73,6 +73,22 @@ mixin _$DepartmentGetAllViewModel on _DepartmentGetAllViewModelBase, Store {
     });
   }
 
+  final _$adminPanelViewModelAtom =
+      Atom(name: '_DepartmentGetAllViewModelBase.adminPanelViewModel');
+
+  @override
+  AdminPanelViewModel? get adminPanelViewModel {
+    _$adminPanelViewModelAtom.reportRead();
+    return super.adminPanelViewModel;
+  }
+
+  @override
+  set adminPanelViewModel(AdminPanelViewModel? value) {
+    _$adminPanelViewModelAtom.reportWrite(value, super.adminPanelViewModel, () {
+      super.adminPanelViewModel = value;
+    });
+  }
+
   final _$departmentNameControllerAtom =
       Atom(name: '_DepartmentGetAllViewModelBase.departmentNameController');
 
@@ -178,6 +194,7 @@ service: ${service},
 departmentGetAllResponse: ${departmentGetAllResponse},
 departmentDeleteResponse: ${departmentDeleteResponse},
 id: ${id},
+adminPanelViewModel: ${adminPanelViewModel},
 departmentNameController: ${departmentNameController},
 formKey: ${formKey},
 isLoading: ${isLoading}

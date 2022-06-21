@@ -50,6 +50,7 @@ class _DepartmentGetAllScreenState extends State<DepartmentGetAllScreen> {
                         .departmentName ??
                     mLoading),
                 trailing: IconButton(
+                  color: Colors.red,
                   onPressed: () {
                     showDialog(
                       context: context,

@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
       });
     });
     super.initState();
+    widget.viewModel?.setBuildContext(context);
   }
 
   Future<void> getAllData() async {

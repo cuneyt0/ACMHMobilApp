@@ -5,7 +5,7 @@ part 'home_view_model.g.dart';
 
 class HomeViewModel = _HomeViewModelBase with _$HomeViewModel;
 
-abstract class _HomeViewModelBase with Store {
+abstract class _HomeViewModelBase extends BaseViewModelProtocol with Store {
   @observable
   Dio dio = Dio();
   @observable
@@ -41,7 +41,6 @@ abstract class _HomeViewModelBase with Store {
 
   @action
   Future<NoticeGetAllResponseModel?> getCafeteriRecently() async {
-  
     return responseModel = await a?.service.getCafeteriRecently();
   }
 
@@ -55,6 +54,10 @@ abstract class _HomeViewModelBase with Store {
     return getbyidrecentlyActivitiyresponse =
         await servicetwo.getbyidrecently();
   }
+
+  @override
+  void setBuildContext(BuildContext buildContext) =>
+      this.buildContext = buildContext;
 
   @action
   Future<NoticeGetAllResponseModel?> getAllNotice() async {
