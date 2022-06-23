@@ -15,7 +15,7 @@ class _DrawerAnnouncementDetailScreenState
   bool isLoading = true;
   @override
   void initState() {
-    _viewModel?.getByIdDepartment();
+    _viewModel?.getByIdDepartment(widget.model!.departmentId ?? 5);
     _viewModel?.getByIdUser(widget.model!.userId!);
 
     _viewModel
@@ -145,7 +145,7 @@ class _DrawerAnnouncementDetailScreenState
                           ),
                         ),
                         Text(
-                            '${_viewModel?.departmentIdResponse.data?.departmentName}'),
+                            '${_viewModel?.departmentIdResponse.data?.departmentName}'), //'${_viewModel?.departmentIdResponse.data?.departmentName
                       ],
                     ),
                   ),

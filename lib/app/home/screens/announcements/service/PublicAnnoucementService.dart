@@ -62,7 +62,7 @@ class PublicAnnoucementService extends IPublicAnnoucementService {
   }
 
   @override
-  Future getByIdDepartment() async {
+  Future getByIdDepartment(int? id) async {
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =
@@ -75,8 +75,8 @@ class PublicAnnoucementService extends IPublicAnnoucementService {
     dio.interceptors.clear();
 
     try {
-      final response = await dio.get(getByIdDepartmentPath,
-          queryParameters: {'id': GetToken.deparmentId});
+      final response =
+          await dio.get(getByIdDepartmentPath, queryParameters: {'id': id});
       if (response.statusCode == HttpStatus.ok) {
         return DepartmentGetByIdModel.fromJson(response.data);
       } else {
@@ -104,8 +104,8 @@ class PublicAnnoucementService extends IPublicAnnoucementService {
     dio.options.headers['Authorization'] = 'Bearer ${GetToken.token}';
     dio.interceptors.clear();
     try {
-      final response = await dio.get(getByIdUserUrl,
-          queryParameters: {'id':id});
+      final response =
+          await dio.get(getByIdUserUrl, queryParameters: {'id': id});
       if (response.statusCode == HttpStatus.ok) {
         return UserGetByIdModel.fromJson(response.data);
       } else {

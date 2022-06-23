@@ -265,8 +265,9 @@ mixin _$PublicAnnouncementViewModel on _PublicAnnouncementViewModelBase, Store {
       AsyncAction('_PublicAnnouncementViewModelBase.getByIdDepartment');
 
   @override
-  Future<DepartmentGetByIdModelBody?> getByIdDepartment() {
-    return _$getByIdDepartmentAsyncAction.run(() => super.getByIdDepartment());
+  Future<DepartmentGetByIdModelBody?> getByIdDepartment(int? id) {
+    return _$getByIdDepartmentAsyncAction
+        .run(() => super.getByIdDepartment(id));
   }
 
   final _$getPublicByIdDepartmentAnnoucementAsyncAction = AsyncAction(

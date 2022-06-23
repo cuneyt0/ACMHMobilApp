@@ -13,7 +13,7 @@ abstract class IPublicAnnoucementService {
 
   Future<dynamic?> getByIdDepartmentAnnoucement();
   Future<dynamic?> getPublicByIdDepartmentAnnoucement();
-  Future<dynamic?> getByIdDepartment();
+  Future<dynamic?> getByIdDepartment(int? id);
   Future<dynamic?> getByIdUser(int id);
 }
 

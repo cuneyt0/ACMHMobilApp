@@ -1,4 +1,3 @@
-
 import 'package:login_work/export_import.dart';
 import 'package:pie_chart/pie_chart.dart';
 
@@ -35,7 +34,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
   @override
   Widget build(BuildContext context) {
     Map<String, double> dataMap = {
-      'Genel Ögrenci Sayısı': widget.viewModel?.allStudentValue ?? 0,
+      'Genel Kulllanıcı Sayısı': widget.viewModel?.allStudentValue ?? 0,
       'Bilgisayar Mühendisligi': widget.viewModel?.computerStudentValue ?? 0,
       'Makine Mühendisligi': widget.viewModel?.machineStudentValue ?? 0,
     };
@@ -71,7 +70,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   const Text(
-                    "Genel Ögrenci Sayısı",
+                    "Genel Kullanıcı Sayısı",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Text(

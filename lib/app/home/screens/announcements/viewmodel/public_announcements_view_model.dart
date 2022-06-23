@@ -121,8 +121,8 @@ abstract class _PublicAnnouncementViewModelBase with Store {
   }
 
   @action
-  Future<DepartmentGetByIdModelBody?> getByIdDepartment() async {
-    departmentIdResponse = await servicetwo.getByIdDepartment();
+  Future<DepartmentGetByIdModelBody?> getByIdDepartment(int? id) async {
+    departmentIdResponse = await servicetwo.getByIdDepartment(id);
   }
 
   @action

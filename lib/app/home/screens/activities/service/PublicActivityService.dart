@@ -1,6 +1,4 @@
-import 'package:dio/src/dio.dart';
 import 'package:login_work/app/home/screens/activities/service/IPublicActivityService.dart';
-import 'package:login_work/app/home/screens/admin_panel_screen/announcement_screen/model/notice_getall_response_model.dart';
 import 'package:login_work/export_import.dart';
 
 class PublicActivityService extends IPublicActivityService {
